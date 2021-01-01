@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "509057625120",
+    "project_id": "cloths-shop-cc247",
+    "storage_bucket": "cloths-shop-cc247.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:509057625120:android:26d8babdafdb8f818b2045",
+        "android_client_info": {
+          "package_name": "com.kosbaship.cloth_shop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "509057625120-bu515b0li9iajl2b8i0o30p3bv175dc2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAE5TvHSnronDzd3EWLwUHjlPN_yVWsz3Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "509057625120-bu515b0li9iajl2b8i0o30p3bv175dc2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,6 +1,11 @@
 import 'package:cloth_shop/shared/colors/colors.dart';
+import 'package:cloth_shop/shared/network/remote/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
+void initApp() {
+  FirebaseAuthService();
+}
 
 Widget showLogo({@required screenHeight}) => Container(
       height: screenHeight * .2,
@@ -97,3 +102,63 @@ void navigateAndFinish(context, widget) => Navigator.pushAndRemoveUntil(
       builder: (context) => widget,
     ),
     (Route<dynamic> route) => false);
+void buildProgressDialog({context, text, error = false}) => showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              children: [
+                if (!error) CircularProgressIndicator(),
+                if (!error)
+                  SizedBox(
+                    width: 20.0,
+                  ),
+                Expanded(
+                  child: Text(
+                    text,
+                  ),
+                ),
+              ],
+            ),
+            if (error) SizedBox(height: 20.0),
+            if (error)
+              buildDefaultButton(
+                onPressed: () => Navigator.pop(context),
+                text: "Cancel",
+              ),
+          ],
+        ),
+      ),
+    );
+
+Widget buildDefaultButton(
+        {@required Function onPressed,
+        @required String text,
+        Color textColor = kWhiteColor,
+        Color backgroundColor = kMainColor,
+        Color borderColor = kMainColor}) =>
+    Container(
+      width: double.infinity,
+      height: 58.0,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(50),
+          color: backgroundColor,
+          border: Border.all(
+            width: 3,
+            color: borderColor,
+          )),
+      child: FlatButton(
+        textColor: textColor,
+        onPressed: onPressed,
+        child: Text(
+          text.toUpperCase(),
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.normal,
+            fontFamily: "MontserratRegular",
+          ),
+        ),
+      ),
+    );
