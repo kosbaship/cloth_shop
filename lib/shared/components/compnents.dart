@@ -13,7 +13,7 @@ Widget showLogo({@required screenHeight}) => Container(
           Positioned(
             bottom: -10,
             child: Text(
-              'Cloth Shop',
+              'Cloths Shop',
               style: TextStyle(fontFamily: 'Pacifico', fontSize: 25),
             ),
           ),
@@ -61,10 +61,10 @@ Widget buildBtn({@required Function function, @required String title}) =>
       onPressed: function,
       color: Colors.black,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 9),
         child: Text(
           title,
-          style: TextStyle(color: kWhiteColor, fontSize: 18),
+          style: TextStyle(color: kWhiteColor, fontSize: 14),
         ),
       ),
     );
@@ -78,3 +78,22 @@ showToast({@required String message, @required bool error}) =>
         backgroundColor: error ? Colors.red : Colors.green,
         textColor: Colors.white,
         fontSize: 16.0);
+
+void navigateTo(context, widget) => Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => widget,
+      ),
+    );
+void navigateToReplaceMe(context, widget) => Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => widget,
+      ),
+    );
+void navigateAndFinish(context, widget) => Navigator.pushAndRemoveUntil(
+    context,
+    MaterialPageRoute(
+      builder: (context) => widget,
+    ),
+    (Route<dynamic> route) => false);

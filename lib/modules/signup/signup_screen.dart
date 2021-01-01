@@ -1,14 +1,15 @@
-import 'package:cloth_shop/modules/signup/signup_screen.dart';
+import 'package:cloth_shop/modules/login/login_screen.dart';
 import 'package:cloth_shop/shared/colors/colors.dart';
 import 'package:cloth_shop/shared/components/compnents.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatelessWidget {
+class SignUpScreen extends StatelessWidget {
+  final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    double loginScreenHeight = MediaQuery.of(context).size.height;
+    double signUpScreenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       backgroundColor: kMainColor,
@@ -23,9 +24,18 @@ class LoginScreen extends StatelessWidget {
                   height: 50,
                   width: double.infinity,
                 ),
-                showLogo(screenHeight: loginScreenHeight),
+                showLogo(screenHeight: signUpScreenHeight),
                 SizedBox(
-                  height: loginScreenHeight * 0.1,
+                  height: signUpScreenHeight * 0.1,
+                ),
+                buildTextField(
+                  icon: Icons.person,
+                  hint: 'Enter your name',
+                  controller: nameController,
+                  type: TextInputType.text,
+                ),
+                SizedBox(
+                  height: signUpScreenHeight * 0.02,
                 ),
                 buildTextField(
                   icon: Icons.email,
@@ -34,7 +44,7 @@ class LoginScreen extends StatelessWidget {
                   type: TextInputType.emailAddress,
                 ),
                 SizedBox(
-                  height: loginScreenHeight * 0.02,
+                  height: signUpScreenHeight * 0.02,
                 ),
                 buildTextField(
                   icon: Icons.lock,
@@ -44,31 +54,32 @@ class LoginScreen extends StatelessWidget {
                   isPassword: true,
                 ),
                 SizedBox(
-                  height: loginScreenHeight * 0.05,
+                  height: signUpScreenHeight * 0.05,
                 ),
                 buildBtn(
                   function: () {
+                    String name = nameController.text;
                     String email = emailController.text;
                     String password = passwordController.text;
 
-                    if (email.isEmpty || password.isEmpty) {
+                    if (name.isEmpty || email.isEmpty || password.isEmpty) {
                       showToast(message: "please enter your data", error: true);
                     } else {
-                      // perform login...
-                      showToast(message: "perform login...", error: false);
+                      // perform Signing up...
+                      showToast(message: "perform Signing up...", error: false);
                     }
                   },
-                  title: 'Login',
+                  title: 'Sign up',
                 ),
                 SizedBox(
-                  height: loginScreenHeight * 0.05,
+                  height: signUpScreenHeight * 0.05,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Flexible(
                       child: Text(
-                        'Don\'t have an account ? ',
+                        'I have an account ? ',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(color: Colors.white, fontSize: 16),
@@ -76,10 +87,10 @@ class LoginScreen extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        navigateToReplaceMe(context, SignUpScreen());
+                        navigateToReplaceMe(context, LoginScreen());
                       },
                       child: Text(
-                        'Sign up',
+                        'Login',
                         style: TextStyle(fontSize: 16),
                       ),
                     )
