@@ -1,7 +1,8 @@
-import 'package:cloth_shop/layout/home_screen.dart';
+import 'package:cloth_shop/modules/admin/admin_home_screen.dart';
 import 'package:cloth_shop/modules/login/cubit/login_cubit.dart';
 import 'package:cloth_shop/modules/login/cubit/login_states.dart';
 import 'package:cloth_shop/modules/signup/signup_screen.dart';
+import 'package:cloth_shop/modules/user/home_screen.dart';
 import 'package:cloth_shop/shared/colors/colors.dart';
 import 'package:cloth_shop/shared/components/compnents.dart';
 import 'package:flutter/material.dart';
@@ -36,10 +37,17 @@ class LoginScreen extends StatelessWidget {
           if (state is LoginSuccessState) {
             // close the progress dialog in the last state
             Navigator.pop(context);
-            navigateAndFinish(
-              context,
-              HomeScreen(),
-            );
+            if (state.mode == LoginCubit.get(context).userMode) {
+              navigateAndFinish(
+                context,
+                HomeScreen(),
+              );
+            } else if (state.mode == LoginCubit.get(context).adminMode) {
+              navigateAndFinish(
+                context,
+                AdminHomeScreen(),
+              );
+            }
           }
 
           if (state is LoginErrorState) {
@@ -47,12 +55,15 @@ class LoginScreen extends StatelessWidget {
             Navigator.pop(context);
             buildProgressDialog(
               context: context,
-              text: "This account not exist",
+              text: "This account not found",
               error: true,
             );
           }
         },
         builder: (context, state) {
+          String defaultMode = LoginCubit.get(context).currentMode;
+          String adminMode = LoginCubit.get(context).adminMode;
+          String userMode = LoginCubit.get(context).userMode;
           return Scaffold(
             backgroundColor: kMainColor,
             body: SafeArea(
@@ -98,8 +109,14 @@ class LoginScreen extends StatelessWidget {
                             showToast(
                                 message: "please enter your data", error: true);
                           } else {
-                            LoginCubit.get(context)
-                                .signIn(email: email, password: password);
+                            _checkAdminOrUserAndLogin(
+                              context: context,
+                              email: email,
+                              password: password,
+                              defaultMode: defaultMode,
+                              adminMode: adminMode,
+                              userMode: userMode,
+                            );
                           }
                         },
                         title: 'Login',
@@ -130,6 +147,45 @@ class LoginScreen extends StatelessWidget {
                           )
                         ],
                       ),
+                      SizedBox(
+                        height: loginScreenHeight * 0.05,
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () {
+                                LoginCubit.get(context).changeToAdminMode();
+                                print('i\'m an admin my mode is $defaultMode');
+                              },
+                              child: Text(
+                                'i\'m an admin',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: defaultMode == adminMode
+                                        ? Colors.deepOrange
+                                        : kWhiteColor),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () {
+                                LoginCubit.get(context).changeToUserMode();
+                                print('i\'m a user my mode is $defaultMode');
+                              },
+                              child: Text(
+                                'i\'m a user',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: defaultMode == userMode
+                                        ? Colors.deepOrange
+                                        : kWhiteColor),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),
@@ -139,5 +195,24 @@ class LoginScreen extends StatelessWidget {
         },
       ),
     );
+  }
+
+  _checkAdminOrUserAndLogin(
+      {context, email, password, defaultMode, userMode, adminMode}) {
+    const String adminPassword = 'kosba4';
+    if (defaultMode == userMode) {
+      LoginCubit.get(context)
+          .signIn(email: email, password: password, mode: userMode);
+      print("login as user");
+    } else if (defaultMode == adminMode) {
+      if (password == adminPassword) {
+        LoginCubit.get(context)
+            .signIn(email: email, password: password, mode: adminMode);
+        print("login as admin");
+      } else {
+        buildProgressDialog(
+            context: context, text: 'Wrong Credentials', error: true);
+      }
+    }
   }
 }

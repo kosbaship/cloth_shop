@@ -7,13 +7,27 @@ class LoginCubit extends Cubit<LoginStates> {
 
   static LoginCubit get(context) => BlocProvider.of(context);
 
-  signIn({email, password}) {
+  String currentMode = 'user';
+  String adminMode = 'admin';
+  String userMode = 'user';
+
+  changeToAdminMode() {
+    currentMode = adminMode;
+    emit(LoginAdminState());
+  }
+
+  changeToUserMode() {
+    currentMode = userMode;
+    emit(LoginUserState());
+  }
+
+  signIn({email, password, String mode}) {
     //change the state
     emit(LoginLoadingState());
 
     //post the date
     FirebaseAuthService.signIn(email: email, password: password).then((value) {
-      emit(LoginSuccessState());
+      emit(LoginSuccessState(mode));
 
       print("===================================");
       print(value.user.email);
