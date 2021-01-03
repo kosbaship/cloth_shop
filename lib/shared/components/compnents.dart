@@ -162,3 +162,22 @@ Widget buildDefaultButton(
         ),
       ),
     );
+
+Widget drawAppbar(
+        {@required context,
+        @required actionWidget,
+        @required leadingWidget,
+        @required title}) =>
+    AppBar(
+      centerTitle: true,
+      backgroundColor: kMainColor,
+      title: title,
+      leading: leadingWidget,
+      actions: [
+        actionWidget,
+        SizedBox(
+          width: 20.0,
+        ),
+      ],
+      elevation: 0.0,
+    );

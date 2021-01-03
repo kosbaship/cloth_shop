@@ -1,4 +1,4 @@
-import 'package:cloth_shop/modules/admin/admin_home_screen.dart';
+import 'package:cloth_shop/modules/admin/home/admin_home_screen.dart';
 import 'package:cloth_shop/modules/login/cubit/login_cubit.dart';
 import 'package:cloth_shop/modules/login/cubit/login_states.dart';
 import 'package:cloth_shop/modules/signup/signup_screen.dart';
