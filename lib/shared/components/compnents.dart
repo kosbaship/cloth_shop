@@ -1,10 +1,12 @@
 import 'package:cloth_shop/shared/colors/colors.dart';
+import 'package:cloth_shop/shared/network/remote/cloud_firestore.dart';
 import 'package:cloth_shop/shared/network/remote/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 void initApp() {
   FirebaseAuthService();
+  FirebaseFireStoreService();
 }
 
 Widget showLogo({@required screenHeight}) => Container(

@@ -1,4 +1,5 @@
 import 'package:cloth_shop/modules/admin/home/cubit/admin_home_cubit.dart';
+import 'package:cloth_shop/modules/login/login_screen.dart';
 import 'package:cloth_shop/shared/colors/colors.dart';
 import 'package:cloth_shop/shared/components/compnents.dart';
 import 'package:flutter/material.dart';
@@ -18,20 +19,22 @@ class AdminHomeScreen extends StatelessWidget {
           var currentIndex = AdminHomeCubit.get(context).currentIndex;
 
           return Scaffold(
-            backgroundColor: kSecondaryColor,
+            backgroundColor: kWhiteColor,
             appBar: drawAppbar(
               context: context,
               leadingWidget: Container(),
               title: AdminHomeCubit.get(context).titles[currentIndex],
-              actionWidget: Container(),
-              // IconButton(
-              //   icon: Icon(
-              //     Icons.shopping_cart,
-              //     size: 30.0,
-              //     color: kSecondaryColor,
-              //   ),
-              //   onPressed: () {},
-              // ),
+              actionWidget: IconButton(
+                icon: Icon(
+                  Icons.logout,
+                  size: 30.0,
+                  color: kSecondaryColor,
+                ),
+                onPressed: () {
+                  AdminHomeCubit.get(context).signOut();
+                  navigateAndFinish(context, LoginScreen());
+                },
+              ),
             ),
             body: AdminHomeCubit.get(context).bodies[currentIndex],
             bottomNavigationBar: Container(

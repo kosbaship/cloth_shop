@@ -1,4 +1,5 @@
 import 'package:cloth_shop/modules/admin/home/admin_home_screen.dart';
+import 'package:cloth_shop/modules/admin/home/cubit/admin_home_cubit.dart';
 import 'package:cloth_shop/modules/login/cubit/login_cubit.dart';
 import 'package:cloth_shop/modules/login/cubit/login_states.dart';
 import 'package:cloth_shop/modules/signup/signup_screen.dart';
@@ -43,6 +44,7 @@ class LoginScreen extends StatelessWidget {
                 HomeScreen(),
               );
             } else if (state.mode == LoginCubit.get(context).adminMode) {
+              AdminHomeCubit.get(context).currentIndex = 1;
               navigateAndFinish(
                 context,
                 AdminHomeScreen(),
