@@ -8,7 +8,7 @@ class AddProductCubit extends Cubit<AddProductStates> {
 
   static AddProductCubit get(context) => BlocProvider.of(context);
 
-  saveProduct({Product product}) {
+  saveProduct({ProductModel product}) {
     //change the state
     emit(AddProductLoadingState());
 
@@ -16,10 +16,6 @@ class AddProductCubit extends Cubit<AddProductStates> {
     FirebaseFireStoreService.createCollectionAndAddProduct(product: product)
         .then((value) {
       emit(AddProductSuccessState());
-
-      print("===================================");
-      print(value.toString());
-      print("===================================");
     }).catchError((e) {
       emit(AddProductErrorState(e.toString()));
     });

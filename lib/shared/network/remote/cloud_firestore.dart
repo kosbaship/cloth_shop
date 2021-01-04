@@ -10,7 +10,7 @@ class FirebaseFireStoreService {
   }
 
   static Future<DocumentReference> createCollectionAndAddProduct(
-      {Product product}) async {
+      {ProductModel product}) async {
     return await fireStore.collection(kProductsCollection).add({
       kProductName: product.pName,
       kProductDescription: product.pDescription,
@@ -18,5 +18,9 @@ class FirebaseFireStoreService {
       kProductCategory: product.pCategory,
       kProductPrice: product.pPrice
     });
+  }
+
+  static Future<QuerySnapshot> getProducts() async {
+    return await fireStore.collection(kProductsCollection).get();
   }
 }

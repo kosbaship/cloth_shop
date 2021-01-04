@@ -25,7 +25,7 @@ class LoginScreen extends StatelessWidget {
     }
 
     return BlocProvider(
-      create: (BuildContext context) => LoginCubit(),
+      create: (context) => LoginCubit(),
       child: BlocConsumer<LoginCubit, LoginStates>(
         listener: (context, state) {
           if (state is LoginLoadingState) {
@@ -158,7 +158,6 @@ class LoginScreen extends StatelessWidget {
                             child: GestureDetector(
                               onTap: () {
                                 LoginCubit.get(context).changeToAdminMode();
-                                print('i\'m an admin my mode is $defaultMode');
                               },
                               child: Text(
                                 'i\'m an admin',
@@ -174,7 +173,6 @@ class LoginScreen extends StatelessWidget {
                             child: GestureDetector(
                               onTap: () {
                                 LoginCubit.get(context).changeToUserMode();
-                                print('i\'m a user my mode is $defaultMode');
                               },
                               child: Text(
                                 'i\'m a user',
@@ -205,12 +203,10 @@ class LoginScreen extends StatelessWidget {
     if (defaultMode == userMode) {
       LoginCubit.get(context)
           .signIn(email: email, password: password, mode: userMode);
-      print("login as user");
     } else if (defaultMode == adminMode) {
       if (password == adminPassword) {
         LoginCubit.get(context)
             .signIn(email: email, password: password, mode: adminMode);
-        print("login as admin");
       } else {
         buildProgressDialog(
             context: context, text: 'Wrong Credentials', error: true);

@@ -23,6 +23,7 @@ dependencies:
   firebase_core: ^0.5.3
   shared_preferences: ^0.5.12+4
   cloud_firestore: ^0.14.4
+  conditional_builder: ^1.0.2
 
 dev_dependencies:
   flutter_launcher_icons: ^0.8.1

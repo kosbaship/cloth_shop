@@ -1,4 +1,4 @@
-class Product {
+class ProductModel {
   String pName;
   String pPrice;
   String pLocation;
@@ -6,7 +6,7 @@ class Product {
   String pCategory;
   String pId;
   int pQuantity;
-  Product(
+  ProductModel(
       {this.pQuantity,
       this.pId,
       this.pName,

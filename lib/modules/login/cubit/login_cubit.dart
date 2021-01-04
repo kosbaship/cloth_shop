@@ -28,10 +28,6 @@ class LoginCubit extends Cubit<LoginStates> {
     //post the date
     FirebaseAuthService.signIn(email: email, password: password).then((value) {
       emit(LoginSuccessState(mode));
-
-      print("===================================");
-      print(value.user.email);
-      print("===================================");
     }).catchError((e) {
       emit(LoginErrorState(e.toString()));
     });

@@ -10,88 +10,85 @@ import 'cubit/admin_home_states.dart';
 class AdminHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AdminHomeCubit(),
-      child: BlocConsumer<AdminHomeCubit, AdminHomeStates>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          // used more than once
-          var currentIndex = AdminHomeCubit.get(context).currentIndex;
+    return BlocConsumer<AdminHomeCubit, AdminHomeStates>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        // used more than once
+        var currentIndex = AdminHomeCubit.get(context).currentIndex;
 
-          return Scaffold(
-            backgroundColor: kWhiteColor,
-            appBar: drawAppbar(
-              context: context,
-              leadingWidget: Container(),
-              title: AdminHomeCubit.get(context).titles[currentIndex],
-              actionWidget: IconButton(
-                icon: Icon(
-                  Icons.logout,
-                  size: 30.0,
-                  color: kSecondaryColor,
-                ),
-                onPressed: () {
-                  AdminHomeCubit.get(context).signOut();
-                  navigateAndFinish(context, LoginScreen());
-                },
+        return Scaffold(
+          backgroundColor: kWhiteColor,
+          appBar: drawAppbar(
+            context: context,
+            leadingWidget: Container(),
+            title: AdminHomeCubit.get(context).titles[currentIndex],
+            actionWidget: IconButton(
+              icon: Icon(
+                Icons.logout,
+                size: 30.0,
+                color: kSecondaryColor,
               ),
+              onPressed: () {
+                AdminHomeCubit.get(context).signOut();
+                navigateAndFinish(context, LoginScreen());
+              },
             ),
-            body: AdminHomeCubit.get(context).bodies[currentIndex],
-            bottomNavigationBar: Container(
-              height: 60.0,
-              decoration: BoxDecoration(
-                color: kWhiteColor,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(
-                    25.0,
-                  ),
-                  topRight: Radius.circular(
-                    25.0,
-                  ),
+          ),
+          body: AdminHomeCubit.get(context).bodies[currentIndex],
+          bottomNavigationBar: Container(
+            height: 60.0,
+            decoration: BoxDecoration(
+              color: kWhiteColor,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(
+                  25.0,
                 ),
-                boxShadow: [
-                  BoxShadow(
-                    color: kGreyColor.withOpacity(0.3),
-                    spreadRadius: 5,
-                    blurRadius: 15,
-                  ),
-                ],
+                topRight: Radius.circular(
+                  25.0,
+                ),
               ),
-              child: BottomNavigationBar(
-                items: [
-                  BottomNavigationBarItem(
-                    icon: Icon(
-                      Icons.add,
-                    ),
-                    label: 'Add Product',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(
-                      Icons.view_list_sharp,
-                    ),
-                    label: 'Orders',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(
-                      Icons.settings_sharp,
-                    ),
-                    label: 'Manage Products',
-                  ),
-                ],
-                backgroundColor: Colors.transparent,
-                onTap: (index) {
-                  AdminHomeCubit.get(context).changeIndex(index);
-                },
-                // current index match this index
-                currentIndex: currentIndex,
-                type: BottomNavigationBarType.fixed,
-                fixedColor: kMainColor,
-                elevation: 0.0,
-              ),
+              boxShadow: [
+                BoxShadow(
+                  color: kGreyColor.withOpacity(0.3),
+                  spreadRadius: 5,
+                  blurRadius: 15,
+                ),
+              ],
             ),
-          );
-        },
-      ),
+            child: BottomNavigationBar(
+              items: [
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.add,
+                  ),
+                  label: 'Add Product',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.view_list_sharp,
+                  ),
+                  label: 'Orders',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.settings_sharp,
+                  ),
+                  label: 'Manage Products',
+                ),
+              ],
+              backgroundColor: Colors.transparent,
+              onTap: (index) {
+                AdminHomeCubit.get(context).changeIndex(index);
+              },
+              // current index match this index
+              currentIndex: currentIndex,
+              type: BottomNavigationBarType.fixed,
+              fixedColor: kMainColor,
+              elevation: 0.0,
+            ),
+          ),
+        );
+      },
     );
   }
 }
