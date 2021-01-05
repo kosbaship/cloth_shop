@@ -19,6 +19,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double loginScreenHeight = MediaQuery.of(context).size.height;
+
     if (email != null && password != null) {
       emailController.text = email;
       passwordController.text = password;

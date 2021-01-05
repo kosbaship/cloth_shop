@@ -3,7 +3,7 @@ import 'package:cloth_shop/modules/admin/add_products/add_products_screen.dart';
 import 'package:cloth_shop/modules/admin/home/cubit/admin_home_states.dart';
 import 'package:cloth_shop/modules/admin/manage_products/manage_products_screen.dart';
 import 'package:cloth_shop/modules/admin/orders/orders_screen.dart';
-import 'package:cloth_shop/shared/network/remote/firebase_auth.dart';
+import 'package:cloth_shop/network/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

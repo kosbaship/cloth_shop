@@ -1,5 +1,5 @@
 import 'package:cloth_shop/modules/login/cubit/login_states.dart';
-import 'package:cloth_shop/shared/network/remote/firebase_auth.dart';
+import 'package:cloth_shop/network/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginCubit extends Cubit<LoginStates> {
