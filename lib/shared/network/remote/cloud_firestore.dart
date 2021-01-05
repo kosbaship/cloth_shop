@@ -20,7 +20,7 @@ class FirebaseFireStoreService {
     });
   }
 
-  static Future<QuerySnapshot> getProducts() async {
-    return await fireStore.collection(kProductsCollection).get();
+  static Stream<QuerySnapshot> getProducts() {
+    return fireStore.collection(kProductsCollection).snapshots();
   }
 }
