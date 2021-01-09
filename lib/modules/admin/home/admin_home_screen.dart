@@ -26,7 +26,7 @@ class AdminHomeScreen extends StatelessWidget {
               icon: Icon(
                 Icons.logout,
                 size: 30.0,
-                color: kSecondaryColor,
+                color: kWhiteColor,
               ),
               onPressed: () {
                 AdminHomeCubit.get(context).signOut();

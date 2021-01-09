@@ -49,6 +49,9 @@ class EditProductScreen extends StatelessWidget {
             condition: state is! EditProductLoadingState,
             builder: (context) => Scaffold(
               appBar: AppBar(
+                iconTheme: IconThemeData(
+                  color: kWhiteColor, //change your color here
+                ),
                 backgroundColor: kMainColor,
                 centerTitle: true,
                 title: Text("Edit $productName"),

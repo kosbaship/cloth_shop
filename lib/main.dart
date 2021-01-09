@@ -24,8 +24,9 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: customMaterialColor,
-        ),
+            primarySwatch: customMaterialColor,
+            primaryTextTheme:
+                TextTheme(headline6: TextStyle(color: kWhiteColor))),
         home: LoginScreen(),
       ),
     );

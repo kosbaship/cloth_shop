@@ -171,6 +171,9 @@ Widget drawAppbar(
         @required leadingWidget,
         @required title}) =>
     AppBar(
+      iconTheme: IconThemeData(
+        color: kWhiteColor, //change your color here
+      ),
       centerTitle: true,
       backgroundColor: kMainColor,
       title: title,
