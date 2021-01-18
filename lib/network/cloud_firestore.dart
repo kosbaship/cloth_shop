@@ -20,13 +20,8 @@ class FirebaseFireStoreService {
     });
   }
 
-  // this to get a stream
-  static List<QueryDocumentSnapshot> getProducts() {
-    var queryDocs;
-    fireStore.collection(kProductsCollection).snapshots().listen((event) {
-      queryDocs = event.docs;
-    });
-    return queryDocs;
+  static Future<QuerySnapshot> getProducts() async {
+    return await fireStore.collection(kProductsCollection).get();
   }
 
   static Future<void> deleteProduct({documentId}) async {

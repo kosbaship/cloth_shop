@@ -13,7 +13,11 @@ class AdminHomeCubit extends Cubit<AdminHomeStates> {
   static AdminHomeCubit get(context) => BlocProvider.of(context);
 
   var bodies = [AddProductScreen(), OrdersScreen(), ManageProductScreen()];
-  var titles = [Text("Add Product"), Text("Orders"), Text("Manage Products")];
+  var titles = [
+    Text("Add Product"),
+    Text("Manage Orders"),
+    Text("Manage Products")
+  ];
 
   int currentIndex = 1;
   changeIndex(index) {

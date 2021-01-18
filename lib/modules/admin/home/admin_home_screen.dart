@@ -67,7 +67,7 @@ class AdminHomeScreen extends StatelessWidget {
                   icon: Icon(
                     Icons.view_list_sharp,
                   ),
-                  label: 'Orders',
+                  label: 'Manage Orders',
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(

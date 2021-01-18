@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "509057625120-td5j2go6c1lb535bfj3jpo1ntloi9vcr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kosbaship.cloth_shop",
+            "certificate_hash": "c498926397ab92c3afeafb27c2b1bda24a9a1a08"
+          }
+        },
+        {
           "client_id": "509057625120-bu515b0li9iajl2b8i0o30p3bv175dc2.apps.googleusercontent.com",
           "client_type": 3
         }
