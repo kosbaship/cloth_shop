@@ -24,6 +24,7 @@ dependencies:
   shared_preferences: ^0.5.12+4
   cloud_firestore: ^0.14.4
   conditional_builder: ^1.0.2
+  flutter_svg: ^0.19.2+1
 
 dev_dependencies:
   flutter_launcher_icons: ^0.8.1
@@ -41,6 +42,7 @@ flutter:
 
   assets:
     - assets/images/icons/
+    - assets/images/bags/
     - assets/images/jackets/
     - assets/images/trousers/
     - assets/images/shoes/

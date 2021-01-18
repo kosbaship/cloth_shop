@@ -10,7 +10,10 @@ const kGreyColor = Color(0xFF787878);
 const kBlackColor = Color(0xFF000000);
 // const kSecondaryColor = Color(0xFFFFE6AC);
 const kSecondaryColor = Colors.white;
-const kUnActiveColor = Color(0xFFC1BDB8);
+const kTextColor = Color(0xFF535353);
+const kTextLightColor = Color(0xFFACACAC);
+const kRedFavColor = Color(0xFFFF6464);
+const kProductColor = Color(0xFF3D82AE);
 
 const MaterialColor customMaterialColor = MaterialColor(
   0xFFBFEB91,
