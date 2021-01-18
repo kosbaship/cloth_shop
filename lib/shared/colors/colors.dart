@@ -7,6 +7,7 @@ const kSloganColor = Color(0xFF5bcc8c);
 const kWhiteColor = Colors.white;
 // const kGreyColor = Colors.black26;
 const kGreyColor = Color(0xFF787878);
+const kBlackColor = Color(0xFF000000);
 // const kSecondaryColor = Color(0xFFFFE6AC);
 const kSecondaryColor = Colors.white;
 const kUnActiveColor = Color(0xFFC1BDB8);
