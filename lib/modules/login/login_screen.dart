@@ -101,7 +101,47 @@ class LoginScreen extends StatelessWidget {
                         isPassword: true,
                       ),
                       SizedBox(
-                        height: loginScreenHeight * 0.05,
+                        height: 15,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Radio(
+                            activeColor: Colors.black,
+                            value: LoginCubit.get(context).userMode,
+                            groupValue: LoginCubit.get(context).currentMode,
+                            onChanged: (value) {
+                              LoginCubit.get(context).changeToUserMode();
+                            },
+                          ),
+                          Text(
+                            "i\'m a user",
+                            style: TextStyle(color: kWhiteColor
+                                // defaultMode == userMode
+                                //     ? Colors.black
+                                //     : kWhiteColor
+                                ),
+                          ),
+                          Radio(
+                            activeColor: Colors.black,
+                            value: LoginCubit.get(context).adminMode,
+                            groupValue: LoginCubit.get(context).currentMode,
+                            onChanged: (value) {
+                              LoginCubit.get(context).changeToAdminMode();
+                            },
+                          ),
+                          Text(
+                            'i\'m an admin',
+                            style: TextStyle(color: kWhiteColor
+                                // defaultMode == adminMode
+                                //     ? Colors.black
+                                //     : kWhiteColor
+                                ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 15,
                       ),
                       buildBtn(
                         function: () {
@@ -152,40 +192,6 @@ class LoginScreen extends StatelessWidget {
                       ),
                       SizedBox(
                         height: loginScreenHeight * 0.05,
-                      ),
-                      Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: GestureDetector(
-                              onTap: () {
-                                LoginCubit.get(context).changeToAdminMode();
-                              },
-                              child: Text(
-                                'i\'m an admin',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: defaultMode == adminMode
-                                        ? Colors.deepOrange
-                                        : kWhiteColor),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: GestureDetector(
-                              onTap: () {
-                                LoginCubit.get(context).changeToUserMode();
-                              },
-                              child: Text(
-                                'i\'m a user',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: defaultMode == userMode
-                                        ? Colors.deepOrange
-                                        : kWhiteColor),
-                              ),
-                            ),
-                          ),
-                        ],
                       ),
                     ],
                   ),

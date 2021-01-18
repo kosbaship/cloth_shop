@@ -2,7 +2,7 @@
     package="com.kosbaship.cloth_shop">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="cloths_shop"
+        android:label="Cloths Shop"
         android:icon="@mipmap/ic_launcher"
        android:usesCleartextTraffic="true">
         <activity

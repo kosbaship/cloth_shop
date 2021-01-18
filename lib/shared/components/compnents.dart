@@ -18,10 +18,11 @@ Widget showLogo({@required screenHeight}) => Container(
             image: AssetImage('assets/images/icons/buyicon.png'),
           ),
           Positioned(
-            bottom: -10,
+            bottom: 0,
             child: Text(
               'Cloths Shop',
-              style: TextStyle(fontFamily: 'Pacifico', fontSize: 25),
+              style: TextStyle(
+                  fontFamily: 'Pacifico', fontSize: 25, color: kSloganColor),
             ),
           ),
           SizedBox(
@@ -52,13 +53,13 @@ Widget buildTextField({
         fillColor: kSecondaryColor,
         enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20),
-            borderSide: BorderSide(color: kWhiteColor)),
+            borderSide: BorderSide(color: kMainColor)),
         focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20),
-            borderSide: BorderSide(color: kWhiteColor)),
+            borderSide: BorderSide(color: kMainColor)),
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20),
-            borderSide: BorderSide(color: kWhiteColor)),
+            borderSide: BorderSide(color: kMainColor)),
       ),
     );
 

@@ -1,6 +1,5 @@
 import 'package:cloth_shop/models/product.dart';
 import 'package:cloth_shop/modules/admin/edit_product/edit_product_screen.dart';
-import 'package:cloth_shop/network/cloud_firestore.dart';
 import 'package:cloth_shop/shared/colors/colors.dart';
 import 'package:cloth_shop/shared/components/compnents.dart';
 import 'package:cloth_shop/shared/constants.dart';
@@ -11,7 +10,7 @@ class ManageProductScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFireStoreService.getProducts(),
+      stream: null, // FirebaseFireStoreService.getProducts(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<ProductModel> products = [];
