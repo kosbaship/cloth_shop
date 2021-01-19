@@ -158,6 +158,7 @@ Widget buildDefaultButton(
             color: borderColor,
           )),
       child: FlatButton(
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         textColor: textColor,
         onPressed: onPressed,
         child: Text(

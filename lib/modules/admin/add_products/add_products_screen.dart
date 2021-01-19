@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:cloth_shop/models/product.dart';
 import 'package:cloth_shop/modules/admin/add_products/cubit/add_product_cubit.dart';
@@ -7,14 +8,17 @@ import 'package:cloth_shop/shared/colors/colors.dart';
 import 'package:cloth_shop/shared/components/compnents.dart';
 import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+
+Color currentColor = kProductColor;
+String caterorySelected = 'jackets';
 
 class AddProductScreen extends StatelessWidget {
   final nameController = TextEditingController();
   final priceController = TextEditingController();
   final descriptionController = TextEditingController();
-  final categoryController = TextEditingController();
-  final locationController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -106,23 +110,13 @@ class AddProductScreen extends StatelessWidget {
                       SizedBox(
                         height: 20,
                       ),
-                      buildTextField(
-                        icon: Icons.edit,
-                        hint: 'Product category',
-                        controller: categoryController,
-                        type: TextInputType.emailAddress,
-                      ),
+                      PickColor(),
                       SizedBox(
                         height: 20,
                       ),
-                      buildTextField(
-                        icon: Icons.edit,
-                        hint: 'Product location',
-                        controller: locationController,
-                        type: TextInputType.emailAddress,
-                      ),
+                      DropDown(),
                       SizedBox(
-                        height: 35,
+                        height: 20,
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 50),
@@ -131,15 +125,11 @@ class AddProductScreen extends StatelessWidget {
                               String name = nameController.text;
                               String price = priceController.text;
                               String description = descriptionController.text;
-                              String category = categoryController.text;
-                              String location = locationController.text;
 
                               if (name.isEmpty ||
                                   price.isEmpty ||
                                   imageLink == '' ||
-                                  description.isEmpty ||
-                                  category.isEmpty ||
-                                  location.isEmpty) {
+                                  description.isEmpty) {
                                 showToast(
                                     message: "please fill your data",
                                     error: true);
@@ -149,8 +139,8 @@ class AddProductScreen extends StatelessWidget {
                                         pName: name,
                                         pPrice: price,
                                         pDescription: description,
-                                        pCategory: category,
-                                        pLocation: location));
+                                        pCategory: caterorySelected,
+                                        pColor: currentColor.toString()));
                                 // nameController.clear();
                                 // priceController.clear();
                                 // descriptionController.clear();
@@ -180,6 +170,151 @@ class AddProductScreen extends StatelessWidget {
           );
         },
       ),
+    );
+  }
+}
+
+class PickColor extends StatefulWidget {
+  @override
+  _PickColorState createState() => _PickColorState();
+}
+
+class _PickColorState extends State<PickColor> {
+  void changeColor(Color color) {
+    setState(() {
+      return currentColor = color;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: 62,
+      child: FlatButton(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        child: Text(
+          'Choose Color'.toUpperCase(),
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.normal,
+            fontFamily: "MontserratRegular",
+          ),
+        ),
+        color: currentColor,
+        textColor: kSecondaryColor,
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                titlePadding: const EdgeInsets.all(0.0),
+                contentPadding: const EdgeInsets.all(16.0),
+                content: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      BlockPicker(
+                          pickerColor: currentColor,
+                          onColorChanged: changeColor),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 50),
+                        child: buildDefaultButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            text: 'Submit',
+                            textColor: kWhiteColor,
+                            backgroundColor: kMainColor,
+                            borderColor: kWhiteColor),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
+        },
+      ),
+    );
+  }
+}
+
+class DropDown extends StatefulWidget {
+  @override
+  DropDownState createState() => DropDownState();
+}
+
+class Company {
+  int id;
+  String name;
+
+  Company(this.id, this.name);
+
+  static List<Company> getCompanies() {
+    return <Company>[
+      Company(1, 'Bags'),
+      Company(2, 'Jackets'),
+      Company(3, 'Trousers'),
+      Company(4, 'T-shirts'),
+      Company(5, 'Shoes'),
+    ];
+  }
+}
+
+class DropDownState extends State<DropDown> {
+  List<Company> _companies = Company.getCompanies();
+  List<DropdownMenuItem<Company>> _dropdownMenuItems;
+  Company _selectedCompany;
+
+  @override
+  void initState() {
+    _dropdownMenuItems = buildDropdownMenuItems(_companies);
+    _selectedCompany = _dropdownMenuItems[0].value;
+    super.initState();
+  }
+
+  List<DropdownMenuItem<Company>> buildDropdownMenuItems(List companies) {
+    List<DropdownMenuItem<Company>> items = List();
+    for (Company company in companies) {
+      items.add(
+        DropdownMenuItem(
+          value: company,
+          child: Text(company.name),
+        ),
+      );
+    }
+    return items;
+  }
+
+  onChangeDropdownItem(Company selectedCompany) {
+    setState(() {
+      _selectedCompany = selectedCompany;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    caterorySelected = _selectedCompany.name;
+    print(caterorySelected);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        DropdownButton(
+          style: TextStyle(
+            color: kBlackColor,
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+            fontFamily: "MontserratRegular",
+          ),
+          value: _selectedCompany,
+          items: _dropdownMenuItems,
+          onChanged: onChangeDropdownItem,
+        ),
+      ],
     );
   }
 }

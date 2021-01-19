@@ -169,7 +169,6 @@ class EditProductScreen extends StatelessWidget {
                                         kProductPrice: price,
                                         kProductDescription: description,
                                         kProductCategory: category,
-                                        kProductLocation: location
                                       },
                                       docId: productId,
                                     );

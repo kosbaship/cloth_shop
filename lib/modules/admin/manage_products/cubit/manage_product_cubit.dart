@@ -23,7 +23,6 @@ class ManageProductCubit extends Cubit<ManageProductStates> {
             pPrice: data[kProductPrice],
             pName: data[kProductName],
             pDescription: data[kProductDescription],
-            pLocation: data[kProductLocation],
             pCategory: data[kProductCategory]));
       }
 

@@ -12,6 +12,7 @@ class AddProductCubit extends Cubit<AddProductStates> {
   static AddProductCubit get(context) => BlocProvider.of(context);
 
   String imageLink = '';
+
   File imageFileFromUser;
 
   selectImage() {

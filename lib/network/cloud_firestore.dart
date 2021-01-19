@@ -15,7 +15,7 @@ class FirebaseFireStoreService {
       kProductImageUrl: imageUrl,
       kProductName: product.pName,
       kProductDescription: product.pDescription,
-      kProductLocation: product.pLocation,
+      kProductColor: product.pColor,
       kProductCategory: product.pCategory,
       kProductPrice: product.pPrice
     });
