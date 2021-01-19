@@ -45,6 +45,9 @@ Widget buildTextField({
       cursorColor: kMainColor,
       decoration: InputDecoration(
         hintText: hint,
+        hintStyle: TextStyle(
+          color: kTextLightColor,
+        ),
         prefixIcon: Icon(
           icon,
           color: kMainColor,
