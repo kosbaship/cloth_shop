@@ -1,4 +1,4 @@
-import 'package:cloth_shop/modules/user/bags_screen.dart';
+import 'package:cloth_shop/modules/user/tab_structure/bags_screen.dart';
 import 'package:cloth_shop/shared/colors/colors.dart';
 import 'package:cloth_shop/shared/components/compnents.dart';
 import 'package:flutter/material.dart';

@@ -1,8 +1,21 @@
-import 'package:cloth_shop/modules/user/product_details_screen.dart';
+import 'package:cloth_shop/modules/user/details_screen/product_details_screen.dart';
 import 'package:cloth_shop/shared/colors/colors.dart';
+import 'package:cloth_shop/shared/components/compnents.dart';
 import 'package:flutter/material.dart';
 
 class BagsScreen extends StatelessWidget {
+  final int itemCount;
+  final Color color;
+  final String imageUrl;
+  final String itemName;
+  final String itemPrice;
+
+  BagsScreen(
+      {this.itemCount,
+      this.color,
+      this.imageUrl,
+      this.itemName,
+      this.itemPrice});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -17,14 +30,7 @@ class BagsScreen extends StatelessWidget {
           ),
           itemBuilder: (context, index) => GestureDetector(
                 onTap: () {
-                  // navigateTo(context, ProductDetailsScreen());
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ProductDetailsScreen(
-                          heroTag: index,
-                        ),
-                      ));
+                  navigateTo(context, ProductDetailsScreen(heroTag: index));
                 },
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,7 +57,7 @@ class BagsScreen extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '234 EGP',
+                      'EGP 234',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     )
                   ],
