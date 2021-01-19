@@ -3,15 +3,16 @@ import 'package:cloth_shop/shared/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirebaseFireStoreService {
-  static FirebaseFirestore fireStore;
+  static FirebaseFirestore fireStoreInstance;
 
   FirebaseFireStoreService() {
-    fireStore = FirebaseFirestore.instance;
+    fireStoreInstance = FirebaseFirestore.instance;
   }
 
   static Future<DocumentReference> createCollectionAndAddProduct(
-      {ProductModel product}) async {
-    return await fireStore.collection(kProductsCollection).add({
+      {ProductModel product, imageUrl}) async {
+    return await fireStoreInstance.collection(kProductsCollection).add({
+      kProductImageUrl: imageUrl,
       kProductName: product.pName,
       kProductDescription: product.pDescription,
       kProductLocation: product.pLocation,
@@ -21,18 +22,18 @@ class FirebaseFireStoreService {
   }
 
   static Future<QuerySnapshot> getProducts() async {
-    return await fireStore.collection(kProductsCollection).get();
+    return await fireStoreInstance.collection(kProductsCollection).get();
   }
 
   static Future<void> deleteProduct({documentId}) async {
-    return await fireStore
+    return await fireStoreInstance
         .collection(kProductsCollection)
         .doc(documentId)
         .delete();
   }
 
   static Future<void> editProduct({productData, documentId}) async {
-    return await fireStore
+    return await fireStoreInstance
         .collection(kProductsCollection)
         .doc(documentId)
         .update(productData);

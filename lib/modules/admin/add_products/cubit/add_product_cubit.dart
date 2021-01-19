@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:cloth_shop/models/product.dart';
 import 'package:cloth_shop/modules/admin/add_products/cubit/add_product_states.dart';
-import 'package:cloth_shop/network/cloud_firestore.dart';
+import 'package:cloth_shop/network/firebase_storage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -29,7 +29,8 @@ class AddProductCubit extends Cubit<AddProductStates> {
   saveProduct({ProductModel product}) {
     emit(AddProductLoadingState());
 
-    FirebaseFireStoreService.createCollectionAndAddProduct(product: product)
+    FirebaseStorageService.uploadImageAndSaveProduct(
+            product: product, imageFile: imageFileFromUser)
         .then((value) {
       emit(AddProductSuccessState());
     }).catchError((e) {

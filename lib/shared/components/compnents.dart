@@ -1,5 +1,6 @@
 import 'package:cloth_shop/network/cloud_firestore.dart';
 import 'package:cloth_shop/network/firebase_auth.dart';
+import 'package:cloth_shop/network/firebase_storage.dart';
 import 'package:cloth_shop/shared/colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -7,6 +8,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 void initApp() {
   FirebaseAuthService();
   FirebaseFireStoreService();
+  FirebaseStorageService();
 }
 
 Widget showLogo({@required screenHeight}) => Container(

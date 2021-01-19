@@ -24,6 +24,7 @@ class AddProductScreen extends StatelessWidget {
         listener: (context, state) {},
         builder: (context, state) {
           String imageLink = AddProductCubit.get(context).imageLink;
+
           return ConditionalBuilder(
             condition: state is! AddProductLoadingState,
             builder: (context) {
@@ -135,6 +136,7 @@ class AddProductScreen extends StatelessWidget {
 
                               if (name.isEmpty ||
                                   price.isEmpty ||
+                                  imageLink == '' ||
                                   description.isEmpty ||
                                   category.isEmpty ||
                                   location.isEmpty) {
