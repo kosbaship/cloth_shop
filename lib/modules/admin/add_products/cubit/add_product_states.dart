@@ -10,3 +10,5 @@ class AddProductErrorState extends AddProductStates {
   final error;
   AddProductErrorState(this.error);
 }
+
+class AddProductImagePickedState extends AddProductStates {}

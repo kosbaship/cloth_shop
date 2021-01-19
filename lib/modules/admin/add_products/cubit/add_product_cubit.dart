@@ -1,18 +1,34 @@
+import 'dart:io';
+
 import 'package:cloth_shop/models/product.dart';
 import 'package:cloth_shop/modules/admin/add_products/cubit/add_product_states.dart';
 import 'package:cloth_shop/network/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AddProductCubit extends Cubit<AddProductStates> {
   AddProductCubit() : super(AddProductInitialState());
 
   static AddProductCubit get(context) => BlocProvider.of(context);
 
+  String imageLink = '';
+  File imageFileFromUser;
+
+  selectImage() {
+    imageLink = 'pick image from select image method';
+    ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) {
+      imageFileFromUser = File(pickedFile.path);
+      imageLink = pickedFile.path;
+
+      emit(AddProductImagePickedState());
+    }).catchError((e) {
+      emit(AddProductErrorState(e.toString()));
+    });
+  }
+
   saveProduct({ProductModel product}) {
-    //change the state
     emit(AddProductLoadingState());
 
-    //post the date
     FirebaseFireStoreService.createCollectionAndAddProduct(product: product)
         .then((value) {
       emit(AddProductSuccessState());
