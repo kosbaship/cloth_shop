@@ -53,6 +53,8 @@ class _ManipulateScreenState extends State<ManipulateScreen> {
               height: 35,
               width: double.infinity,
             ),
+            Image.network(
+                'https://firebasestorage.googleapis.com/v0/b/cloths-shop-cc247.appspot.com/o/Pics%2Fimage_picker2678577131568306932.jpg?alt=media&token=bd86057f-0ca4-49c1-b1b7-022bd4ff9d7e'),
             FlatButton(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20)),

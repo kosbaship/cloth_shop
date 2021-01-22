@@ -6,28 +6,35 @@ import 'package:cloth_shop/shared/colors/colors.dart';
 import 'package:flutter/material.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
-  final heroTag;
+  final String itemHeroTag;
   final int itemCount;
-  final Color color;
-  final String imageUrl;
+  final Color itemBackGroundColor;
+  final String itemImageUrl;
   final String itemName;
   final String itemPrice;
+  final String itemCategories;
+  final String itemDescription;
 
   ProductDetailsScreen(
-      {this.heroTag,
+      {this.itemHeroTag,
       this.itemCount,
-      this.color,
-      this.imageUrl,
+      this.itemBackGroundColor,
+      this.itemImageUrl,
       this.itemName,
-      this.itemPrice});
+      this.itemPrice,
+      this.itemCategories,
+      this.itemDescription});
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
+    print('=-=-=-=-= $itemImageUrl');
+    print('=-=-=-=-= $itemDescription');
+
     return Scaffold(
         // this will come from the db
-        backgroundColor: kProductColor,
+        backgroundColor: itemBackGroundColor,
         body: SingleChildScrollView(
           child: SafeArea(
             child: Column(
@@ -59,7 +66,7 @@ class ProductDetailsScreen extends StatelessWidget {
                           children: <Widget>[
                             // description
                             Text(
-                              'product.description product.description product.description product.description product.description product.description product.description product.description product.description product.description ',
+                              itemDescription,
                               style: TextStyle(height: 1.5),
                             ),
                             SizedBox(height: 20),
@@ -67,12 +74,18 @@ class ProductDetailsScreen extends StatelessWidget {
                             CounterAndFavorite(),
                             SizedBox(height: 20),
                             // buy now
-                            AddToCartAndBuyNow()
+                            AddToCartAndBuyNow(
+                              itemBackGroundColor: itemBackGroundColor,
+                            )
                           ],
                         ),
                       ),
                       NameAndPhotoAndPrice(
-                        heroTag: heroTag,
+                        itemHeroTag: itemHeroTag,
+                        itemName: itemName,
+                        itemCategories: itemCategories,
+                        itemImageUrl: itemImageUrl,
+                        itemPrice: itemPrice,
                       )
                     ],
                   ),

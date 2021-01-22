@@ -1,7 +1,6 @@
 import 'package:cloth_shop/shared/colors/colors.dart';
 import 'package:cloth_shop/shared/components/compnents.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class CounterAndFavorite extends StatelessWidget {
   @override
@@ -17,26 +16,20 @@ class CounterAndFavorite extends StatelessWidget {
               child: OutlineButton(
                 padding: EdgeInsets.zero,
                 shape: RoundedRectangleBorder(
-                  borderRadius:
-                  BorderRadius.circular(13),
+                  borderRadius: BorderRadius.circular(13),
                 ),
                 onPressed: () {
-                  showToast(
-                      message: 'Decrement',
-                      error: false);
+                  showToast(message: 'Decrement', error: false);
                 },
                 child: Icon(Icons.remove),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Text(
                 // if our item is less  then 10 then  it shows 01 02 like that
                 1.toString().padLeft(2, "0"),
-                style: Theme.of(context)
-                    .textTheme
-                    .headline6,
+                style: Theme.of(context).textTheme.headline6,
               ),
             ),
             SizedBox(
@@ -45,13 +38,10 @@ class CounterAndFavorite extends StatelessWidget {
               child: OutlineButton(
                 padding: EdgeInsets.zero,
                 shape: RoundedRectangleBorder(
-                  borderRadius:
-                  BorderRadius.circular(13),
+                  borderRadius: BorderRadius.circular(13),
                 ),
                 onPressed: () {
-                  showToast(
-                      message: 'Increment',
-                      error: false);
+                  showToast(message: 'Increment', error: false);
                 },
                 child: Icon(Icons.add),
               ),
@@ -59,7 +49,7 @@ class CounterAndFavorite extends StatelessWidget {
           ],
         ),
         Container(
-          padding: EdgeInsets.all(12),
+          padding: EdgeInsets.only(top: 4),
           height: 48,
           width: 48,
           decoration: BoxDecoration(
@@ -67,15 +57,14 @@ class CounterAndFavorite extends StatelessWidget {
             shape: BoxShape.circle,
           ),
           child: GestureDetector(
-            onTap: () {
-              showToast(
-                  message: 'add to Favorite',
-                  error: false);
-            },
-            child: SvgPicture.asset(
-              "assets/images/icons/heart.svg",
-            ),
-          ),
+              onTap: () {
+                showToast(message: 'add to Favorite', error: false);
+              },
+              child: Icon(
+                Icons.favorite_border_outlined,
+                color: kSecondaryColor,
+                size: 35,
+              )),
         )
       ],
     );

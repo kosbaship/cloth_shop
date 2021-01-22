@@ -7,6 +7,7 @@ class ProductModel {
   String pId;
   int pQuantity;
   String pColor;
+  String pImageUrl;
   ProductModel(
       {this.pQuantity,
       this.pId,
@@ -15,5 +16,6 @@ class ProductModel {
       this.pDescription,
       this.pLocation,
       this.pPrice,
+      this.pImageUrl,
       this.pColor});
 }

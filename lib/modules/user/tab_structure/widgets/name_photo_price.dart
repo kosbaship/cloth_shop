@@ -2,9 +2,17 @@ import 'package:cloth_shop/shared/colors/colors.dart';
 import 'package:flutter/material.dart';
 
 class NameAndPhotoAndPrice extends StatelessWidget {
-  final heroTag;
-
-  NameAndPhotoAndPrice({this.heroTag});
+  final String itemHeroTag;
+  final String itemImageUrl;
+  final String itemName;
+  final String itemCategories;
+  final String itemPrice;
+  NameAndPhotoAndPrice(
+      {this.itemHeroTag,
+      this.itemImageUrl,
+      this.itemName,
+      this.itemPrice,
+      this.itemCategories});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -16,11 +24,11 @@ class NameAndPhotoAndPrice extends StatelessWidget {
             height: 60,
           ),
           Text(
-            "Bags Categories".toUpperCase(),
+            "$itemCategories Categories".toUpperCase(),
             style: TextStyle(color: kSecondaryColor),
           ),
           Text(
-            "Hand Bag",
+            "$itemName",
             style: Theme.of(context)
                 .textTheme
                 .headline4
@@ -34,7 +42,7 @@ class NameAndPhotoAndPrice extends StatelessWidget {
                   children: [
                     TextSpan(text: "\nPrice\n"),
                     TextSpan(
-                      text: "EGP 234",
+                      text: "EGP $itemPrice",
                       style: Theme.of(context).textTheme.headline4.copyWith(
                           color: Colors.white, fontWeight: FontWeight.bold),
                     ),
@@ -44,9 +52,9 @@ class NameAndPhotoAndPrice extends StatelessWidget {
               SizedBox(width: 20),
               Expanded(
                 child: Hero(
-                  tag: '$heroTag',
-                  child: Image.asset(
-                    'assets/images/bags/bag_1.png',
+                  tag: '$itemHeroTag',
+                  child: Image.network(
+                    '$itemImageUrl',
                     fit: BoxFit.fill,
                   ),
                 ),

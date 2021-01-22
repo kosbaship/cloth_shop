@@ -1,9 +1,11 @@
-import 'package:cloth_shop/shared/colors/colors.dart';
 import 'package:cloth_shop/shared/components/compnents.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class AddToCartAndBuyNow extends StatelessWidget {
+  final Color itemBackGroundColor;
+
+  const AddToCartAndBuyNow({this.itemBackGroundColor});
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -14,13 +16,14 @@ class AddToCartAndBuyNow extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(18),
             border: Border.all(
-              color: kProductColor,
+              color: itemBackGroundColor,
             ),
           ),
           child: IconButton(
-            icon: SvgPicture.asset(
-              "assets/images/icons/add_to_cart.svg",
-              color: kProductColor,
+            icon: Icon(
+              Icons.add_shopping_cart,
+              color: itemBackGroundColor,
+              size: 30,
             ),
             onPressed: () {
               showToast(message: 'add to cart', error: false);
@@ -33,7 +36,7 @@ class AddToCartAndBuyNow extends StatelessWidget {
             child: FlatButton(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(18)),
-              color: kProductColor,
+              color: itemBackGroundColor,
               onPressed: () {
                 showToast(message: 'Buy  Now', error: false);
               },
