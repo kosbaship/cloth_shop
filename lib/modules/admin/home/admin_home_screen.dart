@@ -58,22 +58,28 @@ class AdminHomeScreen extends StatelessWidget {
             child: BottomNavigationBar(
               items: [
                 BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.add,
+                  icon: GestureDetector(
+                    child: Icon(
+                      Icons.logout,
+                    ),
+                    onTap: () {
+                      AdminHomeCubit.get(context).signOut();
+                      navigateAndFinish(context, LoginScreen());
+                    },
                   ),
-                  label: 'Add Product',
+                  label: 'Exit',
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(
                     Icons.view_list_sharp,
                   ),
-                  label: 'Manage Orders',
+                  label: 'Orders',
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(
-                    Icons.settings_sharp,
+                    Icons.shop_two_sharp,
                   ),
-                  label: 'Manage Products',
+                  label: 'Products',
                 ),
               ],
               backgroundColor: Colors.transparent,
