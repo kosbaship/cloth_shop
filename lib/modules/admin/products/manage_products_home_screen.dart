@@ -1,5 +1,7 @@
+import 'package:cloth_shop/modules/admin/products/add_products/add_products_screen.dart';
 import 'package:cloth_shop/modules/admin/products/manage_products/manage_products_screen.dart';
 import 'package:cloth_shop/shared/colors/colors.dart';
+import 'package:cloth_shop/shared/components/compnents.dart';
 import 'package:flutter/material.dart';
 
 class ManageProductsHomeScreen extends StatelessWidget {
@@ -21,18 +23,19 @@ class ManageProductsHomeScreen extends StatelessWidget {
           ),
           elevation: 0,
           actions: [
-            // IconButton(
-            //   icon: Icon(
-            //     Icons.shopping_cart,
-            //     size: 34,
-            //   ),
-            //   onPressed: () {
-            //     showToast(message: "cart", error: false);
-            //   },
-            // ),
-            // SizedBox(
-            //   width: 12,
-            // )
+            IconButton(
+              icon: Icon(
+                Icons.add_box,
+                size: 34,
+                color: kSecondaryColor,
+              ),
+              onPressed: () {
+                navigateTo(context, AddProductScreen());
+              },
+            ),
+            SizedBox(
+              width: 12,
+            )
           ],
           bottom: TabBar(
             indicatorColor: kSecondaryColor,

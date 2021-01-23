@@ -42,6 +42,7 @@ class EditProductScreen extends StatelessWidget {
           return ConditionalBuilder(
             condition: state is! EditProductLoadingState,
             builder: (context) => Scaffold(
+              backgroundColor: kSecondaryColor,
               body: SingleChildScrollView(
                 physics: BouncingScrollPhysics(),
                 child: Padding(

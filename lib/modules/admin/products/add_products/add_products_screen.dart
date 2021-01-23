@@ -32,136 +32,156 @@ class AddProductScreen extends StatelessWidget {
           return ConditionalBuilder(
             condition: state is! AddProductLoadingState,
             builder: (context) {
-              return SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      imageLink != ''
-                          ? CircleAvatar(
-                              radius: 110,
-                              backgroundColor: kMainColor,
-                              child: CircleAvatar(
-                                backgroundColor: Colors.white,
-                                child: ClipOval(
-                                  child: Image.file(
-                                    File(imageLink),
-                                    fit: BoxFit.cover,
+              return Scaffold(
+                backgroundColor: kSecondaryColor,
+                body: SafeArea(
+                  child: SingleChildScrollView(
+                    physics: BouncingScrollPhysics(),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Row(
+                            children: [
+                              IconButton(
+                                icon: Icon(
+                                  Icons.arrow_back_ios,
+                                  color: kMainColor,
+                                  size: 30,
+                                ),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            ],
+                          ),
+
+                          imageLink != ''
+                              ? CircleAvatar(
+                                  radius: 110,
+                                  backgroundColor: kMainColor,
+                                  child: CircleAvatar(
+                                    backgroundColor: Colors.white,
+                                    child: ClipOval(
+                                      child: Image.file(
+                                        File(imageLink),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    radius: 100,
+                                  ),
+                                )
+                              : FlatButton(
+                                  onPressed: () {
+                                    AddProductCubit.get(context).selectImage();
+                                  },
+                                  color: kSecondaryColor,
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Column(
+                                    // Replace with a Row for horizontal icon + text
+                                    children: <Widget>[
+                                      Icon(
+                                        Icons.camera,
+                                        size: 120,
+                                        color: kMainColor,
+                                      ),
+                                      Text(
+                                        "Choose Image",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1
+                                            .copyWith(
+                                              color: kTextLightColor,
+                                            ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                radius: 100,
-                              ),
-                            )
-                          : FlatButton(
-                              onPressed: () {
-                                AddProductCubit.get(context).selectImage();
-                              },
-                              color: kSecondaryColor,
-                              padding: EdgeInsets.all(8.0),
-                              child: Column(
-                                // Replace with a Row for horizontal icon + text
-                                children: <Widget>[
-                                  Icon(
-                                    Icons.camera,
-                                    size: 120,
-                                    color: kMainColor,
-                                  ),
-                                  Text(
-                                    "Choose Image",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyText1
-                                        .copyWith(
-                                          color: kTextLightColor,
-                                        ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                      SizedBox(
-                        height: 19,
-                      ),
-                      buildTextField(
-                        icon: Icons.edit,
-                        hint: 'Product name',
-                        controller: nameController,
-                        type: TextInputType.text,
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      buildTextField(
-                        icon: Icons.edit,
-                        hint: 'Product price',
-                        controller: priceController,
-                        type: TextInputType.number,
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      buildTextField(
-                        icon: Icons.edit,
-                        hint: 'Product description',
-                        controller: descriptionController,
-                        type: TextInputType.text,
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      PickColor(),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      DropDown(),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 50),
-                        child: buildDefaultButton(
-                            onPressed: () {
-                              String name = nameController.text;
-                              String price = priceController.text;
-                              String description = descriptionController.text;
+                          SizedBox(
+                            height: 19,
+                          ),
+                          buildTextField(
+                            icon: Icons.edit,
+                            hint: 'Product name',
+                            controller: nameController,
+                            type: TextInputType.text,
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          buildTextField(
+                            icon: Icons.edit,
+                            hint: 'Product price',
+                            controller: priceController,
+                            type: TextInputType.number,
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          buildTextField(
+                            icon: Icons.edit,
+                            hint: 'Product description',
+                            controller: descriptionController,
+                            type: TextInputType.text,
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          PickColor(),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          DropDown(),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 50),
+                            child: buildDefaultButton(
+                                onPressed: () {
+                                  String name = nameController.text;
+                                  String price = priceController.text;
+                                  String description = descriptionController.text;
 
-                              if (name.isEmpty ||
-                                  price.isEmpty ||
-                                  imageLink == '' ||
-                                  description.isEmpty) {
-                                showToast(
-                                    message: "please fill your data",
-                                    error: true);
-                              } else {
-                                AddProductCubit.get(context).saveProduct(
-                                    product: ProductModel(
-                                        pName: name,
-                                        pPrice: price,
-                                        pDescription: description,
-                                        pCategory: caterorySelected,
-                                        pColor: currentColor.toString()));
-                                // nameController.clear();
-                                // priceController.clear();
-                                // descriptionController.clear();
-                                // categoryController.clear();
-                                // locationController.clear();
-                                // AdminHomeCubit.get(context).currentIndex = 2;
-                                // navigateAndFinish(context, AdminHomeScreen());
-                                showToast(
-                                    message: "Product Saved Successfully",
-                                    error: false);
-                              }
-                            },
-                            text: 'Submit',
-                            textColor: kWhiteColor,
-                            backgroundColor: kMainColor,
-                            borderColor: kWhiteColor),
+                                  if (name.isEmpty ||
+                                      price.isEmpty ||
+                                      imageLink == '' ||
+                                      description.isEmpty) {
+                                    showToast(
+                                        message: "please fill your data",
+                                        error: true);
+                                  } else {
+                                    AddProductCubit.get(context).saveProduct(
+                                        product: ProductModel(
+                                            pName: name,
+                                            pPrice: price,
+                                            pDescription: description,
+                                            pCategory: caterorySelected,
+                                            pColor: currentColor.toString()));
+                                    // nameController.clear();
+                                    // priceController.clear();
+                                    // descriptionController.clear();
+                                    // categoryController.clear();
+                                    // locationController.clear();
+                                    // AdminHomeCubit.get(context).currentIndex = 2;
+                                    // navigateAndFinish(context, AdminHomeScreen());
+                                    showToast(
+                                        message: "Product Saved Successfully",
+                                        error: false);
+                                  }
+                                },
+                                text: 'Submit',
+                                textColor: kWhiteColor,
+                                backgroundColor: kMainColor,
+                                borderColor: kWhiteColor),
+                          ),
+                          SizedBox(
+                            height: 35,
+                          ),
+                        ],
                       ),
-                      SizedBox(
-                        height: 35,
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               );
