@@ -1,7 +1,8 @@
-import 'package:cloth_shop/modules/user/tab_structure/widgets/add_buynow.dart';
-import 'package:cloth_shop/modules/user/tab_structure/widgets/counter_favorite.dart';
-import 'package:cloth_shop/modules/user/tab_structure/widgets/custom_app_bar.dart';
-import 'package:cloth_shop/modules/user/tab_structure/widgets/name_photo_price.dart';
+
+import 'package:cloth_shop/modules/user/details_screen/widgets/add_buynow.dart';
+import 'package:cloth_shop/modules/user/details_screen/widgets/counter_favorite.dart';
+import 'package:cloth_shop/modules/user/details_screen/widgets/custom_app_bar.dart';
+import 'package:cloth_shop/modules/user/details_screen/widgets/name_photo_price.dart';
 import 'package:cloth_shop/shared/colors/colors.dart';
 import 'package:flutter/material.dart';
 

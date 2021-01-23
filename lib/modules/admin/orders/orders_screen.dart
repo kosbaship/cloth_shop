@@ -8,7 +8,7 @@ class OrdersScreen extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       child: Center(
         child: Text(
-          "Orders Screen\nWait\nWe Still Developing",
+          "Orders screen\nwait\nwe still developing",
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 18,

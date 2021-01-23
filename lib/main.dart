@@ -2,6 +2,7 @@ import 'package:cloth_shop/modules/admin/home/cubit/admin_home_cubit.dart';
 import 'package:cloth_shop/modules/login/login_screen.dart';
 import 'package:cloth_shop/shared/colors/colors.dart';
 import 'package:cloth_shop/shared/components/compnents.dart';
+import 'package:cloth_shop/test/maniplation.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
             primaryTextTheme:
                 TextTheme(headline6: TextStyle(color: kWhiteColor))),
         home: LoginScreen(),
+        // home: ManipulateScreen(),
       ),
     );
   }

@@ -18,22 +18,6 @@ class AdminHomeScreen extends StatelessWidget {
 
         return Scaffold(
           backgroundColor: kWhiteColor,
-          appBar: drawAppbar(
-            context: context,
-            leadingWidget: Container(),
-            title: AdminHomeCubit.get(context).titles[currentIndex],
-            actionWidget: IconButton(
-              icon: Icon(
-                Icons.logout,
-                size: 30.0,
-                color: kWhiteColor,
-              ),
-              onPressed: () {
-                AdminHomeCubit.get(context).signOut();
-                navigateAndFinish(context, LoginScreen());
-              },
-            ),
-          ),
           body: AdminHomeCubit.get(context).bodies[currentIndex],
           bottomNavigationBar: Container(
             height: 60.0,
@@ -62,10 +46,10 @@ class AdminHomeScreen extends StatelessWidget {
                     child: Icon(
                       Icons.logout,
                     ),
-                    onTap: () {
-                      AdminHomeCubit.get(context).signOut();
-                      navigateAndFinish(context, LoginScreen());
-                    },
+                      onTap: (){
+                        AdminHomeCubit.get(context).signOut();
+                        navigateAndFinish(context, LoginScreen());
+                      },
                   ),
                   label: 'Exit',
                 ),
@@ -77,7 +61,7 @@ class AdminHomeScreen extends StatelessWidget {
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(
-                    Icons.shop_two_sharp,
+                    Icons.shopping_bag,
                   ),
                   label: 'Products',
                 ),

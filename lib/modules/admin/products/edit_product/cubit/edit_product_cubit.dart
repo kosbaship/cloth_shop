@@ -1,4 +1,4 @@
-import 'package:cloth_shop/modules/admin/edit_product/cubit/edit_product_states.dart';
+import 'package:cloth_shop/modules/admin/products/edit_product/cubit/edit_product_states.dart';
 import 'package:cloth_shop/network/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

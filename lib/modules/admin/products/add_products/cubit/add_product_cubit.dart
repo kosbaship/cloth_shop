@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:cloth_shop/models/product.dart';
-import 'package:cloth_shop/modules/admin/add_products/cubit/add_product_states.dart';
+import 'package:cloth_shop/modules/admin/products/add_products/cubit/add_product_states.dart';
 import 'package:cloth_shop/network/firebase_storage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';

@@ -2,8 +2,8 @@ import 'dart:io';
 import 'dart:ui';
 
 import 'package:cloth_shop/models/product.dart';
-import 'package:cloth_shop/modules/admin/add_products/cubit/add_product_cubit.dart';
-import 'package:cloth_shop/modules/admin/add_products/cubit/add_product_states.dart';
+import 'package:cloth_shop/modules/admin/products/add_products/cubit/add_product_cubit.dart';
+import 'package:cloth_shop/modules/admin/products/add_products/cubit/add_product_states.dart';
 import 'package:cloth_shop/shared/colors/colors.dart';
 import 'package:cloth_shop/shared/components/compnents.dart';
 import 'package:conditional_builder/conditional_builder.dart';
@@ -87,7 +87,7 @@ class AddProductScreen extends StatelessWidget {
                         icon: Icons.edit,
                         hint: 'Product name',
                         controller: nameController,
-                        type: TextInputType.emailAddress,
+                        type: TextInputType.text,
                       ),
                       SizedBox(
                         height: 20,
@@ -96,7 +96,7 @@ class AddProductScreen extends StatelessWidget {
                         icon: Icons.edit,
                         hint: 'Product price',
                         controller: priceController,
-                        type: TextInputType.emailAddress,
+                        type: TextInputType.number,
                       ),
                       SizedBox(
                         height: 20,
@@ -105,7 +105,7 @@ class AddProductScreen extends StatelessWidget {
                         icon: Icons.edit,
                         hint: 'Product description',
                         controller: descriptionController,
-                        type: TextInputType.emailAddress,
+                        type: TextInputType.text,
                       ),
                       SizedBox(
                         height: 20,

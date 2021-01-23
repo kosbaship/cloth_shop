@@ -1,45 +1,45 @@
-import 'package:cloth_shop/modules/user/tab_structure/bags_screen.dart';
+import 'package:cloth_shop/modules/admin/products/manage_products/manage_products_screen.dart';
 import 'package:cloth_shop/shared/colors/colors.dart';
-import 'package:cloth_shop/shared/components/compnents.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
+class ManageProductsHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 5,
       child: Scaffold(
-        backgroundColor: kSecondaryColor,
+        backgroundColor: kMainColor,
+
         appBar: AppBar(
-          backgroundColor: kSecondaryColor,
+          backgroundColor: kMainColor,
           title: Text(
-            'Discover'.toUpperCase(),
+            'Manage'.toUpperCase(),
             style: TextStyle(
-              color: kBlackColor,
+              color: kSecondaryColor,
               fontSize: 24,
             ),
           ),
           elevation: 0,
           actions: [
-            IconButton(
-              icon: Icon(
-                Icons.shopping_cart,
-                size: 34,
-              ),
-              onPressed: () {
-                showToast(message: "cart", error: false);
-              },
-            ),
-            SizedBox(
-              width: 12,
-            )
+            // IconButton(
+            //   icon: Icon(
+            //     Icons.shopping_cart,
+            //     size: 34,
+            //   ),
+            //   onPressed: () {
+            //     showToast(message: "cart", error: false);
+            //   },
+            // ),
+            // SizedBox(
+            //   width: 12,
+            // )
           ],
           bottom: TabBar(
-            indicatorColor: kBlackColor,
+            indicatorColor: kSecondaryColor,
             indicatorWeight: 6,
             indicatorSize: TabBarIndicatorSize.label,
-            unselectedLabelColor: kTextLightColor,
-            labelColor: kBlackColor,
+            unselectedLabelColor: kTextDarkColor,
+            labelColor: kSecondaryColor,
             isScrollable: true,
             unselectedLabelStyle: TextStyle(
               fontSize: 12,
@@ -69,7 +69,12 @@ class HomeScreen extends StatelessWidget {
         ),
         body: TabBarView(
           children: <Widget>[
-            BagsScreen(),
+            ManageProductScreen(),
+            // Center(
+            //   child: Text(
+            //     'Discover'.toUpperCase(),
+            //   ),
+            // ),
             Center(
               child: Text(
                 'Discover'.toUpperCase(),
