@@ -2,6 +2,7 @@ import 'package:cloth_shop/modules/admin/products/add_products/add_products_scre
 import 'package:cloth_shop/modules/admin/products/manage_products/manage_products_screen.dart';
 import 'package:cloth_shop/shared/colors/colors.dart';
 import 'package:cloth_shop/shared/components/compnents.dart';
+import 'package:cloth_shop/shared/constants.dart';
 import 'package:flutter/material.dart';
 
 class ManageProductsHomeScreen extends StatelessWidget {
@@ -72,32 +73,12 @@ class ManageProductsHomeScreen extends StatelessWidget {
         ),
         body: TabBarView(
           children: <Widget>[
-            ManageProductScreen(),
-            // Center(
-            //   child: Text(
-            //     'Discover'.toUpperCase(),
-            //   ),
-            // ),
-            Center(
-              child: Text(
-                'Discover'.toUpperCase(),
-              ),
-            ),
-            Center(
-              child: Text(
-                'Discover'.toUpperCase(),
-              ),
-            ),
-            Center(
-              child: Text(
-                'Discover'.toUpperCase(),
-              ),
-            ),
-            Center(
-              child: Text(
-                'Discover'.toUpperCase(),
-              ),
-            ),
+            ManageProductScreen(searchCategory: kBags),
+            ManageProductScreen(searchCategory: kJackets),
+            ManageProductScreen(searchCategory: kTrousers),
+            ManageProductScreen(searchCategory: kTShirts),
+
+            ManageProductScreen(searchCategory: kShoes),
           ],
         ),
       ),

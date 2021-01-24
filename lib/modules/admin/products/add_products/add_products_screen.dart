@@ -6,13 +6,14 @@ import 'package:cloth_shop/modules/admin/products/add_products/cubit/add_product
 import 'package:cloth_shop/modules/admin/products/add_products/cubit/add_product_states.dart';
 import 'package:cloth_shop/shared/colors/colors.dart';
 import 'package:cloth_shop/shared/components/compnents.dart';
+import 'package:cloth_shop/shared/constants.dart';
 import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
-Color currentColor = kProductColor;
+Color currentColor = kProductColorLocal;
 String caterorySelected = 'jackets';
 
 class AddProductScreen extends StatelessWidget {
@@ -166,6 +167,7 @@ class AddProductScreen extends StatelessWidget {
                                     // locationController.clear();
                                     // AdminHomeCubit.get(context).currentIndex = 2;
                                     // navigateAndFinish(context, AdminHomeScreen());
+                                    AddProductCubit.get(context).imageLink = '';
                                     showToast(
                                         message: "Product Saved Successfully",
                                         error: false);
@@ -275,11 +277,17 @@ class Company {
 
   static List<Company> getCompanies() {
     return <Company>[
-      Company(1, 'Bags'),
-      Company(2, 'Jackets'),
-      Company(3, 'Trousers'),
-      Company(4, 'T-shirts'),
-      Company(5, 'Shoes'),
+
+      Company(1, kBags),
+      Company(2, kJackets),
+      Company(3, kTrousers),
+      Company(4, kTShirts),
+      Company(5, kShoes),
+      // Company(1, 'Bags'),
+      // Company(2, 'Jackets'),
+      // Company(3, 'Trousers'),
+      // Company(4, 'T-shirts'),
+      // Company(5, 'Shoes'),
     ];
   }
 }

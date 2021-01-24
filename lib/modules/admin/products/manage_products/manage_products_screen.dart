@@ -9,10 +9,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ManageProductScreen extends StatelessWidget {
+  final String searchCategory;
+
+  const ManageProductScreen({@required this.searchCategory});
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ManageProductsScreensCubit()..loadProduct(),
+      create: (context) => ManageProductsScreensCubit()..loadProduct(searchCategory: searchCategory),
       child: BlocConsumer<ManageProductsScreensCubit, ManageProductsScreenStates>(
         listener: (context, state) {},
         builder: (context, state) {
@@ -38,6 +42,7 @@ class ManageProductScreen extends StatelessWidget {
                     String itemName = products[index].pName;
                     String itemPrice = products[index].pPrice;
                     String itemCategories = products[index].pCategory;
+                    print('======== - $itemCategories');
                     String itemDescription = products[index].pDescription;
                     String itemHeroTag = 'details$index';
 

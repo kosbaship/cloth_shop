@@ -9,7 +9,7 @@ class ManipulateScreen extends StatefulWidget {
 }
 
 class _ManipulateScreenState extends State<ManipulateScreen> {
-  Color currentColor = kProductColor;
+  Color currentColor = kProductColorLocal;
 
   void changeColor(Color color) {
     setState(() {

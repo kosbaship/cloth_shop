@@ -10,7 +10,7 @@ class ManageProductsScreensCubit extends Cubit<ManageProductsScreenStates> {
   static ManageProductsScreensCubit get(context) => BlocProvider.of(context);
   List<ProductModel> products = [];
 
-  loadProduct() {
+  loadProduct({String searchCategory}) {
     emit(ManageProductsScreenLoadingState());
 
     FirebaseFireStoreService.getProducts().then((value) {
@@ -18,6 +18,7 @@ class ManageProductsScreensCubit extends Cubit<ManageProductsScreenStates> {
 
       for (var doc in value.docs) {
         var data = doc.data();
+        if(data[kProductCategory] == searchCategory)
         products.add(ProductModel(
             pId: doc.id,
             pPrice: data[kProductPrice],
