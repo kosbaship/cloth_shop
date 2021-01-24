@@ -1,6 +1,7 @@
-import 'package:cloth_shop/modules/user/tab_structure/bags_screen.dart';
+import 'package:cloth_shop/modules/user/tab_structure/user_product_model_screen.dart';
 import 'package:cloth_shop/shared/colors/colors.dart';
 import 'package:cloth_shop/shared/components/compnents.dart';
+import 'package:cloth_shop/shared/constants.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -69,27 +70,11 @@ class HomeScreen extends StatelessWidget {
         ),
         body: TabBarView(
           children: <Widget>[
-            BagsScreen(),
-            Center(
-              child: Text(
-                'Discover'.toUpperCase(),
-              ),
-            ),
-            Center(
-              child: Text(
-                'Discover'.toUpperCase(),
-              ),
-            ),
-            Center(
-              child: Text(
-                'Discover'.toUpperCase(),
-              ),
-            ),
-            Center(
-              child: Text(
-                'Discover'.toUpperCase(),
-              ),
-            ),
+            UserProductModelScreen(searchCategory: kBags),
+            UserProductModelScreen(searchCategory: kJackets),
+            UserProductModelScreen(searchCategory: kTrousers),
+            UserProductModelScreen(searchCategory: kTShirts),
+            UserProductModelScreen(searchCategory: kShoes),
           ],
         ),
       ),

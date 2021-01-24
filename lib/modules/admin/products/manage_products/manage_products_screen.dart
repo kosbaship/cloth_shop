@@ -42,7 +42,6 @@ class ManageProductScreen extends StatelessWidget {
                     String itemName = products[index].pName;
                     String itemPrice = products[index].pPrice;
                     String itemCategories = products[index].pCategory;
-                    print('======== - $itemCategories');
                     String itemDescription = products[index].pDescription;
                     String itemHeroTag = 'details$index';
 

@@ -77,7 +77,6 @@ class ManageProductsHomeScreen extends StatelessWidget {
             ManageProductScreen(searchCategory: kJackets),
             ManageProductScreen(searchCategory: kTrousers),
             ManageProductScreen(searchCategory: kTShirts),
-
             ManageProductScreen(searchCategory: kShoes),
           ],
         ),

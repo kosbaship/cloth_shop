@@ -1,30 +1,31 @@
 import 'package:cloth_shop/models/product.dart';
 import 'package:cloth_shop/modules/user/details_screen/product_details_screen.dart';
-import 'package:cloth_shop/modules/user/tab_structure/cubit/cubit.dart';
-import 'package:cloth_shop/modules/user/tab_structure/cubit/states.dart';
+import 'package:cloth_shop/modules/user/tab_structure/cubit/user_product_model_cubit.dart';
+import 'package:cloth_shop/modules/user/tab_structure/cubit/user_product_model_states.dart';
 import 'package:cloth_shop/shared/colors/colors.dart';
 import 'package:cloth_shop/shared/components/compnents.dart';
 import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class BagsScreen extends StatelessWidget {
+class UserProductModelScreen extends StatelessWidget {
   final int itemCount;
   final Color color;
   final String imageUrl;
   final String itemName;
   final String itemPrice;
+  final String searchCategory;
 
-  BagsScreen(
+  UserProductModelScreen(
       {this.itemCount,
       this.color,
       this.imageUrl,
       this.itemName,
-      this.itemPrice});
+      this.itemPrice, this.searchCategory});
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => BagsCubit()..loadProduct(),
+      create: (context) => BagsCubit()..loadProduct(searchCategory: searchCategory),
       child: BlocConsumer<BagsCubit, BagsStates>(
         listener: (context, state) {},
         builder: (context, state) {
@@ -46,17 +47,11 @@ class BagsScreen extends StatelessWidget {
                     //Color itemBackGroundColor = products[index].pColor as Color;
                     Color itemBackGroundColor = Color(0xff46494a);
                     String itemImageUrl = products[index].pImageUrl;
-                    //  print('=-=-=-=-= ${products[index].pImageUrl}');
                     String itemName = products[index].pName;
-                    //  print('=-=-=-=-= ${products[index].pName}');
                     String itemPrice = products[index].pPrice;
-                    //    print('=-=-=-=-= ${products[index].pPrice}');
                     String itemCategories = products[index].pCategory;
-                    //   print('=-=-=-=-= ${products[index].pCategory}');
                     String itemDescription = products[index].pDescription;
-                    //   print('=-=-=-=-= ${products[index].pDescription}');
                     String itemHeroTag = 'details$index';
-                    //  print('=-=-=-=-= details$index');
 
                     return GestureDetector(
                       onTap: () {
