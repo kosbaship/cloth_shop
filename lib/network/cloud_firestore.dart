@@ -21,6 +21,16 @@ class FirebaseFireStoreService {
     });
   }
 
+  static Future<DocumentReference> createCollectionAndAddCart(
+      {ProductModel product}) async {
+    return await fireStoreInstance.collection(kCartCollection).add({
+      kProductImageUrl: product.pImageUrl,
+      kProductName: product.pName,
+      kProductQuantity: product.pQuantity,
+      kProductPrice: product.pPrice
+    });
+  }
+
   static Future<QuerySnapshot> getProducts() async {
     return await fireStoreInstance.collection(kProductsCollection).get();
   }

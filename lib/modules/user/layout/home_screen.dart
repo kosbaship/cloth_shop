@@ -1,4 +1,5 @@
 import 'package:cloth_shop/modules/user/cart/cart_screen.dart';
+import 'package:cloth_shop/modules/user/cart/cubit/cart_screen_cubit.dart';
 import 'package:cloth_shop/modules/user/tabs/cubit/user_product_model_cubit.dart';
 import 'package:cloth_shop/modules/user/tabs/user_product_model_screen.dart';
 import 'package:cloth_shop/shared/colors/colors.dart';
@@ -10,8 +11,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => UserProductModelCubit()..loadAllProductForUser(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => UserProductModelCubit()..loadAllProductForUser(),),
+        BlocProvider(create: (context) => CartScreenCubit(),),
+      ],
       child: DefaultTabController(
         length: 5,
         child: Scaffold(

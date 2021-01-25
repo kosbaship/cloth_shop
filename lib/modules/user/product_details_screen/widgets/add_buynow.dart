@@ -1,4 +1,6 @@
+import 'package:cloth_shop/models/product.dart';
 import 'package:cloth_shop/modules/user/cart/cart_screen.dart';
+import 'package:cloth_shop/modules/user/cart/cubit/cart_screen_cubit.dart';
 import 'package:cloth_shop/modules/user/product_details_screen/cubit/product_details_cubit.dart';
 import 'package:cloth_shop/shared/components/compnents.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +34,16 @@ class AddToCartAndBuyNow extends StatelessWidget {
               size: 30,
             ),
             onPressed: () {
-              showToast(message: 'add to cart', error: false);
+              ProductDetailsScreenCubit.get(context).addToCart(
+                  product: ProductModel(
+                      pName: itemName,
+                      pQuantity: ProductDetailsScreenCubit.get(context).counter,
+                      pImageUrl: itemImageUrl,
+                      pPrice: itemPrice
+                  )
+              );
+              showToast(message: 'Order saved in your cart\n you can continue shopping', error: false);
+              Navigator.pop(context);
             },
           ),
         ),
@@ -44,12 +55,16 @@ class AddToCartAndBuyNow extends StatelessWidget {
                   borderRadius: BorderRadius.circular(18)),
               color: itemBackGroundColor,
               onPressed: () {
-                navigateTo(context, CartScreen(
-                  itemName: itemName,
-                  itemQuantity: ProductDetailsScreenCubit.get(context).counter,
-                  itemImageUrl: itemImageUrl,
-                  itemPrice: itemPrice,
-                ));
+
+                ProductDetailsScreenCubit.get(context).addToCart(
+                  product: ProductModel(
+                    pName: itemName,
+                    pQuantity: ProductDetailsScreenCubit.get(context).counter,
+                    pImageUrl: itemImageUrl,
+                    pPrice: itemPrice
+                  )
+                );
+                navigateTo(context, CartScreen());
               },
               child: Text(
                 "Buy  Now".toUpperCase(),

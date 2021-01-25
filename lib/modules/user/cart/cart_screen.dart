@@ -2,12 +2,9 @@ import 'package:cloth_shop/shared/colors/colors.dart';
 import 'package:flutter/material.dart';
 
 class CartScreen extends StatelessWidget {
-  final String itemImageUrl;
-  final String itemName;
-  final String itemPrice;
-  final int itemQuantity;
 
-  const CartScreen({this.itemImageUrl, this.itemName, this.itemPrice, this.itemQuantity});
+
+  const CartScreen();
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
@@ -76,7 +73,7 @@ class CartScreen extends StatelessWidget {
                               CircleAvatar(
                                 radius: screenHeight * .15 / 2,
                                 child:  Image.network(
-                                  '$itemImageUrl',
+                                  '\$itemImageUrl',
                                   fit: BoxFit.fill,
                                 ),
                                 backgroundColor: kItemBackGroundColor,
@@ -93,7 +90,7 @@ class CartScreen extends StatelessWidget {
                                         MainAxisAlignment.center,
                                         children: <Widget>[
                                           Text(
-                                            '$itemName',
+                                            '\$itemName',
                                             style: TextStyle(
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.bold),
@@ -102,7 +99,7 @@ class CartScreen extends StatelessWidget {
                                             height: 10,
                                           ),
                                           Text(
-                                            'EGP $itemPrice',
+                                            'EGP \$itemPrice',
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold),
                                           )
@@ -112,7 +109,7 @@ class CartScreen extends StatelessWidget {
                                     Padding(
                                       padding: const EdgeInsets.only(right: 20),
                                       child: Text(
-                                        itemQuantity.toString(),
+                                        'itemQuantity.toString()',
                                         style: TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold),
