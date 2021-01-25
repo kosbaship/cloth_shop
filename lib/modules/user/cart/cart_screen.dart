@@ -53,7 +53,7 @@ class CartScreen extends StatelessWidget {
                               color: kBlackColor, fontWeight: FontWeight.bold),
                         ),
                         TextSpan(
-                          text: '${getTotalPrice(cartScreenProducts)}',
+                          text: '${CartScreenCubit.get(context).getTotalPrice()}',
                           style: Theme.of(context).textTheme.headline5.copyWith(
                               color: kSecondaryColor, fontWeight: FontWeight.bold),
                         ),
@@ -171,20 +171,59 @@ class CartScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              fallback: (context) => Center(child: Text(
-                'your cart is empty'.toUpperCase(),
-                style: TextStyle(
-                  color: kBlackColor,
-                  fontSize: 18,
+              fallback: (context) => Scaffold(
+                backgroundColor: kSecondaryColor,
+                appBar: AppBar(
+                  leading: IconButton(
+                    icon: Icon(
+                      Icons.arrow_back_ios,
+                      color: kSecondaryColor,
+                      size: 30,
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  backgroundColor: kItemBackGroundColor,
+                  elevation: 0,
+
                 ),
-              ),),
+                body: Center(child: Text(
+                  'your cart is empty'.toUpperCase(),
+                  style: TextStyle(
+                    color: kBlackColor,
+                    fontSize: 18,
+                  ),
+                ),),
+              ),
+
             ),
-            fallback: (context) => Center(child: CircularProgressIndicator()),
+            fallback: (context) => Scaffold(
+              backgroundColor: kSecondaryColor,
+              appBar: AppBar(
+                leading: IconButton(
+                  icon: Icon(
+                    Icons.arrow_back_ios,
+                    color: kSecondaryColor,
+                    size: 30,
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                backgroundColor: kItemBackGroundColor,
+                elevation: 0,
+
+              ),
+              body: Center(child: CircularProgressIndicator()),
+            ),
           );
         },
       ),
     );
   }
+
+
 
   // void showCustomMenu(details, context, product) async {
   //   double dx = details.globalPosition.dx;
@@ -253,11 +292,5 @@ class CartScreen extends StatelessWidget {
   //       });
   // }
 
-  getTotalPrice(List<ProductModel> products) {
-    var price = 0;
-    for (var product in products) {
-      price += product.pQuantity * int.parse(product.pPrice);
-    }
-    return price;
-  }
+
 }

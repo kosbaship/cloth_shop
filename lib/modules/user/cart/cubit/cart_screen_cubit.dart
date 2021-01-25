@@ -12,7 +12,15 @@ class CartScreenCubit extends Cubit<CartStates> {
 
 
   List<ProductModel> cartProducts = [];
+  var price = 0;
 
+  getTotalPrice() {
+
+    for (var product in cartProducts) {
+      price += product.pQuantity * int.parse(product.pPrice);
+    }
+    return price;
+  }
 
 
   loadUserCartProducts() {

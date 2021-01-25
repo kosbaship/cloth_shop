@@ -26,7 +26,7 @@ class FirebaseFireStoreService {
   static Future<DocumentReference> createCollectionAndAddCart(
       {ProductModel product}) async {
     return await
-    fireStoreInstance.collection(kCartCollection)
+    fireStoreInstance.collection(kUserDetailsCollection)
         .doc(FirebaseAuthService.getUserId())
         .collection(kUserCartCollection)
         .add({
@@ -42,7 +42,7 @@ class FirebaseFireStoreService {
   }
 
   static Future<QuerySnapshot> getCartProducts() async {
-    return await fireStoreInstance.collection(kCartCollection).doc(FirebaseAuthService.getUserId())
+    return await fireStoreInstance.collection(kUserDetailsCollection).doc(FirebaseAuthService.getUserId())
         .collection(kUserCartCollection).get();
   }
 
