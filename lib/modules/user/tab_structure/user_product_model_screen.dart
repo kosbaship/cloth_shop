@@ -24,89 +24,89 @@ class UserProductModelScreen extends StatelessWidget {
       this.itemPrice, this.searchCategory});
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => BagsCubit()..loadProduct(searchCategory: searchCategory),
-      child: BlocConsumer<BagsCubit, BagsStates>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          List<ProductModel> products = BagsCubit.get(context).products;
+       return BlocConsumer<UserProductModelCubit, UserProductModelStates>(
+          listener: (context, state) {},
 
-          return ConditionalBuilder(
-            condition: state is! BagsLoadingState,
-            builder: (context) => Padding(
-              padding: const EdgeInsets.all(20),
-              child: GridView.builder(
-                  itemCount: products.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 20,
-                    crossAxisSpacing: 20,
-                    childAspectRatio: 0.75,
-                  ),
-                  itemBuilder: (context, index) {
-                    //Color itemBackGroundColor = products[index].pColor as Color;
-                    Color itemBackGroundColor = Color(0xff46494a);
-                    String itemImageUrl = products[index].pImageUrl;
-                    String itemName = products[index].pName;
-                    String itemPrice = products[index].pPrice;
-                    String itemCategories = products[index].pCategory;
-                    String itemDescription = products[index].pDescription;
-                    String itemHeroTag = 'details$index';
+          builder: (context, state) {
+            UserProductModelCubit.get(context).loadOneCategoryProductForUser(searchCategory: searchCategory);
 
-                    return GestureDetector(
-                      onTap: () {
-                        navigateTo(
-                            context,
-                            ProductDetailsScreen(
-                              itemHeroTag: itemHeroTag,
-                              itemImageUrl: itemImageUrl,
-                              itemName: itemName,
-                              itemPrice: itemPrice,
-                              itemCategories: itemCategories,
-                              itemDescription: itemDescription,
-                              itemBackGroundColor: itemBackGroundColor,
-                            ));
-                      },
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Expanded(
-                            child: Container(
-                              padding: EdgeInsets.all(20),
-                              height: 180,
-                              width: 160,
-                              decoration: BoxDecoration(
-                                color: itemBackGroundColor,
-                                borderRadius: BorderRadius.circular(16),
+            List<ProductModel> products = UserProductModelCubit.get(context).oneCategoryProductsUser;
+
+            return ConditionalBuilder(
+              condition: state is! UserProductModelLoadingState,
+              builder: (context) => Padding(
+                padding: const EdgeInsets.all(20),
+                child: GridView.builder(
+                    itemCount: products.length,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 20,
+                      crossAxisSpacing: 20,
+                      childAspectRatio: 0.75,
+                    ),
+                    itemBuilder: (context, index) {
+                      //Color itemBackGroundColor = products[index].pColor as Color;
+                      Color itemBackGroundColor = Color(0xff46494a);
+                      String itemImageUrl = products[index].pImageUrl;
+                      String itemName = products[index].pName;
+                      String itemPrice = products[index].pPrice;
+                      String itemCategories = products[index].pCategory;
+                      String itemDescription = products[index].pDescription;
+                      String itemHeroTag = 'details$index';
+
+                      return GestureDetector(
+                        onTap: () {
+                          navigateTo(
+                              context,
+                              ProductDetailsScreen(
+                                itemHeroTag: itemHeroTag,
+                                itemImageUrl: itemImageUrl,
+                                itemName: itemName,
+                                itemPrice: itemPrice,
+                                itemCategories: itemCategories,
+                                itemDescription: itemDescription,
+                                itemBackGroundColor: itemBackGroundColor,
+                              ));
+                        },
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Expanded(
+                              child: Container(
+                                padding: EdgeInsets.all(20),
+                                height: 180,
+                                width: 160,
+                                decoration: BoxDecoration(
+                                  color: itemBackGroundColor,
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
+                                child: Hero(
+                                    tag: itemHeroTag,
+                                    child: Image.network(
+                                      '$itemImageUrl',
+                                      fit: BoxFit.cover,
+                                    )),
                               ),
-                              child: Hero(
-                                  tag: itemHeroTag,
-                                  child: Image.network(
-                                    '$itemImageUrl',
-                                    fit: BoxFit.cover,
-                                  )),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 5),
-                            child: Text(
-                              '$itemName',
-                              style: TextStyle(color: kTextLightColor),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 5),
+                              child: Text(
+                                '$itemName',
+                                style: TextStyle(color: kTextLightColor),
+                              ),
                             ),
-                          ),
-                          Text(
-                            'EGP $itemPrice',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          )
-                        ],
-                      ),
-                    );
-                  }),
-            ),
-            fallback: (context) => Center(child: CircularProgressIndicator()),
-          );
-        },
-      ),
-    );
+                            Text(
+                              'EGP $itemPrice',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            )
+                          ],
+                        ),
+                      );
+                    }),
+              ),
+              fallback: (context) => Center(child: CircularProgressIndicator()),
+            );
+          },
+        );
   }
 }

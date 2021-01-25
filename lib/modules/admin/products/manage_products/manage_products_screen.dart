@@ -16,7 +16,7 @@ class ManageProductScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ManageProductsScreensCubit()..loadProduct(searchCategory: searchCategory),
+      create: (context) => ManageProductsScreensCubit()..loadProductForAdmin(searchCategory: searchCategory),
       child: BlocConsumer<ManageProductsScreensCubit, ManageProductsScreenStates>(
         listener: (context, state) {},
         builder: (context, state) {

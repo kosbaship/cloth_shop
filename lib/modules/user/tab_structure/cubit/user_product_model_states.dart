@@ -1,12 +1,12 @@
-abstract class BagsStates {}
+abstract class UserProductModelStates {}
 
-class BagsInitialState extends BagsStates {}
+class UserProductModelInitialState extends UserProductModelStates {}
 
-class BagsLoadingState extends BagsStates {}
+class UserProductModelLoadingState extends UserProductModelStates {}
 
-class BagsSuccessState extends BagsStates {}
+class UserProductModelSuccessState extends UserProductModelStates {}
 
-class BagsErrorState extends BagsStates {
+class UserProductModelErrorState extends UserProductModelStates {
   final error;
-  BagsErrorState(this.error);
+  UserProductModelErrorState(this.error);
 }

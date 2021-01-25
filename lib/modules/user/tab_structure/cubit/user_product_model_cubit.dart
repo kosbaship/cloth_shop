@@ -4,21 +4,26 @@ import 'package:cloth_shop/network/cloud_firestore.dart';
 import 'package:cloth_shop/shared/constants.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class BagsCubit extends Cubit<BagsStates> {
-  BagsCubit() : super(BagsInitialState());
+class UserProductModelCubit extends Cubit<UserProductModelStates> {
+  UserProductModelCubit() : super(UserProductModelInitialState());
 
-  static BagsCubit get(context) => BlocProvider.of(context);
+  static UserProductModelCubit get(context) => BlocProvider.of(context);
   List<ProductModel> products = [];
-
-  loadProduct({String searchCategory}) {
-    emit(BagsLoadingState());
+  List<ProductModel> oneCategoryProductsUser = [];
+  loadOneCategoryProductForUser({String searchCategory}) {
+    oneCategoryProductsUser.clear();
+    for (var product in products) {
+        if(product.pCategory == searchCategory)
+          oneCategoryProductsUser.add(product);
+      }
+  }
+  loadAllProductForUser() {
+    emit(UserProductModelLoadingState());
 
     FirebaseFireStoreService.getProducts().then((value) {
-      emit(BagsSuccessState());
 
       for (var doc in value.docs) {
         var data = doc.data();
-        if(data[kProductCategory] == searchCategory)
           products.add(ProductModel(
             pId: doc.id,
             pPrice: data[kProductPrice],
@@ -28,9 +33,13 @@ class BagsCubit extends Cubit<BagsStates> {
             pDescription: data[kProductDescription],
             pCategory: data[kProductCategory]));
       }
+      loadOneCategoryProductForUser(searchCategory: kBags);
+      emit(UserProductModelSuccessState());
+
+
     }).catchError((onError) {
       print("Error ========== $onError");
-      emit(BagsErrorState(onError));
+      emit(UserProductModelErrorState(onError));
     });
   }
 }

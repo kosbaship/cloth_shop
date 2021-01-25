@@ -10,7 +10,7 @@ class ManageProductsScreensCubit extends Cubit<ManageProductsScreenStates> {
   static ManageProductsScreensCubit get(context) => BlocProvider.of(context);
   List<ProductModel> products = [];
 
-  loadProduct({String searchCategory}) {
+  loadProductForAdmin({String searchCategory}) {
     emit(ManageProductsScreenLoadingState());
 
     FirebaseFireStoreService.getProducts().then((value) {
