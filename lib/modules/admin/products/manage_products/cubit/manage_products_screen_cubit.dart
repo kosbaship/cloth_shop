@@ -9,16 +9,22 @@ class ManageProductsScreensCubit extends Cubit<ManageProductsScreenStates> {
 
   static ManageProductsScreensCubit get(context) => BlocProvider.of(context);
   List<ProductModel> products = [];
+  List<ProductModel> oneCategoryProductsAdmin = [];
 
-  loadProductForAdmin({String searchCategory}) {
+  loadOneCategoryProductForAdmin({String searchCategory}) {
+    oneCategoryProductsAdmin.clear();
+    for (var product in products) {
+      if(product.pCategory == searchCategory)
+        oneCategoryProductsAdmin.add(product);
+    }
+  }
+
+  loadAllProductForAdmin({String searchCategory}) {
     emit(ManageProductsScreenLoadingState());
 
     FirebaseFireStoreService.getProducts().then((value) {
-      emit(ManageProductsScreenSuccessState());
-
       for (var doc in value.docs) {
         var data = doc.data();
-        if(data[kProductCategory] == searchCategory)
         products.add(ProductModel(
             pId: doc.id,
             pPrice: data[kProductPrice],
@@ -28,6 +34,9 @@ class ManageProductsScreensCubit extends Cubit<ManageProductsScreenStates> {
             pDescription: data[kProductDescription],
             pCategory: data[kProductCategory]));
       }
+
+      loadOneCategoryProductForAdmin(searchCategory: kBags);
+      emit(ManageProductsScreenSuccessState());
     }).catchError((onError) {
       print("Error ========== $onError");
       emit(ManageProductsScreenErrorState(onError));

@@ -33,10 +33,9 @@ class UserProductModelCubit extends Cubit<UserProductModelStates> {
             pDescription: data[kProductDescription],
             pCategory: data[kProductCategory]));
       }
+
       loadOneCategoryProductForUser(searchCategory: kBags);
       emit(UserProductModelSuccessState());
-
-
     }).catchError((onError) {
       print("Error ========== $onError");
       emit(UserProductModelErrorState(onError));
