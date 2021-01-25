@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 
 class AddToCartAndBuyNow extends StatelessWidget {
   final Color itemBackGroundColor;
+  final String itemImageUrl;
+  final String itemName;
+  final String itemPrice;
+  final int itemQuantity ;
 
-  const AddToCartAndBuyNow({this.itemBackGroundColor});
+  const AddToCartAndBuyNow({this.itemBackGroundColor, this.itemImageUrl, this.itemName, this.itemCategories, this.itemPrice, this.itemQuantity});
 
   @override
   Widget build(BuildContext context) {

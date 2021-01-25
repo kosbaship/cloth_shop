@@ -1,12 +1,12 @@
-abstract class CounterAndFavoriteStates {}
+abstract class ProductDetailsScreenStates {}
 
-class CounterAndFavoriteStateInitial extends CounterAndFavoriteStates {}
+class ProductDetailsScreenStateInitial extends ProductDetailsScreenStates {}
 
-class CounterAndFavoriteStatePlus extends CounterAndFavoriteStates {}
+class ProductDetailsScreenStatePlus extends ProductDetailsScreenStates {}
 
-class CounterAndFavoriteStateMinus extends CounterAndFavoriteStates {}
+class ProductDetailsScreenStateMinus extends ProductDetailsScreenStates {}
 
 
 
-class CounterAndFavoriteStateUnFavorite extends CounterAndFavoriteStates {}
-class CounterAndFavoriteStateFavorite extends CounterAndFavoriteStates {}
+class ProductDetailsScreenStateUnFavorite extends ProductDetailsScreenStates {}
+class ProductDetailsScreenStateFavorite extends ProductDetailsScreenStates {}

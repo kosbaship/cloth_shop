@@ -1,22 +1,22 @@
 import 'package:cloth_shop/modules/user/product_details_screen/cubit/product_details_states.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CounterAndFavoriteCubit extends Cubit<CounterAndFavoriteStates>
+class ProductDetailsScreenCubit extends Cubit<ProductDetailsScreenStates>
 {
-  CounterAndFavoriteCubit() : super(CounterAndFavoriteStateInitial());
+  ProductDetailsScreenCubit() : super(ProductDetailsScreenStateInitial());
 
-  static CounterAndFavoriteCubit get(context) => BlocProvider.of(context);
+  static ProductDetailsScreenCubit get(context) => BlocProvider.of(context);
 
   int counter = 1;
 
   plus(){
     counter ++;
-    emit(CounterAndFavoriteStatePlus());
+    emit(ProductDetailsScreenStatePlus());
   }
 
   minus(){
     counter --;
-  emit(CounterAndFavoriteStateMinus());
+  emit(ProductDetailsScreenStateMinus());
 }
 
   String currentMode = 'notmytype';
@@ -25,11 +25,11 @@ class CounterAndFavoriteCubit extends Cubit<CounterAndFavoriteStates>
 
   addToFavorite() {
     currentMode = favoriteMode;
-    emit(CounterAndFavoriteStateFavorite());
+    emit(ProductDetailsScreenStateFavorite());
   }
 
   removeFromMyFavorite() {
     currentMode = unFavoriteMode;
-    emit(CounterAndFavoriteStateUnFavorite());
+    emit(ProductDetailsScreenStateUnFavorite());
   }
 }
