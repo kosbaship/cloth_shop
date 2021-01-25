@@ -1,6 +1,7 @@
 import 'package:cloth_shop/models/product.dart';
 import 'package:cloth_shop/modules/user/cart/cubit/cart_screen_cubit.dart';
 import 'package:cloth_shop/modules/user/cart/cubit/cart_screen_states.dart';
+import 'package:cloth_shop/network/firebase_auth.dart';
 import 'package:cloth_shop/shared/colors/colors.dart';
 import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
@@ -31,30 +32,30 @@ class CartScreen extends StatelessWidget {
                   leading: IconButton(
                     icon: Icon(
                       Icons.arrow_back_ios,
-                      color: kBlackColor,
+                      color: kSecondaryColor,
                       size: 30,
                     ),
                     onPressed: () {
                       Navigator.pop(context);
                     },
                   ),
-                  backgroundColor: kSecondaryColor,
+                  backgroundColor: kItemBackGroundColor,
                   title: RichText(
                     text: TextSpan(
                       children: [
                         TextSpan(text: "Total Price",
                           style: Theme.of(context).textTheme.headline6.copyWith(
-                              color: kBlackColor, fontWeight: FontWeight.normal),
+                              color: kSecondaryColor, fontWeight: FontWeight.normal),
                         ),
                         TextSpan(
                           text: " EGP ",
                           style: Theme.of(context).textTheme.headline5.copyWith(
-                              color: kTextDarkColor, fontWeight: FontWeight.bold),
+                              color: kBlackColor, fontWeight: FontWeight.bold),
                         ),
                         TextSpan(
                           text: '${getTotalPrice(cartScreenProducts)}',
                           style: Theme.of(context).textTheme.headline5.copyWith(
-                              color: kBlackColor, fontWeight: FontWeight.bold),
+                              color: kSecondaryColor, fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),

@@ -17,6 +17,10 @@ class FirebaseAuthService {
         email: email, password: password);
   }
 
+  static  getUserId()  {
+   return  auth.currentUser.uid;
+  }
+
   static Future<void> signOut() async {
     await auth.signOut();
   }

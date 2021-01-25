@@ -2,6 +2,8 @@ import 'package:cloth_shop/models/product.dart';
 import 'package:cloth_shop/shared/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'firebase_auth.dart';
+
 class FirebaseFireStoreService {
   static FirebaseFirestore fireStoreInstance;
 
@@ -23,7 +25,11 @@ class FirebaseFireStoreService {
 
   static Future<DocumentReference> createCollectionAndAddCart(
       {ProductModel product}) async {
-    return await fireStoreInstance.collection(kCartCollection).add({
+    return await
+    fireStoreInstance.collection(kCartCollection)
+        .doc(FirebaseAuthService.getUserId())
+        .collection(kUserCartCollection)
+        .add({
       kProductImageUrl: product.pImageUrl,
       kProductName: product.pName,
       kProductQuantity: product.pQuantity,
@@ -36,7 +42,8 @@ class FirebaseFireStoreService {
   }
 
   static Future<QuerySnapshot> getCartProducts() async {
-    return await fireStoreInstance.collection(kCartCollection).get();
+    return await fireStoreInstance.collection(kCartCollection).doc(FirebaseAuthService.getUserId())
+        .collection(kUserCartCollection).get();
   }
 
   static Future<void> deleteProduct({documentId}) async {

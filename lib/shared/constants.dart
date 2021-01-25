@@ -1,5 +1,6 @@
 const kProductsCollection = 'Products';
 const kCartCollection = 'Carts';
+const kUserCartCollection = 'UserCart';
 
 const kProductImageUrl = 'imageUrl';
 const kProductName = 'productName';
