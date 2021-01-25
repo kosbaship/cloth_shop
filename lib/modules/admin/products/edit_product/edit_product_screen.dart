@@ -1,6 +1,5 @@
 import 'package:cloth_shop/modules/admin/products/edit_product/cubit/edit_product_cubit.dart';
 import 'package:cloth_shop/modules/admin/products/edit_product/cubit/edit_product_states.dart';
-import 'package:cloth_shop/modules/user/details_screen/widgets/custom_app_bar.dart';
 import 'package:cloth_shop/shared/colors/colors.dart';
 import 'package:cloth_shop/shared/components/compnents.dart';
 import 'package:cloth_shop/shared/constants.dart';

@@ -1,12 +1,13 @@
 import 'package:cloth_shop/models/product.dart';
-import 'package:cloth_shop/modules/user/details_screen/product_details_screen.dart';
-import 'package:cloth_shop/modules/user/tab_structure/cubit/user_product_model_cubit.dart';
-import 'package:cloth_shop/modules/user/tab_structure/cubit/user_product_model_states.dart';
+import 'package:cloth_shop/modules/user/product_details_screen/product_details_screen.dart';
+import 'package:cloth_shop/modules/user/tabs/cubit/user_product_model_cubit.dart';
 import 'package:cloth_shop/shared/colors/colors.dart';
 import 'package:cloth_shop/shared/components/compnents.dart';
 import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'cubit/user_product_model_states.dart';
 
 class UserProductModelScreen extends StatelessWidget {
   final int itemCount;

@@ -1,5 +1,5 @@
-import 'package:cloth_shop/modules/user/tab_structure/cubit/user_product_model_cubit.dart';
-import 'package:cloth_shop/modules/user/tab_structure/user_product_model_screen.dart';
+import 'package:cloth_shop/modules/user/tabs/cubit/user_product_model_cubit.dart';
+import 'package:cloth_shop/modules/user/tabs/user_product_model_screen.dart';
 import 'package:cloth_shop/shared/colors/colors.dart';
 import 'package:cloth_shop/shared/components/compnents.dart';
 import 'package:cloth_shop/shared/constants.dart';
