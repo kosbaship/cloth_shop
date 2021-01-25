@@ -1,3 +1,4 @@
+import 'package:cloth_shop/modules/user/cart/cart_screen.dart';
 import 'package:cloth_shop/shared/colors/colors.dart';
 import 'package:cloth_shop/shared/components/compnents.dart';
 import 'package:flutter/material.dart';
@@ -25,8 +26,7 @@ class CustomAppBar extends StatelessWidget {
             size: 30,
           ),
           onPressed: () {
-            showToast(message: 'Moving to cart screen', error: false);
-          },
+            navigateTo(context, CartScreen());          },
         ),
       ],
     );

@@ -1,3 +1,4 @@
+import 'package:cloth_shop/modules/user/cart/cart_screen.dart';
 import 'package:cloth_shop/modules/user/tabs/cubit/user_product_model_cubit.dart';
 import 'package:cloth_shop/modules/user/tabs/user_product_model_screen.dart';
 import 'package:cloth_shop/shared/colors/colors.dart';
@@ -32,7 +33,7 @@ class HomeScreen extends StatelessWidget {
                   size: 34,
                 ),
                 onPressed: () {
-                  showToast(message: "cart", error: false);
+                  navigateTo(context, CartScreen());
                 },
               ),
               SizedBox(

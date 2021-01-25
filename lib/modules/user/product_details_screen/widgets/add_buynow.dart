@@ -1,3 +1,5 @@
+import 'package:cloth_shop/modules/user/cart/cart_screen.dart';
+import 'package:cloth_shop/modules/user/product_details_screen/cubit/product_details_cubit.dart';
 import 'package:cloth_shop/shared/components/compnents.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +10,7 @@ class AddToCartAndBuyNow extends StatelessWidget {
   final String itemPrice;
   final int itemQuantity ;
 
-  const AddToCartAndBuyNow({this.itemBackGroundColor, this.itemImageUrl, this.itemName, this.itemCategories, this.itemPrice, this.itemQuantity});
+  const AddToCartAndBuyNow({this.itemBackGroundColor, this.itemImageUrl, this.itemName, this.itemPrice, this.itemQuantity});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +44,12 @@ class AddToCartAndBuyNow extends StatelessWidget {
                   borderRadius: BorderRadius.circular(18)),
               color: itemBackGroundColor,
               onPressed: () {
-                showToast(message: 'Buy  Now', error: false);
+                navigateTo(context, CartScreen(
+                  itemName: itemName,
+                  itemQuantity: ProductDetailsScreenCubit.get(context).counter,
+                  itemImageUrl: itemImageUrl,
+                  itemPrice: itemPrice,
+                ));
               },
               child: Text(
                 "Buy  Now".toUpperCase(),

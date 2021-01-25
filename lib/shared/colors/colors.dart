@@ -15,6 +15,7 @@ const kTextLightColor = Color(0xFFACACAC);
 const kTextDarkColor = Color(0xFF2C2C2C);
 const kRedFavColor = Color(0xFFFF6464);
 const kProductColorLocal = Color(0xFF3D82AE);
+const kItemBackGroundColor = Color(0xff46494a);
 
 const MaterialColor customMaterialColor = MaterialColor(
   0xFFBFEB91,

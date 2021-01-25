@@ -87,6 +87,9 @@ class ProductDetailsScreen extends StatelessWidget {
                                   SizedBox(height: 20),
                                   // buy now
                                   AddToCartAndBuyNow(
+                                    itemName: itemName,
+                                    itemImageUrl: itemImageUrl,
+                                    itemPrice: itemPrice,
                                     itemBackGroundColor: itemBackGroundColor,
                                   )
                                 ],
