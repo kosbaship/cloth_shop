@@ -35,6 +35,10 @@ class FirebaseFireStoreService {
     return await fireStoreInstance.collection(kProductsCollection).get();
   }
 
+  static Future<QuerySnapshot> getCartProducts() async {
+    return await fireStoreInstance.collection(kCartCollection).get();
+  }
+
   static Future<void> deleteProduct({documentId}) async {
     return await fireStoreInstance
         .collection(kProductsCollection)

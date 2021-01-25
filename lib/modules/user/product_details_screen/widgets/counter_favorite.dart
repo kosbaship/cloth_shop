@@ -1,9 +1,7 @@
 import 'package:cloth_shop/modules/user/product_details_screen/cubit/product_details_cubit.dart';
-import 'package:cloth_shop/modules/user/product_details_screen/cubit/product_details_states.dart';
 import 'package:cloth_shop/shared/colors/colors.dart';
 import 'package:cloth_shop/shared/components/compnents.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CounterAndFavorite extends StatelessWidget {
 

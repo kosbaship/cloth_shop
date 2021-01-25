@@ -1,6 +1,5 @@
 import 'package:cloth_shop/models/product.dart';
 import 'package:cloth_shop/modules/user/cart/cart_screen.dart';
-import 'package:cloth_shop/modules/user/cart/cubit/cart_screen_cubit.dart';
 import 'package:cloth_shop/modules/user/product_details_screen/cubit/product_details_cubit.dart';
 import 'package:cloth_shop/shared/components/compnents.dart';
 import 'package:flutter/material.dart';

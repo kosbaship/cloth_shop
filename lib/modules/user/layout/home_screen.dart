@@ -14,7 +14,6 @@ class HomeScreen extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => UserProductModelCubit()..loadAllProductForUser(),),
-        BlocProvider(create: (context) => CartScreenCubit(),),
       ],
       child: DefaultTabController(
         length: 5,
