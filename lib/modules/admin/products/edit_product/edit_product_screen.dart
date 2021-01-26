@@ -1,3 +1,4 @@
+import 'package:cloth_shop/modules/admin/home/admin_home_screen.dart';
 import 'package:cloth_shop/modules/admin/products/edit_product/cubit/edit_product_cubit.dart';
 import 'package:cloth_shop/modules/admin/products/edit_product/cubit/edit_product_states.dart';
 import 'package:cloth_shop/shared/colors/colors.dart';
@@ -22,13 +23,21 @@ class EditProductScreen extends StatelessWidget {
   final descriptionController = TextEditingController();
   final categoryController = TextEditingController();
   final locationController = TextEditingController();
-  EditProductScreen({
-   this.itemHeroTag, this.itemCount, this.itemBackGroundColor, this.itemImageUrl, this.itemName, this.itemPrice, this.itemCategories, this.itemDescription, this.itemID});
+
+  EditProductScreen(
+      {this.itemHeroTag,
+      this.itemCount,
+      this.itemBackGroundColor,
+      this.itemImageUrl,
+      this.itemName,
+      this.itemPrice,
+      this.itemCategories,
+      this.itemDescription,
+      this.itemID});
+
   @override
   Widget build(BuildContext context) {
-    if (itemName != null &&
-        itemPrice != null &&
-        itemDescription != null ) {
+    if (itemName != null && itemPrice != null && itemDescription != null) {
       nameController.text = itemName;
       priceController.text = itemPrice;
       descriptionController.text = itemDescription;
@@ -50,21 +59,20 @@ class EditProductScreen extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                    Row(
-                      children: [
-                        IconButton(
-                        icon: Icon(
-                        Icons.arrow_back_ios,
-                          color: kMainColor,
-                          size: 30,
+                        Row(
+                          children: [
+                            IconButton(
+                              icon: Icon(
+                                Icons.arrow_back_ios,
+                                color: kMainColor,
+                                size: 30,
+                              ),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                          ],
                         ),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                  ),
-                      ],
-                    ),
-
                         CircleAvatar(
                           radius: 110,
                           backgroundColor: kMainColor,
@@ -130,8 +138,8 @@ class EditProductScreen extends StatelessWidget {
                                   },
                                   color: kMainColor,
                                   child: Padding(
-                                    padding:
-                                    const EdgeInsets.symmetric(vertical: 16),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 16),
                                     child: Text(
                                       "Delete",
                                       style: TextStyle(
@@ -152,42 +160,38 @@ class EditProductScreen extends StatelessWidget {
                                     String price = priceController.text;
                                     String description =
                                         descriptionController.text;
-                                    String category = categoryController.text;
-                                    String location = locationController.text;
 
                                     if (name.isEmpty ||
                                         price.isEmpty ||
-                                        description.isEmpty ||
-                                        category.isEmpty ||
-                                        location.isEmpty) {
+                                        description.isEmpty) {
                                       showToast(
                                           message: "please fill your data",
                                           error: true);
                                     } else {
-                                      EditProductCubit.get(context).updateProduct(
+                                      EditProductCubit.get(context)
+                                          .updateProduct(
                                         product: {
                                           kProductName: name,
                                           kProductPrice: price,
                                           kProductDescription: description,
-                                          kProductCategory: category,
                                         },
                                         docId: itemID,
                                       );
                                       // nameController.clear();
                                       // priceController.clear();
                                       // descriptionController.clear();
-                                      // categoryController.clear();
-                                      // locationController.clear();
-                                      Navigator.pop(context);
+                                      navigateToReplaceMe(
+                                          context, AdminHomeScreen());
                                       showToast(
-                                          message: "Product Edited Successfully",
+                                          message:
+                                              "Product Edited Successfully",
                                           error: false);
                                     }
                                   },
                                   color: kMainColor,
                                   child: Padding(
-                                    padding:
-                                    const EdgeInsets.symmetric(vertical: 16),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 16),
                                     child: Text(
                                       "Save",
                                       style: TextStyle(

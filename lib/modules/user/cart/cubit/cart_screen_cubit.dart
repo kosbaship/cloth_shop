@@ -15,7 +15,7 @@ class CartScreenCubit extends Cubit<CartStates> {
   var price = 0;
 
   getTotalPrice() {
-
+    price = 0;
     for (var product in cartProducts) {
       price += product.pQuantity * int.parse(product.pPrice);
     }

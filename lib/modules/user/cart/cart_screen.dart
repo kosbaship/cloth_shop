@@ -1,7 +1,6 @@
 import 'package:cloth_shop/models/product.dart';
 import 'package:cloth_shop/modules/user/cart/cubit/cart_screen_cubit.dart';
 import 'package:cloth_shop/modules/user/cart/cubit/cart_screen_states.dart';
-import 'package:cloth_shop/network/firebase_auth.dart';
 import 'package:cloth_shop/shared/colors/colors.dart';
 import 'package:cloth_shop/shared/components/compnents.dart';
 import 'package:conditional_builder/conditional_builder.dart';
@@ -229,13 +228,12 @@ class CartScreen extends StatelessWidget {
 
 
   void showCustomDialog(context) async {
-    var price = CartScreenCubit.get(context).getTotalPrice();
     var address;
     Dialog alertDialog = Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
       elevation: 16,
       child: Container(
-        height: 380.0,
+        height: 420.0,
         width: 360.0,
         child: ListView(
           children: <Widget>[
@@ -250,7 +248,31 @@ class CartScreen extends StatelessWidget {
             SizedBox(height: 12),
             Container(height: 2, color: kItemBackGroundColor),
             SizedBox(height: 12),
-
+            Center(
+              child: RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(text: "Total Price",
+                      style: Theme.of(context).textTheme.headline6.copyWith(
+                          color: kTextLightColor, fontWeight: FontWeight.normal),
+                    ),
+                    TextSpan(
+                      text: " EGP ",
+                      style: Theme.of(context).textTheme.headline5.copyWith(
+                          color: kBlackColor, fontWeight: FontWeight.bold),
+                    ),
+                    TextSpan(
+                      text: '${CartScreenCubit.get(context).getTotalPrice()}',
+                      style: Theme.of(context).textTheme.headline5.copyWith(
+                          color: kItemBackGroundColor, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(height: 12),
+            Container(height: 2, color: kItemBackGroundColor),
+            SizedBox(height: 12),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: TextField(
