@@ -1,6 +1,8 @@
 import 'package:cloth_shop/models/product.dart';
+import 'package:cloth_shop/modules/admin/home/admin_home_screen.dart';
 import 'package:cloth_shop/modules/user/cart/cubit/cart_screen_cubit.dart';
 import 'package:cloth_shop/modules/user/cart/cubit/cart_screen_states.dart';
+import 'package:cloth_shop/modules/user/layout/home_screen.dart';
 import 'package:cloth_shop/shared/colors/colors.dart';
 import 'package:cloth_shop/shared/components/compnents.dart';
 import 'package:conditional_builder/conditional_builder.dart';
@@ -184,7 +186,7 @@ class CartScreen extends StatelessWidget {
                       size: 30,
                     ),
                     onPressed: () {
-                      Navigator.pop(context);
+                        Navigator.pop(context);
                     },
                   ),
                   backgroundColor: kItemBackGroundColor,
@@ -350,7 +352,12 @@ class CartScreen extends StatelessWidget {
                           message: "please fill your data",
                           error: true);
                     } else {
-
+                      CartScreenCubit.get(context).saveOrder(shippingAddress: userAddress, phone: userPhone);
+                      showToast(
+                          message: "Order Confirmed Successfully",
+                          error: false);
+                      CartScreenCubit.get(context).emptyCurrentUserCart();
+                      navigateToReplaceMe(context, HomeScreen());
                     }
                   },
                   text: 'Submit',

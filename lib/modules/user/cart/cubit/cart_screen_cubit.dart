@@ -1,5 +1,6 @@
 import 'package:cloth_shop/models/product.dart';
 import 'package:cloth_shop/network/cloud_firestore.dart';
+import 'package:cloth_shop/network/firebase_auth.dart';
 import 'package:cloth_shop/shared/constants.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -22,6 +23,19 @@ class CartScreenCubit extends Cubit<CartStates> {
     return price;
   }
 
+  saveOrder({shippingAddress , phone}) {
+    emit(CartLoadingState());
+
+    FirebaseFireStoreService.storeOrders(products: cartProducts, totalPrice: price, shippingAddress:shippingAddress , phone: phone)
+        .then((value) {
+      emit(CartSuccessState());
+    }).catchError((e) {
+      emit(CartErrorState(e.toString()));
+    });
+  }
+
+
+
 
   loadUserCartProducts() {
     emit(CartLoadingState());
@@ -38,6 +52,17 @@ class CartScreenCubit extends Cubit<CartStates> {
             pImageUrl: data[kProductImageUrl]));
       }
 
+      emit(CartSuccessState());
+    }).catchError((e) {
+      emit(CartErrorState(e.toString()));
+    });
+  }
+
+
+  emptyCurrentUserCart() {
+    emit(CartLoadingState());
+    //cartProducts.clear();
+    FirebaseFireStoreService.deleteUserCart().then((value) {
       emit(CartSuccessState());
     }).catchError((e) {
       emit(CartErrorState(e.toString()));

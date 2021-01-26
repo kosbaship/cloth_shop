@@ -63,7 +63,7 @@ class AddToCartAndBuyNow extends StatelessWidget {
                     pPrice: itemPrice
                   )
                 );
-                navigateTo(context, CartScreen());
+                navigateToReplaceMe(context, CartScreen());
               },
               child: Text(
                 "Buy  Now".toUpperCase(),

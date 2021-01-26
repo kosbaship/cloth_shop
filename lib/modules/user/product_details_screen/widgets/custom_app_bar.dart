@@ -26,7 +26,8 @@ class CustomAppBar extends StatelessWidget {
             size: 30,
           ),
           onPressed: () {
-            navigateTo(context, CartScreen());          },
+              navigateToReplaceMe(context, CartScreen());
+            },
         ),
       ],
     );
