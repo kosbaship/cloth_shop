@@ -3,14 +3,16 @@ import 'package:cloth_shop/modules/user/cart/cubit/cart_screen_cubit.dart';
 import 'package:cloth_shop/modules/user/cart/cubit/cart_screen_states.dart';
 import 'package:cloth_shop/network/firebase_auth.dart';
 import 'package:cloth_shop/shared/colors/colors.dart';
+import 'package:cloth_shop/shared/components/compnents.dart';
 import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CartScreen extends StatelessWidget {
+  final addressController = TextEditingController();
+  final phoneController = TextEditingController();
 
 
-  const CartScreen();
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
@@ -27,6 +29,7 @@ class CartScreen extends StatelessWidget {
             builder: (context) => ConditionalBuilder(
               condition: cartScreenProducts.length != 0,
               builder: (context) => Scaffold(
+                resizeToAvoidBottomPadding: false,
                 backgroundColor: kSecondaryColor,
                 appBar: AppBar(
                   leading: IconButton(
@@ -154,7 +157,8 @@ class CartScreen extends StatelessWidget {
                                   topRight: Radius.circular(18),
                                   topLeft: Radius.circular(18))),
                           onPressed: () {
-                            // showCustomDialog(products, context);
+                            showCustomDialog(context);
+
                           },
                           child: Text(
                             "Confirm  Order".toUpperCase(),
@@ -224,73 +228,124 @@ class CartScreen extends StatelessWidget {
   }
 
 
+  void showCustomDialog(context) async {
+    var price = CartScreenCubit.get(context).getTotalPrice();
+    var address;
+    Dialog alertDialog = Dialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+      elevation: 16,
+      child: Container(
+        height: 380.0,
+        width: 360.0,
+        child: ListView(
+          children: <Widget>[
+            SizedBox(height: 20),
+            Center(
+              child: Text(
+                "You Info, Please",
+                style: TextStyle(fontSize: 24, color: kItemBackGroundColor, fontWeight: FontWeight.bold),
+              ),
+            ),
+            SizedBox(height: 20),
+            SizedBox(height: 12),
+            Container(height: 2, color: kItemBackGroundColor),
+            SizedBox(height: 12),
 
-  // void showCustomMenu(details, context, product) async {
-  //   double dx = details.globalPosition.dx;
-  //   double dy = details.globalPosition.dy;
-  //   double dx2 = MediaQuery.of(context).size.width - dx;
-  //   double dy2 = MediaQuery.of(context).size.width - dy;
-  //   await showMenu(
-  //       context: context,
-  //       position: RelativeRect.fromLTRB(dx, dy, dx2, dy2),
-  //       items: [
-  //         MyPopupMenuItem(
-  //           onClick: () {
-  //             Navigator.pop(context);
-  //             Provider.of<CartItem>(context, listen: false)
-  //                 .deleteProduct(product);
-  //             Navigator.pushNamed(context, ProductInfo.id, arguments: product);
-  //           },
-  //           child: Text('Edit'),
-  //         ),
-  //         MyPopupMenuItem(
-  //           onClick: () {
-  //             Navigator.pop(context);
-  //             Provider.of<CartItem>(context, listen: false)
-  //                 .deleteProduct(product);
-  //           },
-  //           child: Text('Delete'),
-  //         ),
-  //       ]);
-  // }
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: TextField(
+                controller: addressController,
+                keyboardType: TextInputType.text,
+                cursorColor: kMainColor,
+                decoration: InputDecoration(
+                  hintText: 'Your Address',
+                  hintStyle: TextStyle(
+                    color: kTextLightColor,
+                  ),
+                  prefixIcon: Icon(
+                    Icons.edit_location_sharp,
+                    color: kItemBackGroundColor,
+                  ),
+                  filled: true,
+                  fillColor: kSecondaryColor,
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: BorderSide(color: kItemBackGroundColor)),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: BorderSide(color: kItemBackGroundColor)),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: BorderSide(color: kItemBackGroundColor)),
+                ),
+              ),
+            ),
+            SizedBox(height: 12),
+            Container(height: 2, color: kItemBackGroundColor),
+            SizedBox(height: 12),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: TextField(
+                controller: phoneController,
+                keyboardType: TextInputType.number,
+                cursorColor: kMainColor,
+                decoration: InputDecoration(
+                  hintText: 'Your Phone',
+                  hintStyle: TextStyle(
+                    color: kTextLightColor,
+                  ),
+                  prefixIcon: Icon(
+                    Icons.phone_android,
+                    color: kItemBackGroundColor,
+                  ),
+                  filled: true,
+                  fillColor: kSecondaryColor,
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: BorderSide(color: kItemBackGroundColor)),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: BorderSide(color: kItemBackGroundColor)),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: BorderSide(color: kItemBackGroundColor)),
+                ),
+              ),
+            ),
+            SizedBox(height: 12),
+            Container(height: 2, color: kItemBackGroundColor),
+            SizedBox(height: 12),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 50),
+              child: buildDefaultButton(
+                  onPressed: () {
 
-  // void showCustomDialog(List<Product> products, context) async {
-  //   var price = getTotallPrice(products);
-  //   var address;
-  //   AlertDialog alertDialog = AlertDialog(
-  //     actions: <Widget>[
-  //       MaterialButton(
-  //         onPressed: () {
-  //           try {
-  //             Store _store = Store();
-  //             _store.storeOrders(
-  //                 {kTotallPrice: price, kAddress: address}, products);
-  //
-  //             Scaffold.of(context).showSnackBar(SnackBar(
-  //               content: Text('Orderd Successfully'),
-  //             ));
-  //             Navigator.pop(context);
-  //           } catch (ex) {
-  //             print(ex.message);
-  //           }
-  //         },
-  //         child: Text('Confirm'),
-  //       )
-  //     ],
-  //     content: TextField(
-  //       onChanged: (value) {
-  //         address = value;
-  //       },
-  //       decoration: InputDecoration(hintText: 'Enter your Address'),
-  //     ),
-  //     title: Text('Totall Price  = \$ $price'),
-  //   );
-  //   await showDialog(
-  //       context: context,
-  //       builder: (context) {
-  //         return alertDialog;
-  //       });
-  // }
+                    String userAddress = addressController.text;
+                    String userPhone = phoneController.text;
+
+                    if (userAddress.isEmpty || userPhone.isEmpty) {
+                      showToast(
+                          message: "please fill your data",
+                          error: true);
+                    } else {
+
+                    }
+                  },
+                  text: 'Submit',
+                  textColor: kWhiteColor,
+                  backgroundColor: kItemBackGroundColor,
+                  borderColor: kWhiteColor),
+            ),
+          ],
+        ),
+      ),
+    );
+    await showDialog(
+        context: context,
+        builder: (context) {
+          return alertDialog;
+        });
+  }
 
 
 }
