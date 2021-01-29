@@ -25,14 +25,14 @@ class NameAndPhotoAndPrice extends StatelessWidget {
           ),
           Text(
             "$itemCategories Categories".toUpperCase(),
-            style: TextStyle(color: kSecondaryColor),
+            style: TextStyle(color: kMainColor),
           ),
           Text(
             "$itemName",
             style: Theme.of(context)
                 .textTheme
                 .headline4
-                .copyWith(color: kSecondaryColor, fontWeight: FontWeight.bold),
+                .copyWith(color: kMainColor, fontWeight: FontWeight.bold),
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,

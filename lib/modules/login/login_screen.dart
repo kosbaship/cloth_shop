@@ -116,7 +116,7 @@ class LoginScreen extends StatelessWidget {
                           ),
                           Text(
                             "i\'m a user",
-                            style: TextStyle(color: kWhiteColor
+                            style: TextStyle(color: kTextDarkColor
                                 // defaultMode == userMode
                                 //     ? Colors.black
                                 //     : kWhiteColor
@@ -132,7 +132,7 @@ class LoginScreen extends StatelessWidget {
                           ),
                           Text(
                             'i\'m an admin',
-                            style: TextStyle(color: kWhiteColor
+                            style: TextStyle(color: kTextDarkColor
                                 // defaultMode == adminMode
                                 //     ? Colors.black
                                 //     : kWhiteColor
@@ -176,7 +176,7 @@ class LoginScreen extends StatelessWidget {
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style:
-                                  TextStyle(color: Colors.white, fontSize: 16),
+                                  TextStyle(color: kGreyColor, fontSize: 16),
                             ),
                           ),
                           GestureDetector(
@@ -185,7 +185,7 @@ class LoginScreen extends StatelessWidget {
                             },
                             child: Text(
                               'Sign up',
-                              style: TextStyle(fontSize: 16),
+                              style: TextStyle(fontSize: 16, color: kSloganColor),
                             ),
                           )
                         ],

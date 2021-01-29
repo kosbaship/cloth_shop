@@ -17,9 +17,9 @@ class HomeScreen extends StatelessWidget {
       child: DefaultTabController(
         length: 5,
         child: Scaffold(
-          backgroundColor: kSecondaryColor,
+          backgroundColor: kMainColor,
           appBar: AppBar(
-            backgroundColor: kSecondaryColor,
+            backgroundColor: kMainColor,
             title: Text(
               'Discover'.toUpperCase(),
               style: TextStyle(

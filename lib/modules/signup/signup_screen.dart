@@ -123,7 +123,7 @@ class SignUpScreen extends StatelessWidget {
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style:
-                                  TextStyle(color: Colors.white, fontSize: 16),
+                                  TextStyle(color: kGreyColor, fontSize: 16),
                             ),
                           ),
                           GestureDetector(
@@ -132,7 +132,7 @@ class SignUpScreen extends StatelessWidget {
                             },
                             child: Text(
                               'Login',
-                              style: TextStyle(fontSize: 16),
+                              style: TextStyle(fontSize: 16, color: kSloganColor),
                             ),
                           )
                         ],

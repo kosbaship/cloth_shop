@@ -76,7 +76,7 @@ class AdminHomeScreen extends StatelessWidget {
                 // current index match this index
                 currentIndex: currentIndex,
                 type: BottomNavigationBarType.fixed,
-                fixedColor: kMainColor,
+                fixedColor: kBlackColor,
                 elevation: 0.0,
               ),
             ),

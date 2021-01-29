@@ -12,7 +12,7 @@ class CustomAppBar extends StatelessWidget {
         IconButton(
           icon: Icon(
             Icons.arrow_back_ios,
-            color: kSecondaryColor,
+            color: kMainColor,
             size: 30,
           ),
           onPressed: () {
@@ -22,7 +22,7 @@ class CustomAppBar extends StatelessWidget {
         IconButton(
           icon: Icon(
             Icons.shopping_cart_outlined,
-            color: kSecondaryColor,
+            color: kMainColor,
             size: 30,
           ),
           onPressed: () {

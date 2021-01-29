@@ -100,14 +100,16 @@ class ManageProductScreen extends StatelessWidget {
                                       itemBackGroundColor: itemBackGroundColor,
                                     ));
                               },
-                              color: itemBackGroundColor,
+                              color: kSecondaryColor,
                               child: Padding(
                                 padding:
                                 const EdgeInsets.symmetric(vertical: 8),
                                 child: Text(
                                   "Edit",
                                   style: TextStyle(
-                                      color: kTextDarkColor, fontSize: 16),
+                                    color: kMainColor,
+                                    fontSize: 16,
+                                  ),
                                 ),
                               ),
                             ),

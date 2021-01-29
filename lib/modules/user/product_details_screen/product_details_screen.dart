@@ -63,7 +63,7 @@ class ProductDetailsScreen extends StatelessWidget {
                               ),
                               width: double.infinity,
                               decoration: BoxDecoration(
-                                color: kSecondaryColor,
+                                color: kMainColor,
                                 borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(24),
                                   topRight: Radius.circular(24),

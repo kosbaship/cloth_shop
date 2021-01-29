@@ -31,7 +31,7 @@ class CartScreen extends StatelessWidget {
               condition: cartScreenProducts.length != 0,
               builder: (context) => Scaffold(
                 resizeToAvoidBottomPadding: false,
-                backgroundColor: kSecondaryColor,
+                backgroundColor: kMainColor,
                 appBar: AppBar(
                   leading: IconButton(
                     icon: Icon(
@@ -43,7 +43,7 @@ class CartScreen extends StatelessWidget {
                       Navigator.pop(context);
                     },
                   ),
-                  backgroundColor: kItemBackGroundColor,
+                  backgroundColor: kMainColor,
                   title: RichText(
                     text: TextSpan(
                       children: [
@@ -86,7 +86,8 @@ class CartScreen extends StatelessWidget {
                                   // showCustomMenu(details, context, products[index]);
                                 },
                                 child: Container(
-                                  height: screenHeight * .15,
+                                  padding: const EdgeInsets.only(left: 8,top: 8, bottom: 8),
+                                  height: screenHeight * .19,
                                   child: Row(
                                     children: <Widget>[
                                       CircleAvatar(
@@ -139,7 +140,13 @@ class CartScreen extends StatelessWidget {
                                       )
                                     ],
                                   ),
-                                  color: kSecondaryColor,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: kMainColor,
+                                    boxShadow: [
+                                      BoxShadow(color: kItemBackGroundColor, spreadRadius: 3),
+                                    ],
+                                  ),
                                 ),
                               ),
                             );
@@ -177,7 +184,7 @@ class CartScreen extends StatelessWidget {
                 ),
               ),
               fallback: (context) => Scaffold(
-                backgroundColor: kSecondaryColor,
+                backgroundColor: kMainColor,
                 appBar: AppBar(
                   leading: IconButton(
                     icon: Icon(
@@ -189,7 +196,7 @@ class CartScreen extends StatelessWidget {
                         Navigator.pop(context);
                     },
                   ),
-                  backgroundColor: kItemBackGroundColor,
+                  backgroundColor: kMainColor,
                   elevation: 0,
 
                 ),
@@ -204,7 +211,7 @@ class CartScreen extends StatelessWidget {
 
             ),
             fallback: (context) => Scaffold(
-              backgroundColor: kSecondaryColor,
+              backgroundColor: kMainColor,
               appBar: AppBar(
                 leading: IconButton(
                   icon: Icon(
@@ -216,7 +223,7 @@ class CartScreen extends StatelessWidget {
                     Navigator.pop(context);
                   },
                 ),
-                backgroundColor: kItemBackGroundColor,
+                backgroundColor: kMainColor,
                 elevation: 0,
 
               ),
@@ -280,7 +287,7 @@ class CartScreen extends StatelessWidget {
               child: TextField(
                 controller: addressController,
                 keyboardType: TextInputType.text,
-                cursorColor: kMainColor,
+                cursorColor: kSecondaryColor,
                 decoration: InputDecoration(
                   hintText: 'Your Address',
                   hintStyle: TextStyle(
@@ -291,7 +298,7 @@ class CartScreen extends StatelessWidget {
                     color: kItemBackGroundColor,
                   ),
                   filled: true,
-                  fillColor: kSecondaryColor,
+                  fillColor: kMainColor,
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
                       borderSide: BorderSide(color: kItemBackGroundColor)),
@@ -312,7 +319,7 @@ class CartScreen extends StatelessWidget {
               child: TextField(
                 controller: phoneController,
                 keyboardType: TextInputType.number,
-                cursorColor: kMainColor,
+                cursorColor: kSecondaryColor,
                 decoration: InputDecoration(
                   hintText: 'Your Phone',
                   hintStyle: TextStyle(
@@ -323,7 +330,7 @@ class CartScreen extends StatelessWidget {
                     color: kItemBackGroundColor,
                   ),
                   filled: true,
-                  fillColor: kSecondaryColor,
+                  fillColor: kMainColor,
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
                       borderSide: BorderSide(color: kItemBackGroundColor)),
