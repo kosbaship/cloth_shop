@@ -45,27 +45,27 @@ Widget buildTextField({
       controller: controller,
       keyboardType: type,
       obscureText: isPassword,
-      cursorColor: kMainColor,
+      cursorColor: kSecondaryColor,
       decoration: InputDecoration(
         hintText: hint,
         hintStyle: TextStyle(
-          color: kTextLightColor,
+          color: kGreyColor,
         ),
         prefixIcon: Icon(
           icon,
-          color: kMainColor,
+          color: kSecondaryColor,
         ),
         filled: true,
-        fillColor: kSecondaryColor,
+        fillColor: kMainColor,
         enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20),
-            borderSide: BorderSide(color: kMainColor)),
+            borderSide: BorderSide(color: kSecondaryColor)),
         focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20),
-            borderSide: BorderSide(color: kMainColor)),
+            borderSide: BorderSide(color: kSecondaryColor)),
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20),
-            borderSide: BorderSide(color: kMainColor)),
+            borderSide: BorderSide(color: kSecondaryColor)),
       ),
     );
 Widget writeQuickText(
@@ -161,8 +161,8 @@ void buildProgressDialog({context, text, error = false}) => showDialog(
 Widget buildDefaultButton(
         {@required Function onPressed,
         @required String text,
-        Color textColor = kWhiteColor,
-        Color backgroundColor = kMainColor,
+        Color textColor = kMainColor,
+        Color backgroundColor = kSecondaryColor,
         Color borderColor = kMainColor}) =>
     Container(
       width: double.infinity,

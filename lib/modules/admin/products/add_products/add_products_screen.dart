@@ -34,7 +34,7 @@ class AddProductScreen extends StatelessWidget {
             condition: state is! AddProductLoadingState,
             builder: (context) {
               return Scaffold(
-                backgroundColor: kSecondaryColor,
+                backgroundColor: kMainColor,
                 body: SafeArea(
                   child: SingleChildScrollView(
                     physics: BouncingScrollPhysics(),
@@ -48,7 +48,7 @@ class AddProductScreen extends StatelessWidget {
                               IconButton(
                                 icon: Icon(
                                   Icons.arrow_back_ios,
-                                  color: kMainColor,
+                                  color: kSecondaryColor,
                                   size: 30,
                                 ),
                                 onPressed: () {
@@ -61,9 +61,9 @@ class AddProductScreen extends StatelessWidget {
                           imageLink != ''
                               ? CircleAvatar(
                                   radius: 110,
-                                  backgroundColor: kMainColor,
+                                  backgroundColor: kSecondaryColor,
                                   child: CircleAvatar(
-                                    backgroundColor: Colors.white,
+                                    backgroundColor: kMainColor,
                                     child: ClipOval(
                                       child: Image.file(
                                         File(imageLink),
@@ -77,7 +77,7 @@ class AddProductScreen extends StatelessWidget {
                                   onPressed: () {
                                     AddProductCubit.get(context).selectImage();
                                   },
-                                  color: kSecondaryColor,
+                                  color: kMainColor,
                                   padding: EdgeInsets.all(8.0),
                                   child: Column(
                                     // Replace with a Row for horizontal icon + text
@@ -85,7 +85,7 @@ class AddProductScreen extends StatelessWidget {
                                       Icon(
                                         Icons.camera,
                                         size: 120,
-                                        color: kMainColor,
+                                        color: kSecondaryColor,
                                       ),
                                       Text(
                                         "Choose Image",
@@ -159,7 +159,7 @@ class AddProductScreen extends StatelessWidget {
                                             pPrice: price,
                                             pDescription: description,
                                             pCategory: caterorySelected,
-                                            pColor: currentColor.toString()));
+                                            pColor: currentColor.toString().replaceAll('Color(', '')..replaceAll(')', '')));
                                     // nameController.clear();
                                     // priceController.clear();
                                     // descriptionController.clear();
@@ -174,9 +174,9 @@ class AddProductScreen extends StatelessWidget {
                                   }
                                 },
                                 text: 'Submit',
-                                textColor: kWhiteColor,
+                                textColor: kSecondaryColor,
                                 backgroundColor: kMainColor,
-                                borderColor: kWhiteColor),
+                                borderColor: kSecondaryColor),
                           ),
                           SizedBox(
                             height: 35,
@@ -224,7 +224,7 @@ class _PickColorState extends State<PickColor> {
           ),
         ),
         color: currentColor,
-        textColor: kSecondaryColor,
+        textColor: kMainColor,
         onPressed: () {
           showDialog(
             context: context,
@@ -237,9 +237,10 @@ class _PickColorState extends State<PickColor> {
                     children: [
                       BlockPicker(
                           pickerColor: currentColor,
-                          onColorChanged: changeColor),
+                          onColorChanged: changeColor,
+                      ),
                       SizedBox(
-                        height: 10,
+                        height: 15,
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 50),
@@ -248,9 +249,9 @@ class _PickColorState extends State<PickColor> {
                               Navigator.pop(context);
                             },
                             text: 'Submit',
-                            textColor: kWhiteColor,
-                            backgroundColor: kMainColor,
-                            borderColor: kWhiteColor),
+                            textColor: kMainColor,
+                            backgroundColor: kSecondaryColor,
+                            borderColor: kMainColor),
                       ),
                     ],
                   ),
