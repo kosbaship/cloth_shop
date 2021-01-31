@@ -21,7 +21,7 @@ class OrdersScreen extends StatelessWidget {
         return ConditionalBuilder(
           condition: state is! OrdersLoadingState,
           builder: (context) => ConditionalBuilder(
-            condition: orders.length != 0 || ordersDetails.length !=0 ,
+            condition: orders.length != 0 ,
             builder: (context) => Scaffold(
               backgroundColor: kMainColor,
               body: SingleChildScrollView(
@@ -51,8 +51,8 @@ class OrdersScreen extends StatelessWidget {
                       ListView.separated(
                         shrinkWrap: true,
                         physics: BouncingScrollPhysics(),
-                        itemBuilder: (BuildContext context, int index) =>
-                            Container(
+                        itemBuilder: (BuildContext context, int index) {
+                          return Container(
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(
@@ -110,7 +110,18 @@ class OrdersScreen extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                onExpansionChanged: (value) {},
+                                onExpansionChanged: (value) {
+                                  print("value ========== $value");
+                                  //==============================
+                                  if(value == true) {
+                                    ordersDetails.clear();
+                                    OrdersCubit.get(context).loadOrdersDetails(
+                                        index: index);
+                                    //==============================
+                                  } else{
+                                    OrdersCubit.get(context).userOrderProducts.clear();
+                                  }
+                                },
                                 children: <Widget>[
                                   Stack(
                                     children: [
@@ -122,64 +133,68 @@ class OrdersScreen extends StatelessWidget {
                                             SizedBox(height: 8),
                                             Container(height: 2, color: kSecondaryColor),
                                             SizedBox(height: 12),
-                                            SizedBox(
-                                              height: 300,
-                                              child: GridView.builder(
-                                                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                                    crossAxisCount: 2,
-                                                    mainAxisSpacing: 20,
-                                                    crossAxisSpacing: 20,
-                                                  ),
-                                                  itemCount: ordersDetails.length,
-                                                  itemBuilder: ( context, index) {return Container(
-                                                    padding: EdgeInsets.all(8),
-                                                    decoration: BoxDecoration(
-                                                      color: Colors.white,
-                                                      borderRadius: BorderRadius.circular(
-                                                        15.0,
-                                                      ),
-                                                      border: Border.all(
-                                                        color: kSecondaryColor,
-                                                        style: BorderStyle.solid,
-                                                        width: 1.0,
-                                                      ),
+                                            ConditionalBuilder(
+                                              condition: ordersDetails.length !=0 ,
+                                              builder: (context) => SizedBox(
+                                                height:  300  ,
+                                                child: GridView.builder(
+                                                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                                      crossAxisCount: 2,
+                                                      mainAxisSpacing: 20,
+                                                      crossAxisSpacing: 20,
                                                     ),
-                                                    child: Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                                      children: [
-                                                        Container(
-                                                          width: 80.0,
-                                                          height: 80.0,
-                                                          decoration: BoxDecoration(
-                                                            borderRadius: BorderRadius.circular(
-                                                              10.0,
+                                                    itemCount: ordersDetails.length,
+                                                    itemBuilder: ( context, index) {return Container(
+                                                      padding: EdgeInsets.all(8),
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.white,
+                                                        borderRadius: BorderRadius.circular(
+                                                          15.0,
+                                                        ),
+                                                        border: Border.all(
+                                                          color: kSecondaryColor,
+                                                          style: BorderStyle.solid,
+                                                          width: 1.0,
+                                                        ),
+                                                      ),
+                                                      child: Column(
+                                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                                        children: [
+                                                          Container(
+                                                            width: 80.0,
+                                                            height: 80.0,
+                                                            decoration: BoxDecoration(
+                                                              borderRadius: BorderRadius.circular(
+                                                                10.0,
+                                                              ),
+                                                              color: kMainColor,
+                                                              image: DecorationImage(image: NetworkImage(
+                                                                  '${ordersDetails[index].pImageUrl}'
+                                                              ), fit: BoxFit.fill),
                                                             ),
-                                                            color: kMainColor,
-                                                            image: DecorationImage(image: NetworkImage(
-                                                                '${ordersDetails[index].pImageUrl}'
-                                                            ), fit: BoxFit.fill),
                                                           ),
-                                                        ),
-                                                        SizedBox(
-                                                          height: 4.0,
-                                                        ),
-                                                        writeQuickText(
-                                                            text: '${ordersDetails[index].pName}',
-                                                            fontSize: 10,
-                                                            textAlign: TextAlign.start),
-                                                        SizedBox(
-                                                          height: 4.0,
-                                                        ),
+                                                          SizedBox(
+                                                            height: 4.0,
+                                                          ),
+                                                          writeQuickText(
+                                                              text: '${ordersDetails[index].pName}',
+                                                              fontSize: 10,
+                                                              textAlign: TextAlign.start),
+                                                          SizedBox(
+                                                            height: 4.0,
+                                                          ),
 
-                                                        // total price
-                                                        writeQuickText(
-                                                            text: 'Q: ${ordersDetails[index].pQuantity}',
-                                                            fontSize: 14,
-                                                            textAlign: TextAlign.start),
+                                                          // total price
+                                                          writeQuickText(
+                                                              text: 'Q: ${ordersDetails[index].pQuantity}',
+                                                              fontSize: 14,
+                                                              textAlign: TextAlign.start),
 
-                                                      ],
-                                                    ),
-                                                  );}),
+                                                        ],
+                                                      ),
+                                                    );}),
+                                              ),
+                                              fallback:(context) => Center(child: CircularProgressIndicator(),),
                                             ),
                                             SizedBox(height: 12),
                                             Container(height: 2, color: kSecondaryColor),
@@ -234,7 +249,8 @@ class OrdersScreen extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                            ),
+                            );
+                        },
                         itemCount: orders.length,
                         separatorBuilder:
                             (BuildContext context, int index) => SizedBox(

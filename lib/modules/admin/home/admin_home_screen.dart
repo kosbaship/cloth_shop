@@ -50,8 +50,8 @@ class AdminHomeScreen extends StatelessWidget {
                         Icons.logout,
                       ),
                         onTap: (){
-                          AdminHomeCubit.get(context).signOut();
                           navigateAndFinish(context, LoginScreen());
+                          AdminHomeCubit.get(context).signOut();
                         },
                     ),
                     label: 'Exit',

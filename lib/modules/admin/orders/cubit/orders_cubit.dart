@@ -12,6 +12,7 @@ class OrdersCubit extends Cubit<OrdersStates> {
   static OrdersCubit get(context) => BlocProvider.of(context);
   List<OrderModel> orders = [];
   List<ProductModel> userOrderProducts = [];
+  List<String> userIDs = [];
 
 
   loadOrders() {
@@ -29,9 +30,11 @@ class OrdersCubit extends Cubit<OrdersStates> {
             oTotalPrice: data[kTotalPrice],
         )
         );
-
-       loadOrdersDetails(data[kUserID]);
+        userIDs.add(data[kUserID]);
+      // loadOrdersDetails(data[kUserID]);
       }
+      print("User IDs ========== ${userIDs.length}");
+
       emit(OrdersSuccessState());
     }).catchError((onError) {
       print("Error ========== $onError");
@@ -39,8 +42,9 @@ class OrdersCubit extends Cubit<OrdersStates> {
     });
   }
 
-   loadOrdersDetails(userId) {
-     FirebaseFireStoreService.getOrdersDetails(userId:userId).then((value) {
+   loadOrdersDetails({index}) {
+
+     FirebaseFireStoreService.getOrdersDetails(userId:userIDs[index]).then((value) {
        for (var doc in value.docs) {
          var data = doc.data();
          userOrderProducts.add(ProductModel(
@@ -49,6 +53,8 @@ class OrdersCubit extends Cubit<OrdersStates> {
              pQuantity: data[kProductQuantity],
              pImageUrl: data[kProductImageUrl]));
        }
+       emit(OrdersSuccessState());
+
      });
    }
 }
