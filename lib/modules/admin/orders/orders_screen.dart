@@ -51,6 +51,7 @@ class OrdersScreen extends StatelessWidget {
                         itemBuilder: (BuildContext context, int index) =>
                             buildExpandedCourseItem(
                                 startToday: () {
+                                  OrdersCubit.get(context).loadOrders();
                                   showToast(
                                       message:
                                       "yes Course price is 50\$",

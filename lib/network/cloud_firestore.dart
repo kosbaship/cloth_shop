@@ -1,6 +1,7 @@
 import 'package:cloth_shop/models/product.dart';
 import 'package:cloth_shop/shared/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'firebase_auth.dart';
 
@@ -40,7 +41,10 @@ class FirebaseFireStoreService {
   static storeOrders(
       {List<ProductModel> products, totalPrice, shippingAddress, phone}) async {
 
-    var docReference  = fireStoreInstance.collection(kOrderCollection).doc();
+    var docReference  = fireStoreInstance
+        .collection(kOrderCollection)
+        .doc(FirebaseAuthService
+        .getUserId());
     docReference.set({
       'userID': FirebaseAuthService.getUserId(),
       kAddress: shippingAddress,
@@ -59,6 +63,17 @@ class FirebaseFireStoreService {
 
   static Future<QuerySnapshot> getProducts() async {
     return await fireStoreInstance.collection(kProductsCollection).get();
+  }
+
+  static Future<QuerySnapshot> getOrders() async {
+    return await fireStoreInstance.collection(kOrderCollection).get();
+  }
+  static Future<QuerySnapshot> getOrdersDetails({@required String userId}) async {
+    return await fireStoreInstance
+        .collection(kOrderCollection)
+        .doc(userId)
+        .collection(kOrderDetailsCollection)
+        .get();
   }
 
   static Future<QuerySnapshot> getCartProducts() async {

@@ -25,7 +25,7 @@ class AdminHomeScreen extends StatelessWidget {
             bottomNavigationBar: Container(
               height: 60.0,
               decoration: BoxDecoration(
-                color: kWhiteColor,
+                color: kSecondaryColor,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(
                     25.0,
@@ -43,6 +43,7 @@ class AdminHomeScreen extends StatelessWidget {
                 ],
               ),
               child: BottomNavigationBar(
+                unselectedItemColor: kGreyColor,
                 items: [
                   BottomNavigationBarItem(
                     icon: GestureDetector(
@@ -76,7 +77,7 @@ class AdminHomeScreen extends StatelessWidget {
                 // current index match this index
                 currentIndex: currentIndex,
                 type: BottomNavigationBarType.fixed,
-                fixedColor: kBlackColor,
+                fixedColor: kMainColor,
                 elevation: 0.0,
               ),
             ),

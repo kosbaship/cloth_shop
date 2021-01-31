@@ -1,6 +1,7 @@
 
 
 import 'package:cloth_shop/models/order.dart';
+import 'package:cloth_shop/network/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'orders_states.dart';
@@ -12,26 +13,32 @@ class OrdersCubit extends Cubit<OrdersStates> {
   List<OrderModel> orders = [];
 
   loadOrders() {
-    // emit(OrdersLoadingState());
+    emit(OrdersLoadingState());
+    print("Orders ========= =============== ====================== ");
+
+    // FirebaseFireStoreService.getOrdersDetails().then((value) {
+    //   print("Orders Details ========== ${value.docs}\n");
     //
-    // FirebaseFireStoreService.getProducts().then((value) {
     //   for (var doc in value.docs) {
     //     var data = doc.data();
-    //     products.add(ProductModel(
-    //         pId: doc.id,
-    //         pPrice: data[kProductPrice],
-    //         pName: data[kProductName],
-    //         pColor: data[kProductColor],
-    //         pImageUrl: data[kProductImageUrl],
-    //         pDescription: data[kProductDescription],
-    //         pCategory: data[kProductCategory]));
+    //     print("Orders Details ========== $data\n");
     //   }
-    //
-    //   loadOneCategoryProductForAdmin(searchCategory: kBags);
     //   emit(OrdersSuccessState());
     // }).catchError((onError) {
     //   print("Error ========== $onError");
     //   emit(OrdersErrorState(onError));
     // });
+
+    FirebaseFireStoreService.getOrders().then((value) {
+      for (var doc in value.docs) {
+        var data = doc.data();
+        FirebaseFireStoreService.getOrdersDetails(userId: data['userID']);
+        print("Orders ===== ---- ===== $data\n");
+      }
+      emit(OrdersSuccessState());
+    }).catchError((onError) {
+      print("Error ========== $onError");
+      emit(OrdersErrorState(onError));
+    });
   }
 }
