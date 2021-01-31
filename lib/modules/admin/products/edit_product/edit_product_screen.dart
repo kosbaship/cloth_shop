@@ -50,7 +50,7 @@ class EditProductScreen extends StatelessWidget {
           return ConditionalBuilder(
             condition: state is! EditProductLoadingState,
             builder: (context) => Scaffold(
-              backgroundColor: kSecondaryColor,
+              backgroundColor: kMainColor,
               body: SingleChildScrollView(
                 physics: BouncingScrollPhysics(),
                 child: Padding(
@@ -64,7 +64,7 @@ class EditProductScreen extends StatelessWidget {
                             IconButton(
                               icon: Icon(
                                 Icons.arrow_back_ios,
-                                color: kMainColor,
+                                color: itemBackGroundColor,
                                 size: 30,
                               ),
                               onPressed: () {
@@ -75,7 +75,7 @@ class EditProductScreen extends StatelessWidget {
                         ),
                         CircleAvatar(
                           radius: 110,
-                          backgroundColor: kMainColor,
+                          backgroundColor: itemBackGroundColor,
                           child: CircleAvatar(
                             backgroundColor: Colors.white,
                             child: ClipOval(
@@ -98,6 +98,8 @@ class EditProductScreen extends StatelessWidget {
                           hint: 'Product name',
                           controller: nameController,
                           type: TextInputType.text,
+                            color: itemBackGroundColor
+
                         ),
                         SizedBox(
                           height: 20,
@@ -107,6 +109,7 @@ class EditProductScreen extends StatelessWidget {
                           hint: 'Product price',
                           controller: priceController,
                           type: TextInputType.number,
+                          color: itemBackGroundColor
                         ),
                         SizedBox(
                           height: 20,
@@ -116,6 +119,8 @@ class EditProductScreen extends StatelessWidget {
                           hint: 'Product description',
                           controller: descriptionController,
                           type: TextInputType.text,
+                            color: itemBackGroundColor
+
                         ),
                         SizedBox(
                           height: 20,
@@ -136,7 +141,7 @@ class EditProductScreen extends StatelessWidget {
                                         message: "Product Deleted Successfully",
                                         error: false);
                                   },
-                                  color: kMainColor,
+                                  color: itemBackGroundColor,
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 16),
@@ -188,7 +193,7 @@ class EditProductScreen extends StatelessWidget {
                                           error: false);
                                     }
                                   },
-                                  color: kMainColor,
+                                  color: itemBackGroundColor,
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 16),

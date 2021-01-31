@@ -55,7 +55,7 @@ class NameAndPhotoAndPrice extends StatelessWidget {
                   tag: '$itemHeroTag',
                   child: Image.network(
                     '$itemImageUrl',
-                    fit: BoxFit.fill,
+                    fit: BoxFit.cover,
                   ),
                 ),
               )

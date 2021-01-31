@@ -159,7 +159,7 @@ class AddProductScreen extends StatelessWidget {
                                             pPrice: price,
                                             pDescription: description,
                                             pCategory: caterorySelected,
-                                            pColor: currentColor.toString().replaceAll('Color(', '')..replaceAll(')', '')));
+                                            pColor: currentColor.toString().replaceAll('Color(', '').replaceAll(')', '')));
                                     // nameController.clear();
                                     // priceController.clear();
                                     // descriptionController.clear();

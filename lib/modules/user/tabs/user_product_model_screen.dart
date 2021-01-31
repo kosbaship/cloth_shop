@@ -47,8 +47,8 @@ class UserProductModelScreen extends StatelessWidget {
                     ),
                     itemBuilder: (context, index) {
                       //Color itemBackGroundColor = products[index].pColor as Color;
-                      //Color itemBackGroundColor = Color(int.parse(products[index].pColor));
-                      Color itemBackGroundColor = kItemBackGroundColor;
+                      Color itemBackGroundColor = Color(int.parse(products[index].pColor));
+                      // Color itemBackGroundColor = kItemBackGroundColor;
                       String itemImageUrl = products[index].pImageUrl;
                       String itemName = products[index].pName;
                       String itemPrice = products[index].pPrice;

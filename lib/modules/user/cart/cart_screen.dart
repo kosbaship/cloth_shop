@@ -237,7 +237,6 @@ class CartScreen extends StatelessWidget {
 
 
   void showCustomDialog(context) async {
-    var address;
     Dialog alertDialog = Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
       elevation: 16,

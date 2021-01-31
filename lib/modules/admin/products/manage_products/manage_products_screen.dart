@@ -36,7 +36,8 @@ class ManageProductScreen extends StatelessWidget {
                 ),
                 itemBuilder: (context, index) {
                   //Color itemBackGroundColor = products[index].pColor as Color;
-                  Color itemBackGroundColor = kSecondaryColor;
+                  Color itemBackGroundColor = Color(int.parse(products[index].pColor));
+                  //Color itemBackGroundColor = kSecondaryColor;
                   String itemID =  products[index].pId;
                   String itemImageUrl = products[index].pImageUrl;
                   String itemName = products[index].pName;
@@ -100,7 +101,7 @@ class ManageProductScreen extends StatelessWidget {
                                       itemBackGroundColor: itemBackGroundColor,
                                     ));
                               },
-                              color: kSecondaryColor,
+                              color: Color(int.parse(products[index].pColor)),
                               child: Padding(
                                 padding:
                                 const EdgeInsets.symmetric(vertical: 8),

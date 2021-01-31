@@ -40,6 +40,7 @@ Widget buildTextField({
   @required hint,
   @required TextInputType type,
   bool isPassword = false,
+  Color color = kSecondaryColor,
 }) =>
     TextField(
       controller: controller,
@@ -59,13 +60,13 @@ Widget buildTextField({
         fillColor: kMainColor,
         enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20),
-            borderSide: BorderSide(color: kSecondaryColor)),
+            borderSide: BorderSide(color: color)),
         focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20),
-            borderSide: BorderSide(color: kSecondaryColor)),
+            borderSide: BorderSide(color: color)),
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20),
-            borderSide: BorderSide(color: kSecondaryColor)),
+            borderSide: BorderSide(color: color)),
       ),
     );
 Widget writeQuickText(

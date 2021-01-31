@@ -268,7 +268,7 @@ class OrdersScreen extends StatelessWidget {
             fallback: (context) => Center(child: Text(
               'Your have no Orders'.toUpperCase(),
               style: TextStyle(
-                color: kMainColor,
+                color: kSecondaryColor,
                 fontSize: 18,
               ),
             ),),
