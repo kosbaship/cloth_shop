@@ -39,7 +39,7 @@ class ProductDetailsScreenCubit extends Cubit<ProductDetailsScreenStates>
   addToCart({ProductModel product}) {
     emit(ProductDetailsScreenLoadingState());
 
-    FirebaseFireStoreService.createCollectionAndAddCart(product: product).then((value) {
+    FirebaseFireStoreService.storeUserCartDetails(product: product).then((value) {
 
       emit(ProductDetailsScreenSuccessState());
     }).catchError((e) {

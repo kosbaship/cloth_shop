@@ -26,8 +26,9 @@ class CartScreenCubit extends Cubit<CartStates> {
   saveOrder({shippingAddress , phone}) {
     emit(CartLoadingState());
 
-    FirebaseFireStoreService.storeOrders(products: cartProducts, totalPrice: price, shippingAddress:shippingAddress , phone: phone)
+    FirebaseFireStoreService.storeOrders(totalPrice: price, shippingAddress:shippingAddress , phone: phone)
         .then((value) {
+          FirebaseFireStoreService.storeOrdersDetails(products: cartProducts);
       emit(CartSuccessState());
     }).catchError((e) {
       emit(CartErrorState(e.toString()));

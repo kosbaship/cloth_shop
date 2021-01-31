@@ -18,7 +18,7 @@ class OrdersScreen extends StatelessWidget {
         return ConditionalBuilder(
           condition: state is! OrdersLoadingState,
           builder: (context) => ConditionalBuilder(
-            condition: orders.length == 0,
+            condition: orders.length != 0,
             builder: (context) => Scaffold(
               backgroundColor: kMainColor,
               body: SingleChildScrollView(

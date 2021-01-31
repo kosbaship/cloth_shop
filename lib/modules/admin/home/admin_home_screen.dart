@@ -16,7 +16,6 @@ class AdminHomeScreen extends StatelessWidget {
       child: BlocConsumer<AdminHomeCubit, AdminHomeStates>(
         listener: (context, state) {},
         builder: (context, state) {
-          // used more than once
           var currentIndex = AdminHomeCubit.get(context).currentIndex;
 
           return Scaffold(

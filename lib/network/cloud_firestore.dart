@@ -24,12 +24,12 @@ class FirebaseFireStoreService {
     });
   }
 
-  static Future<DocumentReference> createCollectionAndAddCart(
+  static Future<DocumentReference> storeUserCartDetails(
       {ProductModel product}) async {
     return await
-    fireStoreInstance.collection(kUserDetailsCollection)
+    fireStoreInstance.collection(kCartCollection)
         .doc(FirebaseAuthService.getUserId())
-        .collection(kUserCartCollection)
+        .collection(kCartDetailsCollection)
         .add({
       kProductImageUrl: product.pImageUrl,
       kProductName: product.pName,
@@ -38,21 +38,22 @@ class FirebaseFireStoreService {
     });
   }
 
-  static storeOrders(
-      {List<ProductModel> products, totalPrice, shippingAddress, phone}) async {
-
-    var docReference  = fireStoreInstance
-        .collection(kOrderCollection)
-        .doc(FirebaseAuthService
-        .getUserId());
-    docReference.set({
-      'userID': FirebaseAuthService.getUserId(),
+  static Future<DocumentReference> storeOrders({totalPrice, shippingAddress, phone}) async {
+    return await fireStoreInstance
+        .collection(kOrderCollection).add({
+      kUserID: FirebaseAuthService.getUserId(),
       kAddress: shippingAddress,
       kPhone: phone,
       kTotalPrice: totalPrice,
     });
+  }
+  static storeOrdersDetails({List<ProductModel> products}) async {
+    var docReference  = fireStoreInstance
+        .collection(kOrderDetailsCollection)
+        .doc(FirebaseAuthService.getUserId())
+        .collection(kOrderDetailsCollection);
     for(var product in products){
-      docReference.collection(kOrderDetailsCollection).doc().set({
+      docReference.add({
         kProductImageUrl: product.pImageUrl,
         kProductName: product.pName,
         kProductQuantity: product.pQuantity,
@@ -70,7 +71,7 @@ class FirebaseFireStoreService {
   }
   static Future<QuerySnapshot> getOrdersDetails({@required String userId}) async {
     return await fireStoreInstance
-        .collection(kOrderCollection)
+        .collection(kOrderDetailsCollection)
         .doc(userId)
         .collection(kOrderDetailsCollection)
         .get();
@@ -78,23 +79,20 @@ class FirebaseFireStoreService {
 
   static Future<QuerySnapshot> getCartProducts() async {
     return await fireStoreInstance
-        .collection(kUserDetailsCollection)
+        .collection(kCartCollection)
         .doc(FirebaseAuthService.getUserId())
-        .collection(kUserCartCollection)
+        .collection(kCartDetailsCollection)
         .get();
   }
 
   static deleteUserCart() async {
-    print('--------$kUserDetailsCollection');
-    print('--------${FirebaseAuthService.getUserId()}');
 
     getCartProducts().then((value) {
       for (var doc in value.docs) {
-        print('--------${doc.id}');
         fireStoreInstance
-            .collection(kUserDetailsCollection)
+            .collection(kCartCollection)
             .doc(FirebaseAuthService.getUserId())
-            .collection(kUserCartCollection)
+            .collection(kCartDetailsCollection)
             .doc(doc.id)
             .delete();
       }
