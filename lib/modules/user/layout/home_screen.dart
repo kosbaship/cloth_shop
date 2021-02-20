@@ -1,3 +1,4 @@
+import 'package:cloth_shop/modules/login/login_screen.dart';
 import 'package:cloth_shop/modules/user/cart/cart_screen.dart';
 import 'package:cloth_shop/modules/user/tabs/cubit/user_product_model_cubit.dart';
 import 'package:cloth_shop/modules/user/tabs/user_product_model_screen.dart';
@@ -29,6 +30,17 @@ class HomeScreen extends StatelessWidget {
             ),
             elevation: 0,
             actions: [
+              IconButton(
+                icon: Icon(
+                  Icons.logout,
+                  size: 34,
+                  color: kSecondaryColor,
+                ),
+                onPressed: () {
+                  navigateAndFinish(context, LoginScreen());
+                  UserProductModelCubit.get(context).signOut();
+                },
+              ),
               IconButton(
                 icon: Icon(
                   Icons.shopping_cart,

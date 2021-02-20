@@ -1,4 +1,5 @@
 import 'package:cloth_shop/models/product.dart';
+import 'package:cloth_shop/models/user.dart';
 import 'package:cloth_shop/shared/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -26,8 +27,8 @@ class FirebaseFireStoreService {
 
   static Future<DocumentReference> storeUserCartDetails(
       {ProductModel product}) async {
-    return await
-    fireStoreInstance.collection(kCartCollection)
+    return await fireStoreInstance
+        .collection(kCartCollection)
         .doc(FirebaseAuthService.getUserId())
         .collection(kCartDetailsCollection)
         .add({
@@ -38,21 +39,22 @@ class FirebaseFireStoreService {
     });
   }
 
-  static Future<DocumentReference> storeOrders({totalPrice, shippingAddress, phone}) async {
-    return await fireStoreInstance
-        .collection(kOrderCollection).add({
+  static Future<DocumentReference> storeOrders(
+      {totalPrice, shippingAddress, phone}) async {
+    return await fireStoreInstance.collection(kOrderCollection).add({
       kUserID: FirebaseAuthService.getUserId(),
       kAddress: shippingAddress,
       kPhone: phone,
       kTotalPrice: totalPrice,
     });
   }
+
   static storeOrdersDetails({List<ProductModel> products}) async {
-    var docReference  = fireStoreInstance
+    var docReference = fireStoreInstance
         .collection(kOrderDetailsCollection)
         .doc(FirebaseAuthService.getUserId())
         .collection(kOrderDetailsCollection);
-    for(var product in products){
+    for (var product in products) {
       docReference.add({
         kProductImageUrl: product.pImageUrl,
         kProductName: product.pName,
@@ -66,10 +68,26 @@ class FirebaseFireStoreService {
     return await fireStoreInstance.collection(kProductsCollection).get();
   }
 
+  // save user details after login
+  static storeUsers({@required User user}) async {
+    return await fireStoreInstance
+        .collection(kUsersCollection)
+        .doc(FirebaseAuthService.getUserId())
+        .set({
+      kUserID: user.userID,
+      kUserName: user.userName,
+      kUserEmail: user.userEmail,
+      kUserPhone: user.userPhone,
+      kUserPassword: user.userPassword
+    });
+  }
+
   static Future<QuerySnapshot> getOrders() async {
     return await fireStoreInstance.collection(kOrderCollection).get();
   }
-  static Future<QuerySnapshot> getOrdersDetails({@required String userId}) async {
+
+  static Future<QuerySnapshot> getOrdersDetails(
+      {@required String userId}) async {
     return await fireStoreInstance
         .collection(kOrderDetailsCollection)
         .doc(userId)
@@ -86,7 +104,6 @@ class FirebaseFireStoreService {
   }
 
   static deleteUserCart() async {
-
     getCartProducts().then((value) {
       for (var doc in value.docs) {
         fireStoreInstance
@@ -97,7 +114,6 @@ class FirebaseFireStoreService {
             .delete();
       }
     });
-
   }
 
   static Future<void> deleteProduct({documentId}) async {

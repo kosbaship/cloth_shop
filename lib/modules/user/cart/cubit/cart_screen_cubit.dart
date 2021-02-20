@@ -1,6 +1,5 @@
 import 'package:cloth_shop/models/product.dart';
 import 'package:cloth_shop/network/cloud_firestore.dart';
-import 'package:cloth_shop/network/firebase_auth.dart';
 import 'package:cloth_shop/shared/constants.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

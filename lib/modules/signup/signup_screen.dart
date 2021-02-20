@@ -1,3 +1,4 @@
+import 'package:cloth_shop/models/user.dart';
 import 'package:cloth_shop/modules/login/login_screen.dart';
 import 'package:cloth_shop/modules/signup/cubit/signup_cubit.dart';
 import 'package:cloth_shop/modules/signup/cubit/signup_states.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class SignUpScreen extends StatelessWidget {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
+  final phoneController = TextEditingController();
   final passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -63,7 +65,7 @@ class SignUpScreen extends StatelessWidget {
                       ),
                       showLogo(screenHeight: signUpScreenHeight),
                       SizedBox(
-                        height: signUpScreenHeight * 0.1,
+                        height: signUpScreenHeight * 0.04,
                       ),
                       buildTextField(
                         icon: Icons.person,
@@ -84,6 +86,15 @@ class SignUpScreen extends StatelessWidget {
                         height: signUpScreenHeight * 0.02,
                       ),
                       buildTextField(
+                        icon: Icons.phone_android,
+                        hint: 'Enter your phone',
+                        controller: phoneController,
+                        type: TextInputType.phone,
+                      ),
+                      SizedBox(
+                        height: signUpScreenHeight * 0.02,
+                      ),
+                      buildTextField(
                         icon: Icons.lock,
                         hint: 'Enter your password',
                         controller: passwordController,
@@ -95,19 +106,18 @@ class SignUpScreen extends StatelessWidget {
                       ),
                       buildBtn(
                         function: () {
-                          String name = nameController.text;
-                          String email = emailController.text;
-                          String password = passwordController.text;
+                          String name = nameController.text.trim();
+                          String email = emailController.text.trim();
+                          String phone = phoneController.text.trim();
+                          String password = passwordController.text.trim();
 
-                          if (name.isEmpty ||
-                              email.isEmpty ||
-                              password.isEmpty) {
-                            showToast(
-                                message: "please enter your data", error: true);
-                          } else {
-                            SignUpCubit.get(context)
-                                .signUp(email: email, password: password);
-                          }
+                          _checkValidationAndSignUP(
+                            context: context,
+                            name: name,
+                            email: email,
+                            phone: phone,
+                            password: password,
+                          );
                         },
                         title: 'Sign up',
                       ),
@@ -145,6 +155,36 @@ class SignUpScreen extends StatelessWidget {
           );
         },
       ),
+    );
+  }
+}
+void _checkValidationAndSignUP({
+  @required BuildContext context,
+  @required String name,
+  @required String email,
+  @required String phone,
+  @required String password,
+}) {
+  // check if the field are empty
+  if (name.isEmpty || email.isEmpty || phone.isEmpty || password.isEmpty) {
+    showToast(message: 'please enter your data', error: true);
+  } else {
+    // check every fields validation
+    if (name.length < 3) {
+      showToast(message: 'name must be at least 3 Characters', error: true);
+    } else if (!email.contains('@')) {
+      showToast(message: 'please, enter a valid email', error: true);
+    } else if (password.length > 6) {
+      showToast(message: 'password must be at least 3 Characters', error: true);
+    }
+    // register the user
+    SignUpCubit.get(context).signUp(
+        user: User(
+            userName: name,
+            userEmail: email,
+            userPhone: phone,
+            userPassword: password
+        )
     );
   }
 }
