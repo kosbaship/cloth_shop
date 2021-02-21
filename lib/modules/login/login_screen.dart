@@ -84,22 +84,21 @@ class LoginScreen extends StatelessWidget {
                       SizedBox(
                         height: loginScreenHeight * 0.1,
                       ),
-                      buildTextField(
+                      drawTextField(
                         icon: Icons.email,
-                        hint: 'Enter your email',
+                        title: 'Email',
                         controller: emailController,
-                        type: TextInputType.emailAddress,
+                        keyboardType: TextInputType.emailAddress,
                       ),
                       SizedBox(
-                        height: loginScreenHeight * 0.02,
+                        height: loginScreenHeight * 0.03,
                       ),
-                      buildTextField(
-                        icon: Icons.lock,
-                        hint: 'Enter your password',
-                        controller: passwordController,
-                        type: TextInputType.visiblePassword,
-                        isPassword: true,
-                      ),
+                      drawTextField(
+                          title: 'Password',
+                          keyboardType: TextInputType.visiblePassword,
+                          controller: passwordController,
+                          icon: Icons.lock,
+                          obscureText: true),
                       SizedBox(
                         height: 15,
                       ),
@@ -143,8 +142,8 @@ class LoginScreen extends StatelessWidget {
                       SizedBox(
                         height: 15,
                       ),
-                      buildBtn(
-                        function: () {
+                      buildButton(
+                        onPressed: () {
                           String email = emailController.text;
                           String password = passwordController.text;
 

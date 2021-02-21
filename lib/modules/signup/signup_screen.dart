@@ -66,46 +66,41 @@ class SignUpScreen extends StatelessWidget {
                       showLogo(screenHeight: signUpScreenHeight),
                       SizedBox(
                         height: signUpScreenHeight * 0.04,
-                      ),
-                      buildTextField(
-                        icon: Icons.person,
-                        hint: 'Enter your name',
+                      ),drawTextField(
+                        title: 'Name',
                         controller: nameController,
-                        type: TextInputType.text,
+                        icon: Icons.person,
                       ),
                       SizedBox(
-                        height: signUpScreenHeight * 0.02,
+                        height: signUpScreenHeight * 0.03,
                       ),
-                      buildTextField(
-                        icon: Icons.email,
-                        hint: 'Enter your email',
-                        controller: emailController,
-                        type: TextInputType.emailAddress,
-                      ),
+                      drawTextField(
+                          title: 'Email',
+                          keyboardType: TextInputType.emailAddress,
+                          controller: emailController,
+                          icon: Icons.email),
                       SizedBox(
-                        height: signUpScreenHeight * 0.02,
+                        height: signUpScreenHeight * 0.03,
                       ),
-                      buildTextField(
-                        icon: Icons.phone_android,
-                        hint: 'Enter your phone',
+                      drawTextField(
+                        title: 'Phone',
                         controller: phoneController,
-                        type: TextInputType.phone,
+                        icon: Icons.phone_android,
                       ),
                       SizedBox(
-                        height: signUpScreenHeight * 0.02,
+                        height: signUpScreenHeight * 0.03,
                       ),
-                      buildTextField(
-                        icon: Icons.lock,
-                        hint: 'Enter your password',
-                        controller: passwordController,
-                        type: TextInputType.visiblePassword,
-                        isPassword: true,
-                      ),
+                      drawTextField(
+                          title: 'Password',
+                          keyboardType: TextInputType.visiblePassword,
+                          controller: passwordController,
+                          icon: Icons.lock,
+                          obscureText: true),
                       SizedBox(
                         height: signUpScreenHeight * 0.05,
                       ),
-                      buildBtn(
-                        function: () {
+                      buildButton(
+                        onPressed: () {
                           String name = nameController.text.trim();
                           String email = emailController.text.trim();
                           String phone = phoneController.text.trim();

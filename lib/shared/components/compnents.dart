@@ -86,6 +86,36 @@ Widget writeQuickText(
       ),
     );
 
+Widget drawTextField({
+  @required String title,
+  @required TextEditingController controller,
+  @required IconData icon,
+  TextInputType keyboardType = TextInputType.text,
+  bool obscureText = false,
+  Function onChange
+}) => TextFormField(
+  keyboardType: keyboardType,
+  obscureText: obscureText,
+  controller: controller,
+  onChanged: onChange,
+  decoration: InputDecoration(
+    hintText: "Enter your $title",
+    floatingLabelBehavior: FloatingLabelBehavior.always,
+    suffixIcon: Icon(icon),
+    labelText: title,
+    labelStyle: TextStyle(
+      fontSize: 16.0,
+    ),
+    hintStyle: TextStyle(color: kGreyColor, fontSize: 10),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(28),
+      borderSide: BorderSide(color: kSloganColor, width: 2),
+      gapPadding: 10,
+    ),
+  ),
+  style: TextStyle(fontSize: 14.0, color: kSecondaryColor),
+);
+
 Widget buildBtn({@required Function function, @required String title}) =>
     FlatButton(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -97,6 +127,31 @@ Widget buildBtn({@required Function function, @required String title}) =>
           title,
           style: TextStyle(color: kWhiteColor, fontSize: 14),
         ),
+      ),
+    );
+// the new button design
+Widget buildButton({
+  title,
+  onPressed,
+}) =>
+    FlatButton(
+      onPressed: onPressed,
+      color: kSloganColor,
+      textColor: Colors.white,
+      child: Container(
+        height: 50.0,
+        child: Center(
+          child: Text(
+            title,
+            style: TextStyle(
+              fontSize: 16.0,
+              fontFamily: 'BoltSemiBold',
+            ),
+          ),
+        ),
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(24),
       ),
     );
 
