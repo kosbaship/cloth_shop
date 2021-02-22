@@ -30,7 +30,7 @@ class LoginScreen extends StatelessWidget {
       child: BlocConsumer<LoginCubit, LoginStates>(
         listener: (context, state) {
           if (state is LoginLoadingState) {
-            buildProgressDialog(
+            showAlertDialog(
               context: context,
               text: 'please wait ...',
             );
@@ -56,7 +56,7 @@ class LoginScreen extends StatelessWidget {
           if (state is LoginErrorState) {
             // close the progress dialog in the last state
             Navigator.pop(context);
-            buildProgressDialog(
+            showAlertDialog(
               context: context,
               text: "This account not found",
               error: true,
@@ -84,7 +84,7 @@ class LoginScreen extends StatelessWidget {
                       SizedBox(
                         height: loginScreenHeight * 0.1,
                       ),
-                      drawTextField(
+                      buildTextFormField(
                         icon: Icons.email,
                         title: 'Email',
                         controller: emailController,
@@ -93,7 +93,7 @@ class LoginScreen extends StatelessWidget {
                       SizedBox(
                         height: loginScreenHeight * 0.03,
                       ),
-                      drawTextField(
+                      buildTextFormField(
                           title: 'Password',
                           keyboardType: TextInputType.visiblePassword,
                           controller: passwordController,
@@ -214,7 +214,7 @@ class LoginScreen extends StatelessWidget {
         LoginCubit.get(context)
             .signIn(email: email, password: password, mode: adminMode);
       } else {
-        buildProgressDialog(
+        showAlertDialog(
             context: context, text: 'Wrong Credentials', error: true);
       }
     }

@@ -6,12 +6,73 @@ import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+// app db configuration
 void initApp() {
   FirebaseAuthService();
   FirebaseFireStoreService();
   FirebaseStorageService();
 }
 
+// toast message
+void showToast({@required String message, @required bool error}) => Fluttertoast.showToast(
+    msg: " $message ",
+    toastLength: Toast.LENGTH_SHORT,
+    gravity: ToastGravity.BOTTOM,
+    timeInSecForIosWeb: 1,
+    backgroundColor: error ? Colors.red : Colors.green,
+    textColor: Colors.white,
+    fontSize: 16.0);
+
+// navigation
+void navigateTo(context, widget) => Navigator.push(
+  context,
+  MaterialPageRoute(
+    builder: (context) => widget,
+  ),
+);
+void navigateToReplaceMe(context, widget) => Navigator.pushReplacement(
+  context,
+  MaterialPageRoute(
+    builder: (context) => widget,
+  ),
+);
+void navigateAndFinish(context, widget) => Navigator.pushAndRemoveUntil(
+    context,
+    MaterialPageRoute(
+      builder: (context) => widget,
+    ),
+        (Route<dynamic> route) => false);
+
+// alert dialog
+void showAlertDialog({context, text, error = false}) => showDialog(context: context, builder: (context) => AlertDialog(
+  content: Column(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      Row(
+        children: [
+          if (!error) CircularProgressIndicator(),
+          if (!error)
+            SizedBox(
+              width: 20.0,
+            ),
+          Expanded(
+            child: Text(
+              text,
+            ),
+          ),
+        ],
+      ),
+      if (error) SizedBox(height: 20.0),
+      if (error)
+        buildDefaultButton(
+          onPressed: () => Navigator.pop(context),
+          text: "Cancel",
+        ),
+    ],
+  ),
+),);
+
+// custom logo
 Widget showLogo({@required screenHeight}) => Container(
       height: screenHeight * .2,
       child: Stack(
@@ -34,15 +95,27 @@ Widget showLogo({@required screenHeight}) => Container(
         ],
       ),
     );
-Widget buildTextField({
-  @required TextEditingController controller,
-  @required icon,
-  @required hint,
-  @required TextInputType type,
-  bool isPassword = false,
-  Color color = kSecondaryColor,
-}) =>
-    TextField(
+
+// custom appbar
+Widget drawAppbar({@required context, @required actionWidget, @required leadingWidget, @required title}) => AppBar(
+      iconTheme: IconThemeData(
+        color: kWhiteColor, //change your color here
+      ),
+      centerTitle: true,
+      backgroundColor: kMainColor,
+      title: title,
+      leading: leadingWidget,
+      actions: [
+        actionWidget,
+        SizedBox(
+          width: 20.0,
+        ),
+      ],
+      elevation: 0.0,
+    );
+
+// custom text field
+Widget buildTextField({@required TextEditingController controller, @required icon, @required hint, @required TextInputType type, bool isPassword = false, Color color = kSecondaryColor,}) => TextField(
       controller: controller,
       keyboardType: type,
       obscureText: isPassword,
@@ -68,14 +141,11 @@ Widget buildTextField({
             borderRadius: BorderRadius.circular(20),
             borderSide: BorderSide(color: color)),
       ),
-    );
-Widget writeQuickText(
-    {@required String text,
-      double fontSize = 16.0,
-      Color color = kTextDarkColor,
-      FontWeight fontWeight = FontWeight.normal,
-      TextAlign textAlign = TextAlign.center}) =>
-    Text(
+
+);
+
+// custom text
+Widget writeQuickText({@required String text, double fontSize = 16.0, Color color = kTextDarkColor, FontWeight fontWeight = FontWeight.normal, TextAlign textAlign = TextAlign.center}) => Text(
       text,
       textAlign: textAlign,
       style: TextStyle(
@@ -86,18 +156,13 @@ Widget writeQuickText(
       ),
     );
 
-Widget drawTextField({
-  @required String title,
-  @required TextEditingController controller,
-  @required IconData icon,
-  TextInputType keyboardType = TextInputType.text,
-  bool obscureText = false,
-  Function onChange
-}) => TextFormField(
+// custom text form Field
+Widget buildTextFormField({@required String title, @required TextEditingController controller, @required IconData icon, TextInputType keyboardType = TextInputType.text, bool obscureText = false, Function onChange}) => TextFormField(
   keyboardType: keyboardType,
   obscureText: obscureText,
   controller: controller,
   onChanged: onChange,
+
   decoration: InputDecoration(
     hintText: "Enter your $title",
     floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -116,10 +181,10 @@ Widget drawTextField({
   style: TextStyle(fontSize: 14.0, color: kSecondaryColor),
 );
 
-Widget buildBtn({@required Function function, @required String title}) =>
-    FlatButton(
+// custom button not used
+Widget buildBtn({@required Function onPressed, @required String title}) => FlatButton(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      onPressed: function,
+      onPressed: onPressed,
       color: Colors.black,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 9),
@@ -129,12 +194,9 @@ Widget buildBtn({@required Function function, @required String title}) =>
         ),
       ),
     );
-// the new button design
-Widget buildButton({
-  title,
-  onPressed,
-}) =>
-    FlatButton(
+
+// custom button 
+Widget buildButton({title, onPressed,}) => FlatButton(
       onPressed: onPressed,
       color: kSloganColor,
       textColor: Colors.white,
@@ -155,72 +217,8 @@ Widget buildButton({
       ),
     );
 
-showToast({@required String message, @required bool error}) =>
-    Fluttertoast.showToast(
-        msg: " $message ",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: error ? Colors.red : Colors.green,
-        textColor: Colors.white,
-        fontSize: 16.0);
-
-void navigateTo(context, widget) => Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => widget,
-      ),
-    );
-void navigateToReplaceMe(context, widget) => Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => widget,
-      ),
-    );
-void navigateAndFinish(context, widget) => Navigator.pushAndRemoveUntil(
-    context,
-    MaterialPageRoute(
-      builder: (context) => widget,
-    ),
-    (Route<dynamic> route) => false);
-void buildProgressDialog({context, text, error = false}) => showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Row(
-              children: [
-                if (!error) CircularProgressIndicator(),
-                if (!error)
-                  SizedBox(
-                    width: 20.0,
-                  ),
-                Expanded(
-                  child: Text(
-                    text,
-                  ),
-                ),
-              ],
-            ),
-            if (error) SizedBox(height: 20.0),
-            if (error)
-              buildDefaultButton(
-                onPressed: () => Navigator.pop(context),
-                text: "Cancel",
-              ),
-          ],
-        ),
-      ),
-    );
-
-Widget buildDefaultButton(
-        {@required Function onPressed,
-        @required String text,
-        Color textColor = kMainColor,
-        Color backgroundColor = kSecondaryColor,
-        Color borderColor = kMainColor}) =>
-    Container(
+// custom default button
+Widget buildDefaultButton({@required Function onPressed, @required String text, Color textColor = kMainColor, Color backgroundColor = kSecondaryColor, Color borderColor = kMainColor}) => Container(
       width: double.infinity,
       height: 58.0,
       decoration: BoxDecoration(
@@ -245,37 +243,8 @@ Widget buildDefaultButton(
       ),
     );
 
-Widget drawAppbar(
-        {@required context,
-        @required actionWidget,
-        @required leadingWidget,
-        @required title}) =>
-    AppBar(
-      iconTheme: IconThemeData(
-        color: kWhiteColor, //change your color here
-      ),
-      centerTitle: true,
-      backgroundColor: kMainColor,
-      title: title,
-      leading: leadingWidget,
-      actions: [
-        actionWidget,
-        SizedBox(
-          width: 20.0,
-        ),
-      ],
-      elevation: 0.0,
-    );
-Widget buildExpandedCourseItem({
-  @required Function startToday,
-  @required String price,
-  @required ImageProvider<Object> image,
-  @required String title,
-  @required String startDate,
-  @required String description,
-  bool initiallyExpanded = false,
-}) =>
-    Container(
+// custom expanded card
+Widget buildExpandedCard({@required Function startToday, @required String price, @required ImageProvider<Object> image, @required String title, @required String startDate, @required String description, bool initiallyExpanded = false,}) => Container(
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(
@@ -438,3 +407,4 @@ Widget buildExpandedCourseItem({
         ],
       ),
     );
+

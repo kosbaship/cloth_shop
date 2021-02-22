@@ -21,7 +21,7 @@ class SignUpScreen extends StatelessWidget {
       child: BlocConsumer<SignUpCubit, SignUpStates>(
         listener: (context, state) {
           if (state is SignUpLoadingState) {
-            buildProgressDialog(
+            showAlertDialog(
               context: context,
               text: 'please wait ...',
             );
@@ -42,7 +42,7 @@ class SignUpScreen extends StatelessWidget {
           if (state is SignUpErrorState) {
             // close the progress dialog in the last state
             Navigator.pop(context);
-            buildProgressDialog(
+            showAlertDialog(
               context: context,
               text: "This account is already exist",
               error: true,
@@ -66,7 +66,7 @@ class SignUpScreen extends StatelessWidget {
                       showLogo(screenHeight: signUpScreenHeight),
                       SizedBox(
                         height: signUpScreenHeight * 0.04,
-                      ),drawTextField(
+                      ),buildTextFormField(
                         title: 'Name',
                         controller: nameController,
                         icon: Icons.person,
@@ -74,7 +74,7 @@ class SignUpScreen extends StatelessWidget {
                       SizedBox(
                         height: signUpScreenHeight * 0.03,
                       ),
-                      drawTextField(
+                      buildTextFormField(
                           title: 'Email',
                           keyboardType: TextInputType.emailAddress,
                           controller: emailController,
@@ -82,7 +82,7 @@ class SignUpScreen extends StatelessWidget {
                       SizedBox(
                         height: signUpScreenHeight * 0.03,
                       ),
-                      drawTextField(
+                      buildTextFormField(
                         title: 'Phone',
                         controller: phoneController,
                         icon: Icons.phone_android,
@@ -90,7 +90,7 @@ class SignUpScreen extends StatelessWidget {
                       SizedBox(
                         height: signUpScreenHeight * 0.03,
                       ),
-                      drawTextField(
+                      buildTextFormField(
                           title: 'Password',
                           keyboardType: TextInputType.visiblePassword,
                           controller: passwordController,
