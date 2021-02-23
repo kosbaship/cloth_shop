@@ -6,16 +6,21 @@ import 'package:cloth_shop/modules/signup/signup_screen.dart';
 import 'package:cloth_shop/modules/user/layout/home_screen.dart';
 import 'package:cloth_shop/shared/colors/colors.dart';
 import 'package:cloth_shop/shared/components/compnents.dart';
+import 'package:cloth_shop/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginScreen extends StatelessWidget {
+
+  final _formKey = GlobalKey<FormState>();
   final String email;
   final String password;
 
   LoginScreen({this.email, this.password});
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+
+
   @override
   Widget build(BuildContext context) {
     double loginScreenHeight = MediaQuery.of(context).size.height;
@@ -74,125 +79,125 @@ class LoginScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(16.0),
                 child: SingleChildScrollView(
                   physics: BouncingScrollPhysics(),
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 50,
-                        width: double.infinity,
-                      ),
-                      showLogo(screenHeight: loginScreenHeight),
-                      SizedBox(
-                        height: loginScreenHeight * 0.1,
-                      ),
-                      buildTextFormField(
-                        icon: Icons.email,
-                        title: 'Email',
-                        controller: emailController,
-                        keyboardType: TextInputType.emailAddress,
-                      ),
-                      SizedBox(
-                        height: loginScreenHeight * 0.03,
-                      ),
-                      buildTextFormField(
-                          title: 'Password',
-                          keyboardType: TextInputType.visiblePassword,
-                          controller: passwordController,
-                          icon: Icons.lock,
-                          obscureText: true),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Radio(
-                            activeColor: Colors.black,
-                            value: LoginCubit.get(context).userMode,
-                            groupValue: LoginCubit.get(context).currentMode,
-                            onChanged: (value) {
-                              LoginCubit.get(context).changeToUserMode();
-                            },
-                          ),
-                          Text(
-                            "i\'m a user",
-                            style: TextStyle(color: kTextDarkColor
-                                // defaultMode == userMode
-                                //     ? Colors.black
-                                //     : kWhiteColor
-                                ),
-                          ),
-                          Radio(
-                            activeColor: Colors.black,
-                            value: LoginCubit.get(context).adminMode,
-                            groupValue: LoginCubit.get(context).currentMode,
-                            onChanged: (value) {
-                              LoginCubit.get(context).changeToAdminMode();
-                            },
-                          ),
-                          Text(
-                            'i\'m an admin',
-                            style: TextStyle(color: kTextDarkColor
-                                // defaultMode == adminMode
-                                //     ? Colors.black
-                                //     : kWhiteColor
-                                ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      buildButton(
-                        onPressed: () {
-                          String email = emailController.text;
-                          String password = passwordController.text;
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 50,
+                          width: double.infinity,
+                        ),
+                        showLogo(screenHeight: loginScreenHeight),
+                        SizedBox(
+                          height: loginScreenHeight * 0.1,
+                        ),
+                        buildTextFormField(
+                          icon: Icons.email,
+                          title: kTextFormEmail,
+                          controller: emailController,
+                          keyboardType: TextInputType.emailAddress,
+                        ),
+                        SizedBox(
+                          height: loginScreenHeight * 0.03,
+                        ),
+                        buildTextFormField(
+                            title: kTextFormPassword,
+                            keyboardType: TextInputType.visiblePassword,
+                            controller: passwordController,
+                            icon: Icons.lock,
+                            obscureText: true),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Radio(
+                              activeColor: Colors.black,
+                              value: LoginCubit.get(context).userMode,
+                              groupValue: LoginCubit.get(context).currentMode,
+                              onChanged: (value) {
+                                LoginCubit.get(context).changeToUserMode();
+                              },
+                            ),
+                            Text(
+                              kIamUser,
+                              style: TextStyle(color: kTextDarkColor
+                                  // defaultMode == userMode
+                                  //     ? Colors.black
+                                  //     : kWhiteColor
+                                  ),
+                            ),
+                            Radio(
+                              activeColor: Colors.black,
+                              value: LoginCubit.get(context).adminMode,
+                              groupValue: LoginCubit.get(context).currentMode,
+                              onChanged: (value) {
+                                LoginCubit.get(context).changeToAdminMode();
+                              },
+                            ),
+                            Text(
+                              kIamAdmin,
+                              style: TextStyle(color: kTextDarkColor
+                                  // defaultMode == adminMode
+                                  //     ? Colors.black
+                                  //     : kWhiteColor
+                                  ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        buildButton(
+                          onPressed: () {
+                            String email = emailController.text.trim();
+                            String password = passwordController.text.trim();
 
-                          if (email.isEmpty || password.isEmpty) {
-                            showToast(
-                                message: "please enter your data", error: true);
-                          } else {
-                            _checkAdminOrUserAndLogin(
-                              context: context,
-                              email: email,
-                              password: password,
-                              defaultMode: defaultMode,
-                              adminMode: adminMode,
-                              userMode: userMode,
-                            );
-                          }
-                        },
-                        title: 'Login',
-                      ),
-                      SizedBox(
-                        height: loginScreenHeight * 0.05,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Flexible(
-                            child: Text(
-                              'Don\'t have an account ? ',
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style:
-                                  TextStyle(color: kGreyColor, fontSize: 16),
+                            if (_formKey.currentState.validate()) {
+                              _checkAdminOrUserAndLogin(
+                                context: context,
+                                email: email,
+                                password: password,
+                                defaultMode: defaultMode,
+                                adminMode: adminMode,
+                                userMode: userMode,
+                              );
+                            }
+                          },
+                          title: kSignIn,
+                        ),
+                        SizedBox(
+                          height: loginScreenHeight * 0.05,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Flexible(
+                              child: Text(
+                                kHaveNoAccount,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style:
+                                    TextStyle(color: kGreyColor, fontSize: 16),
+                              ),
                             ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              navigateToReplaceMe(context, SignUpScreen());
-                            },
-                            child: Text(
-                              'Sign up',
-                              style: TextStyle(fontSize: 16, color: kSloganColor),
-                            ),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: loginScreenHeight * 0.05,
-                      ),
-                    ],
+                            GestureDetector(
+                              onTap: () {
+                                navigateToReplaceMe(context, SignUpScreen());
+                              },
+                              child: Text(
+                                kSignUp,
+                                style: TextStyle(fontSize: 16, color: kSloganColor),
+                              ),
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: loginScreenHeight * 0.05,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

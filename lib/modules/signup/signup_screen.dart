@@ -4,14 +4,17 @@ import 'package:cloth_shop/modules/signup/cubit/signup_cubit.dart';
 import 'package:cloth_shop/modules/signup/cubit/signup_states.dart';
 import 'package:cloth_shop/shared/colors/colors.dart';
 import 'package:cloth_shop/shared/components/compnents.dart';
+import 'package:cloth_shop/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignUpScreen extends StatelessWidget {
+  final _formKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final phoneController = TextEditingController();
   final passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     double signUpScreenHeight = MediaQuery.of(context).size.height;
@@ -57,92 +60,103 @@ class SignUpScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(16.0),
                 child: SingleChildScrollView(
                   physics: BouncingScrollPhysics(),
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 50,
-                        width: double.infinity,
-                      ),
-                      showLogo(screenHeight: signUpScreenHeight),
-                      SizedBox(
-                        height: signUpScreenHeight * 0.04,
-                      ),buildTextFormField(
-                        title: 'Name',
-                        controller: nameController,
-                        icon: Icons.person,
-                      ),
-                      SizedBox(
-                        height: signUpScreenHeight * 0.03,
-                      ),
-                      buildTextFormField(
-                          title: 'Email',
-                          keyboardType: TextInputType.emailAddress,
-                          controller: emailController,
-                          icon: Icons.email),
-                      SizedBox(
-                        height: signUpScreenHeight * 0.03,
-                      ),
-                      buildTextFormField(
-                        title: 'Phone',
-                        controller: phoneController,
-                        icon: Icons.phone_android,
-                      ),
-                      SizedBox(
-                        height: signUpScreenHeight * 0.03,
-                      ),
-                      buildTextFormField(
-                          title: 'Password',
-                          keyboardType: TextInputType.visiblePassword,
-                          controller: passwordController,
-                          icon: Icons.lock,
-                          obscureText: true),
-                      SizedBox(
-                        height: signUpScreenHeight * 0.05,
-                      ),
-                      buildButton(
-                        onPressed: () {
-                          String name = nameController.text.trim();
-                          String email = emailController.text.trim();
-                          String phone = phoneController.text.trim();
-                          String password = passwordController.text.trim();
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 50,
+                          width: double.infinity,
+                        ),
+                        showLogo(screenHeight: signUpScreenHeight),
+                        SizedBox(
+                          height: signUpScreenHeight * 0.04,
+                        ),
+                        buildTextFormField(
+                          title: kTextFormName,
+                          controller: nameController,
+                          icon: Icons.person,
+                        ),
+                        SizedBox(
+                          height: signUpScreenHeight * 0.03,
+                        ),
+                        buildTextFormField(
+                            title: kTextFormEmail,
+                            keyboardType: TextInputType.emailAddress,
+                            controller: emailController,
+                            icon: Icons.email),
+                        SizedBox(
+                          height: signUpScreenHeight * 0.03,
+                        ),
+                        buildTextFormField(
+                          title: kTextFormPhone,
+                          controller: phoneController,
+                          icon: Icons.phone_android,
+                        ),
+                        SizedBox(
+                          height: signUpScreenHeight * 0.03,
+                        ),
+                        buildTextFormField(
+                            title: kTextFormPassword,
+                            keyboardType: TextInputType.visiblePassword,
+                            controller: passwordController,
+                            icon: Icons.lock,
+                            obscureText: true),
+                        SizedBox(
+                          height: signUpScreenHeight * 0.05,
+                        ),
+                        buildButton(
+                          onPressed: () {
+                            String name = nameController.text.trim();
+                            String email = emailController.text.trim();
+                            String phone = phoneController.text.trim();
+                            String password = passwordController.text.trim();
 
-                          _checkValidationAndSignUP(
-                            context: context,
-                            name: name,
-                            email: email,
-                            phone: phone,
-                            password: password,
-                          );
-                        },
-                        title: 'Sign up',
-                      ),
-                      SizedBox(
-                        height: signUpScreenHeight * 0.05,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Flexible(
-                            child: Text(
-                              'I have an account ? ',
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style:
-                                  TextStyle(color: kGreyColor, fontSize: 16),
+                            if (_formKey.currentState.validate()) {
+                              _checkValidationAndSignUP(
+                                context: context,
+                                name: name,
+                                email: email,
+                                phone: phone,
+                                password: password,
+                              );
+                            }
+                          },
+                          title: kSignUp,
+                        ),
+                        SizedBox(
+                          height: signUpScreenHeight * 0.05,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Flexible(
+                              child: Text(
+                                kHaveNoAccount,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(color: kGreyColor, fontSize: 16),
+                              ),
                             ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              navigateToReplaceMe(context, LoginScreen());
-                            },
-                            child: Text(
-                              'Login',
-                              style: TextStyle(fontSize: 16, color: kSloganColor),
-                            ),
-                          )
-                        ],
-                      ),
-                    ],
+                            GestureDetector(
+                              onTap: () {
+                                navigateToReplaceMe(context, LoginScreen());
+                              },
+                              child: Text(
+                                kSignIn,
+                                style:
+                                    TextStyle(fontSize: 16, color: kSloganColor),
+                              ),
+                            )
+                          ],
+                        ),
+
+
+                    SizedBox(
+                    height: signUpScreenHeight * 0.05,
+                ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -153,6 +167,7 @@ class SignUpScreen extends StatelessWidget {
     );
   }
 }
+
 void _checkValidationAndSignUP({
   @required BuildContext context,
   @required String name,
@@ -160,26 +175,10 @@ void _checkValidationAndSignUP({
   @required String phone,
   @required String password,
 }) {
-  // check if the field are empty
-  if (name.isEmpty || email.isEmpty || phone.isEmpty || password.isEmpty) {
-    showToast(message: 'please enter your data', error: true);
-  } else {
-    // check every fields validation
-    if (name.length < 3) {
-      showToast(message: 'name must be at least 3 Characters', error: true);
-    } else if (!email.contains('@')) {
-      showToast(message: 'please, enter a valid email', error: true);
-    } else if (password.length > 6) {
-      showToast(message: 'password must be at least 3 Characters', error: true);
-    }
-    // register the user
-    SignUpCubit.get(context).signUp(
-        user: User(
-            userName: name,
-            userEmail: email,
-            userPhone: phone,
-            userPassword: password
-        )
-    );
-  }
+  SignUpCubit.get(context).signUp(
+      user: User(
+          userName: name,
+          userEmail: email,
+          userPhone: phone,
+          userPassword: password));
 }

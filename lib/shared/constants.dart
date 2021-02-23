@@ -4,6 +4,17 @@ const kCartCollection = 'Cart';
 const kOrderDetailsCollection = 'OrderDetails';
 const kOrderCollection = 'Orders';
 
+// login strings
+const kTextFormName = 'Name';
+const kTextFormEmail = 'Email';
+const kTextFormPassword = 'Password';
+const kTextFormPhone = 'Phone';
+const kSignUp = 'Sign-Up';
+const kSignIn = 'Sign-In';
+const kHaveNoAccount = 'Don\'t have an account ? ';
+const kIamAdmin = 'i\'m an admin';
+const kIamUser = 'i\'m an user';
+
 const kTotalPrice = 'TotalPrice';
 const kAddress = 'Address';
 const kPhone = 'Phone';

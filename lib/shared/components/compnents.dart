@@ -2,6 +2,7 @@ import 'package:cloth_shop/network/cloud_firestore.dart';
 import 'package:cloth_shop/network/firebase_auth.dart';
 import 'package:cloth_shop/network/firebase_storage.dart';
 import 'package:cloth_shop/shared/colors/colors.dart';
+import 'package:cloth_shop/shared/constants.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -162,7 +163,20 @@ Widget buildTextFormField({@required String title, @required TextEditingControll
   obscureText: obscureText,
   controller: controller,
   onChanged: onChange,
-
+  validator: (value) {
+    if (value.isEmpty) {
+      return 'Please enter some text';
+    } else if (title == kTextFormName && value.length < 2){
+      return 'enter at least 2 Characters';
+    }else if (title == kTextFormEmail && !value.contains('@')){
+      return 'Please enter valid Email';
+    } else if (title == kTextFormEmail && !value.contains('.')){
+      return 'Please enter valid Email';
+    } else if (title == kTextFormPassword && value.length < 6){
+      return 'enter at least 6 Characters';
+    }
+    return null;
+  },
   decoration: InputDecoration(
     hintText: "Enter your $title",
     floatingLabelBehavior: FloatingLabelBehavior.always,
