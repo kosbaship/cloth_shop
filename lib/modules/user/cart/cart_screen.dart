@@ -12,7 +12,6 @@ class CartScreen extends StatelessWidget {
   final addressController = TextEditingController();
   final phoneController = TextEditingController();
 
-
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
@@ -23,13 +22,13 @@ class CartScreen extends StatelessWidget {
       child: BlocConsumer<CartScreenCubit, CartStates>(
         listener: (context, state) {},
         builder: (context, state) {
-          List<ProductModel> cartScreenProducts = CartScreenCubit.get(context).cartProducts;
+          List<ProductModel> cartScreenProducts =
+              CartScreenCubit.get(context).cartProducts;
           return ConditionalBuilder(
             condition: state is! CartLoadingState,
             builder: (context) => ConditionalBuilder(
               condition: cartScreenProducts.length != 0,
               builder: (context) => Scaffold(
-                resizeToAvoidBottomPadding: false,
                 backgroundColor: kMainColor,
                 appBar: AppBar(
                   leading: IconButton(
@@ -46,9 +45,11 @@ class CartScreen extends StatelessWidget {
                   title: RichText(
                     text: TextSpan(
                       children: [
-                        TextSpan(text: "Total Price",
+                        TextSpan(
+                          text: "Total Price",
                           style: Theme.of(context).textTheme.headline6.copyWith(
-                              color: kSecondaryColor, fontWeight: FontWeight.normal),
+                              color: kSecondaryColor,
+                              fontWeight: FontWeight.normal),
                         ),
                         TextSpan(
                           text: " EGP ",
@@ -56,15 +57,16 @@ class CartScreen extends StatelessWidget {
                               color: kBlackColor, fontWeight: FontWeight.bold),
                         ),
                         TextSpan(
-                          text: '${CartScreenCubit.get(context).getTotalPrice()}',
+                          text:
+                              '${CartScreenCubit.get(context).getTotalPrice()}',
                           style: Theme.of(context).textTheme.headline5.copyWith(
-                              color: kSecondaryColor, fontWeight: FontWeight.bold),
+                              color: kSecondaryColor,
+                              fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
                   ),
                   elevation: 0,
-
                 ),
                 body: Column(
                   children: <Widget>[
@@ -76,8 +78,6 @@ class CartScreen extends StatelessWidget {
                             (screenHeight * .08),
                         child: ListView.builder(
                           itemBuilder: (context, index) {
-
-
                             return Padding(
                               padding: const EdgeInsets.all(15),
                               child: GestureDetector(
@@ -85,13 +85,14 @@ class CartScreen extends StatelessWidget {
                                   // showCustomMenu(details, context, products[index]);
                                 },
                                 child: Container(
-                                  padding: const EdgeInsets.only(left: 8,top: 8, bottom: 8),
+                                  padding: const EdgeInsets.only(
+                                      left: 8, top: 8, bottom: 8),
                                   height: screenHeight * .19,
                                   child: Row(
                                     children: <Widget>[
                                       CircleAvatar(
                                         radius: screenHeight * .15 / 2,
-                                        child:  Image.network(
+                                        child: Image.network(
                                           '${cartScreenProducts[index].pImageUrl}',
                                           fit: BoxFit.fill,
                                         ),
@@ -100,19 +101,21 @@ class CartScreen extends StatelessWidget {
                                       Expanded(
                                         child: Row(
                                           mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                              MainAxisAlignment.spaceBetween,
                                           children: <Widget>[
                                             Padding(
-                                              padding: const EdgeInsets.only(left: 10),
+                                              padding: const EdgeInsets.only(
+                                                  left: 10),
                                               child: Column(
                                                 mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                                                    MainAxisAlignment.center,
                                                 children: <Widget>[
                                                   Text(
                                                     '${cartScreenProducts[index].pName}',
                                                     style: TextStyle(
                                                         fontSize: 18,
-                                                        fontWeight: FontWeight.bold),
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   ),
                                                   SizedBox(
                                                     height: 10,
@@ -120,18 +123,21 @@ class CartScreen extends StatelessWidget {
                                                   Text(
                                                     'EGP ${cartScreenProducts[index].pPrice}',
                                                     style: TextStyle(
-                                                        fontWeight: FontWeight.bold),
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   )
                                                 ],
                                               ),
                                             ),
                                             Padding(
-                                              padding: const EdgeInsets.only(right: 20),
+                                              padding: const EdgeInsets.only(
+                                                  right: 20),
                                               child: Text(
                                                 '${cartScreenProducts[index].pQuantity}',
                                                 style: TextStyle(
                                                     fontSize: 16,
-                                                    fontWeight: FontWeight.bold),
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
                                             )
                                           ],
@@ -143,7 +149,9 @@ class CartScreen extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(10),
                                     color: kMainColor,
                                     boxShadow: [
-                                      BoxShadow(color: kItemBackGroundColor, spreadRadius: 3),
+                                      BoxShadow(
+                                          color: kItemBackGroundColor,
+                                          spreadRadius: 3),
                                     ],
                                   ),
                                 ),
@@ -153,7 +161,6 @@ class CartScreen extends StatelessWidget {
                           itemCount: cartScreenProducts.length,
                         ),
                       );
-
                     }),
                     Expanded(
                       child: SizedBox(
@@ -165,7 +172,6 @@ class CartScreen extends StatelessWidget {
                                   topLeft: Radius.circular(18))),
                           onPressed: () {
                             showCustomDialog(context);
-
                           },
                           child: Text(
                             "Confirm  Order".toUpperCase(),
@@ -192,22 +198,22 @@ class CartScreen extends StatelessWidget {
                       size: 30,
                     ),
                     onPressed: () {
-                        Navigator.pop(context);
+                      Navigator.pop(context);
                     },
                   ),
                   backgroundColor: kMainColor,
                   elevation: 0,
-
                 ),
-                body: Center(child: Text(
-                  'your cart is empty'.toUpperCase(),
-                  style: TextStyle(
-                    color: kBlackColor,
-                    fontSize: 18,
+                body: Center(
+                  child: Text(
+                    'your cart is empty'.toUpperCase(),
+                    style: TextStyle(
+                      color: kBlackColor,
+                      fontSize: 18,
+                    ),
                   ),
-                ),),
+                ),
               ),
-
             ),
             fallback: (context) => Scaffold(
               backgroundColor: kMainColor,
@@ -224,7 +230,6 @@ class CartScreen extends StatelessWidget {
                 ),
                 backgroundColor: kMainColor,
                 elevation: 0,
-
               ),
               body: Center(child: CircularProgressIndicator()),
             ),
@@ -233,7 +238,6 @@ class CartScreen extends StatelessWidget {
       ),
     );
   }
-
 
   void showCustomDialog(context) async {
     Dialog alertDialog = Dialog(
@@ -248,7 +252,10 @@ class CartScreen extends StatelessWidget {
             Center(
               child: Text(
                 "You Info, Please",
-                style: TextStyle(fontSize: 24, color: kItemBackGroundColor, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontSize: 24,
+                    color: kItemBackGroundColor,
+                    fontWeight: FontWeight.bold),
               ),
             ),
             SizedBox(height: 20),
@@ -259,9 +266,11 @@ class CartScreen extends StatelessWidget {
               child: RichText(
                 text: TextSpan(
                   children: [
-                    TextSpan(text: "Total Price",
+                    TextSpan(
+                      text: "Total Price",
                       style: Theme.of(context).textTheme.headline6.copyWith(
-                          color: kTextLightColor, fontWeight: FontWeight.normal),
+                          color: kTextLightColor,
+                          fontWeight: FontWeight.normal),
                     ),
                     TextSpan(
                       text: " EGP ",
@@ -271,7 +280,8 @@ class CartScreen extends StatelessWidget {
                     TextSpan(
                       text: '${CartScreenCubit.get(context).getTotalPrice()}',
                       style: Theme.of(context).textTheme.headline5.copyWith(
-                          color: kItemBackGroundColor, fontWeight: FontWeight.bold),
+                          color: kItemBackGroundColor,
+                          fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
@@ -348,16 +358,14 @@ class CartScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 50),
               child: buildDefaultButton(
                   onPressed: () {
-
                     String userAddress = addressController.text;
                     String userPhone = phoneController.text;
 
                     if (userAddress.isEmpty || userPhone.isEmpty) {
-                      showToast(
-                          message: "please fill your data",
-                          error: true);
+                      showToast(message: "please fill your data", error: true);
                     } else {
-                      CartScreenCubit.get(context).saveOrder(shippingAddress: userAddress, phone: userPhone);
+                      CartScreenCubit.get(context).saveOrder(
+                          shippingAddress: userAddress, phone: userPhone);
                       showToast(
                           message: "Order Confirmed Successfully",
                           error: false);
@@ -380,6 +388,4 @@ class CartScreen extends StatelessWidget {
           return alertDialog;
         });
   }
-
-
 }
